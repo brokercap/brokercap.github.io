@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>数据源管理 - Bifrost Document</title>
+<meta name="description" content="Bifrost ---- 将  MySQL 数据 实时同步 到 Redis , MongoDB 等服务的高性能异构中间件">
+<meta name="generator" content="Hugo 0.59.1" />
+<link href="http://wiki.xbifrost.com/index.xml" rel="alternate" type="application/rss+xml">
+<link rel="canonical" href="http://wiki.xbifrost.com/data_source/">
+<link rel="stylesheet" href="http://wiki.xbifrost.com/css/theme.min.css">
+<script src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+<link rel="stylesheet" href="http://wiki.xbifrost.com/css/chroma.min.css">
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery.easing@1.4.1/jquery.easing.min.js"></script>
+<script src="http://wiki.xbifrost.com/js/bundle.js"></script><style>
+:root {
+  
+  
+}
+</style>
+</head>
+<body><div class="container"><header>
+<h1>Bifrost Document</h1>
+
+ <span class="version">Version 1.1.0</span>
+<a href="https://github.com/brokercap/Bifrost" class="github"><i class="fab fa-github"></i></a>
+<p class="description">Bifrost ---- 将  MySQL 数据 实时同步 到 Redis , MongoDB 等服务的高性能异构中间件</p>
+
+</header>
+<div class="global-menu">
+<nav>
+<ul>
+<li><a href="/">Home</a></li>
+<li><a href="https://github.com/brokercap/Bifrost">github</a></li></ul>
+</nav>
+</div>
+<div class="content-container">
+<main><h1>数据源管理</h1>
+
+<p><img src="/images/data_source/data_source_list.jpg" alt="image" /></p>
+
+<p>可以动态添加多个 MySQL 数据源</p>
+
+<h5 id="字段解析">字段解析</h5>
+
+<p>Name : 数据源唯一名字,在添加数据源的时候指定</p>
+
+<p>ConnectUri : 连接数据源的地址</p>
+
+<p>ConnStatus : 当前数据源状态</p>
+
+<pre><code>running : 正在运行,正常解析binlog
+
+starting : 正在连接 MySQL
+
+closing : 正在尝试关闭连接
+
+close : 关闭状态
+
+stop : 暂停解析状态
+</code></pre>
+
+<p>Position : 当前成功解析 MySQL Binlog 的位点信息</p>
+
+<p>DB Postion : 可以点击  最新位点 按钮  进行获取当前 MySQL 最新的位点,并进行与当前成功解析的位点 计算,延时了多少秒</p>
+
+<p>MaxPosition : 在添加数据源的时候指定的 MaxBinlogFileName 和 MaxBinlogPosition 配置</p>
+
+<p>ServerId : 这个是 MySQL slave 里配置的  server_id 同一个概念,在添加数据源的时候,不能和 MySQL 主库及其其他从库 的 server_id 相同, 建议在配置 MySQL 主从的时候,用 IP 的后三位来当作  mysql 的 server_id</p>
+
+<p>ConnErr : 当前 数据源连接 或者 解析遇到的错误信息</p>
+
+<p>ChannelCount : 当前数据源有多少个 通道</p>
+
+<p>TableCount : 当前数据源配置了多少数据表同步</p>
+
+<p>ReplicateDoDb : 当前数据源配置了哪些数据库要同步</p>
+
+<h5 id="常见问题">常见问题</h5>
+
+<p><em>1. 一直是 starting 状态,有以下可能</em></p>
+
+<p>1). 刷新整个界面,看是否会有状态变化</p>
+
+<p>2). 在尝试启动数据源之前,发现位点有问题,会自动的将当前位点文件最开始的位置进行遍历寻找离当前最近的一个可用的位点,如果这个关闭请 点击close 或者 去MySQL kill 连接</p>
+
+<p>3). 网络异常,一直在重试</p>
+
+<p><em>2. 卡在 closing 状态</em></p>
+
+<p>1). 刷新整个界面,看是否会有状态变化</p>
+
+<p>2). 假如上一个状态是 staring 再点击关闭的,那可能是因为位点不对,后台在寻找正确的位点,比较慢,如果这个时候需要关闭,请 去MySQL 端找到相关连接 进行 Kill 操作</p>
+
+<p>3). 判断 MySQL 连接是否假死等情况,如果要退出,请去MySQL Kill 连接</p>
+
+<p><em>3. 位点显示延时</em></p>
+
+<p>在点击 最新位点 按钮的时候 并且数据源是running状态</p>
+
+<p>假如会计算当前位点 和 最新位点 不一致的情况下,将会拿最后解析成功的位点时间 与 当前时间点进行对比,算出差值,单位(秒)</p>
+
+<p>这里并不是拿最新位点的时间对比,而是当前服务器时间</p>
+<div class="edit-meta">
+Last updated on 23 Nov 2018
+
+
+<br>
+Published on 23 Nov 2018
+<br><a href="https://github.com/brokercap/brokercap.github.io/edit/master/content/data_source/_index.md" class="edit-page"><i class="fas fa-pen-square"></i> Edit on GitHub</a></div><nav class="pagination"><a class="nav nav-prev" href="/install/config_doc/" title="启动配置解析"><i class="fas fa-arrow-left" aria-hidden="true"></i> Prev - 启动配置解析</a>
+<a class="nav nav-next" href="/data_source/add/" title="数据源新增">Next - 数据源新增 <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+</nav><footer><p class="powered">Powered by <a href="https://gohugo.io">Hugo</a>. Theme by <a href="https://themes.gohugo.io/hugo-theme-techdoc/">TechDoc</a>. Designed by <a href="https://github.com/thingsym/hugo-theme-techdoc">Thingsym</a>.</p>
+</footer>
+</main><div class="sidebar">
+
+<nav class="open-menu">
+<ul>
+<li class=""><a href="http://wiki.xbifrost.com/">Home</a></li>
+
+<li class=""><a href="/install/">安装部署</a>
+  
+<ul class="sub-menu">
+<li class=""><a href="/install/data_source_build/">编译安装</a></li>
+<li class=""><a href="/install/install_binary/">二进制安装</a></li>
+<li class=""><a href="/install/config_doc/">启动配置解析</a></li>
+</ul>
+  
+</li>
+
+<li class="parent active"><a href="/data_source/">数据源管理</a>
+  
+<ul class="sub-menu">
+<li class=""><a href="/data_source/add/">数据源新增</a></li>
+<li class=""><a href="/data_source/edit/">数据源修改</a></li>
+</ul>
+  
+</li>
+
+<li class=""><a href="/plugin/">插件管理</a>
+  
+</li>
+
+<li class=""><a href="/dest/">目标库管理</a>
+  
+<ul class="sub-menu">
+<li class=""><a href="/dest/edit/">目标库修改</a></li>
+<li class=""><a href="/dest/add/">目标库新增</a></li>
+</ul>
+  
+</li>
+
+<li class=""><a href="/syncdata/">数据同步配置</a>
+  
+<ul class="sub-menu">
+<li class=""><a href="/syncdata/sync_config/">数据表同步配置</a></li>
+<li class=""><a href="/syncdata/sync_batch/">批量同步配置</a></li>
+<li class=""><a href="/syncdata/sync_list/">同步列表字段解析</a></li>
+<li class=""><a href="/syncdata/sync_history_config/">全量任务配置</a></li>
+</ul>
+  
+</li>
+
+<li class=""><a href="/channel/">通道</a>
+  
+</li>
+
+<li class=""><a href="/flow/">流量</a>
+  
+</li>
+
+<li class=""><a href="/warning/">报警</a>
+  
+<ul class="sub-menu">
+<li class=""><a href="/warning/rule/">报警规则</a></li>
+<li class=""><a href="/warning/weixin/">微信</a></li>
+<li class=""><a href="/warning/email/">邮箱</a></li>
+</ul>
+  
+</li>
+
+<li class=""><a href="/user/">用户管理</a>
+  
+</li>
+
+<li class=""><a href="/bristol/">二进制文件解析</a>
+  
+</li>
+
+<li class=""><a href="/other/">其他</a>
+  
+<ul class="sub-menu">
+<li class=""><a href="/other/why/">为什么选择 Bifrost</a></li>
+</ul>
+  
+</li>
+</ul>
+</nav>
+
+
+
+<div class="sidebar-footer"></div>
+</div>
+</div><a href="#" id="backtothetop-fixed" class="backtothetop"
+ data-backtothetop-duration="600"
+ data-backtothetop-easing="easeOutQuart"
+ data-backtothetop-fixed-fadeIn="1000"
+ data-backtothetop-fixed-fadeOut="1000"
+ data-backtothetop-fixed-bottom="10"
+ data-backtothetop-fixed-right="20">
+<span class="fa-layers fa-fw">
+<i class="fas fa-circle"></i>
+<i class="fas fa-arrow-circle-up"></i>
+</span></a>
+</div>
+</body>
+</html>

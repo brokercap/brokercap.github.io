@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>插件管理 - Bifrost Document</title>
+<meta name="description" content="Bifrost ---- 将  MySQL 数据 实时同步 到 Redis , MongoDB 等服务的高性能异构中间件">
+<meta name="generator" content="Hugo 0.59.1" />
+<link href="http://wiki.xbifrost.com/index.xml" rel="alternate" type="application/rss+xml">
+<link rel="canonical" href="http://wiki.xbifrost.com/plugin/">
+<link rel="stylesheet" href="http://wiki.xbifrost.com/css/theme.min.css">
+<script src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+<link rel="stylesheet" href="http://wiki.xbifrost.com/css/chroma.min.css">
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery.easing@1.4.1/jquery.easing.min.js"></script>
+<script src="http://wiki.xbifrost.com/js/bundle.js"></script><style>
+:root {
+  
+  
+}
+</style>
+</head>
+<body><div class="container"><header>
+<h1>Bifrost Document</h1>
+
+ <span class="version">Version 1.1.0</span>
+<a href="https://github.com/brokercap/Bifrost" class="github"><i class="fab fa-github"></i></a>
+<p class="description">Bifrost ---- 将  MySQL 数据 实时同步 到 Redis , MongoDB 等服务的高性能异构中间件</p>
+
+</header>
+<div class="global-menu">
+<nav>
+<ul>
+<li><a href="/">Home</a></li>
+<li><a href="https://github.com/brokercap/Bifrost">github</a></li></ul>
+</nav>
+</div>
+<div class="content-container">
+<main><h1>插件管理</h1>
+
+<p><img src="/images/plugin/plugin_list.jpg" alt="image" /></p>
+
+<p>Bifrost v1.1.0 支持 12 个插件</p>
+
+<p>当前版本每个插件都有对应连接使用文档</p>
+
+<p>每个插件都有不同的功能</p>
+
+<h4 id="1-redis">1. Redis</h4>
+
+<p>支持将数据静实时同步到 Redis,可以自定义字段或者内容</p>
+
+<h4 id="2-memcache">2. Memcache</h4>
+
+<p>支持将数据静实时同步到 Memcache,可以自定义字段或者内容</p>
+
+<h4 id="3-rabbitmq">3. RabbitMQ</h4>
+
+<p>支持将数据同步到指定的 RabbitMQ 队列中,支持 持久化,非持久化,自动创建队列等操作</p>
+
+<h4 id="4-activemq">4. ActiveMQ</h4>
+
+<p>支持将数据同步到指定的 ActvieQ 队列中</p>
+
+<h4 id="5-kafka">5. Kafka</h4>
+
+<p>支持将数据同步到 Kafka 中</p>
+
+<h4 id="6-mongodb">6. Mongodb</h4>
+
+<p>支持将数据同步 Mongodb ,自动按 MySQL 表中的索引创建索引 ,及 文档ID</p>
+
+<h4 id="7-clickhouse">7. ClickHouse</h4>
+
+<p>同步到 ClickHouse ,支持 普通同步模式, MySQL 中删除之后 ClickHouse 也相应删除的方式</p>
+
+<p>也支持将 MySQL 中的 delete update 修改删除操作,转成以日志的方式写入到 ClickHouse</p>
+
+<h4 id="8-mysql">8. MySQL</h4>
+
+<p>类似于 MySQL 从库的方式,但不支持 DDL, 支持数据表结构不一样,数据类型自动转换</p>
+
+<h4 id="9-http-自定义服务-https-github-com-brokercap-bifrost-blob-v1-1-x-plugin-http-example-http-server-http-server-go">9. <a href="https://github.com/brokercap/Bifrost/blob/v1.1.x/plugin/http/example/http_server/http_server.go">Http 自定义服务</a></h4>
+
+<p>以 Http 的方式推送到自定义的 http server中</p>
+
+<h4 id="10-hprose-rpc-自定义服务-https-github-com-brokercap-bifrost-blob-v1-1-x-hprose-server-tcp-server-go">10. <a href="https://github.com/brokercap/Bifrost/blob/v1.1.x/hprose_server/tcp_server.go">Hprose RPC 自定义服务</a></h4>
+
+<p>以 hprose rpc 的方式 推送到自定义的  rpc sereve 中</p>
+
+<h4 id="11-tablecount">11. TableCount</h4>
+
+<p>TableCount 插件是统计每个表的 insert , update , delete 的写入次数 和  条数, 以折线图的方式显示出来, 用于判断分析哪个表的写入量及QPS等场景使用</p>
+
+<h4 id="12-blackhole">12. blackhole</h4>
+
+<p>blackhole 插件, 思想来源于 MySQL 里的 blackhole 引擎.</p>
+
+<p>blackhole 没有任何逻辑计算,当数据从 Bifrost server 层传到 blackhole 插件的时候,立马进行返回,不做任何逻辑计算</p>
+<div class="edit-meta">
+Last updated on 23 Nov 2019
+
+
+<br>
+Published on 23 Nov 2019
+<br><a href="https://github.com/brokercap/brokercap.github.io/edit/master/content/plugin/_index.md" class="edit-page"><i class="fas fa-pen-square"></i> Edit on GitHub</a></div><nav class="pagination"><a class="nav nav-prev" href="/data_source/edit/" title="数据源修改"><i class="fas fa-arrow-left" aria-hidden="true"></i> Prev - 数据源修改</a>
+<a class="nav nav-next" href="/dest/" title="目标库管理">Next - 目标库管理 <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+</nav><footer><p class="powered">Powered by <a href="https://gohugo.io">Hugo</a>. Theme by <a href="https://themes.gohugo.io/hugo-theme-techdoc/">TechDoc</a>. Designed by <a href="https://github.com/thingsym/hugo-theme-techdoc">Thingsym</a>.</p>
+</footer>
+</main><div class="sidebar">
+
+<nav class="open-menu">
+<ul>
+<li class=""><a href="http://wiki.xbifrost.com/">Home</a></li>
+
+<li class=""><a href="/install/">安装部署</a>
+  
+<ul class="sub-menu">
+<li class=""><a href="/install/data_source_build/">编译安装</a></li>
+<li class=""><a href="/install/install_binary/">二进制安装</a></li>
+<li class=""><a href="/install/config_doc/">启动配置解析</a></li>
+</ul>
+  
+</li>
+
+<li class=""><a href="/data_source/">数据源管理</a>
+  
+<ul class="sub-menu">
+<li class=""><a href="/data_source/add/">数据源新增</a></li>
+<li class=""><a href="/data_source/edit/">数据源修改</a></li>
+</ul>
+  
+</li>
+
+<li class="parent active"><a href="/plugin/">插件管理</a>
+  
+</li>
+
+<li class=""><a href="/dest/">目标库管理</a>
+  
+<ul class="sub-menu">
+<li class=""><a href="/dest/edit/">目标库修改</a></li>
+<li class=""><a href="/dest/add/">目标库新增</a></li>
+</ul>
+  
+</li>
+
+<li class=""><a href="/syncdata/">数据同步配置</a>
+  
+<ul class="sub-menu">
+<li class=""><a href="/syncdata/sync_config/">数据表同步配置</a></li>
+<li class=""><a href="/syncdata/sync_batch/">批量同步配置</a></li>
+<li class=""><a href="/syncdata/sync_list/">同步列表字段解析</a></li>
+<li class=""><a href="/syncdata/sync_history_config/">全量任务配置</a></li>
+</ul>
+  
+</li>
+
+<li class=""><a href="/channel/">通道</a>
+  
+</li>
+
+<li class=""><a href="/flow/">流量</a>
+  
+</li>
+
+<li class=""><a href="/warning/">报警</a>
+  
+<ul class="sub-menu">
+<li class=""><a href="/warning/rule/">报警规则</a></li>
+<li class=""><a href="/warning/weixin/">微信</a></li>
+<li class=""><a href="/warning/email/">邮箱</a></li>
+</ul>
+  
+</li>
+
+<li class=""><a href="/user/">用户管理</a>
+  
+</li>
+
+<li class=""><a href="/bristol/">二进制文件解析</a>
+  
+</li>
+
+<li class=""><a href="/other/">其他</a>
+  
+<ul class="sub-menu">
+<li class=""><a href="/other/why/">为什么选择 Bifrost</a></li>
+</ul>
+  
+</li>
+</ul>
+</nav>
+
+
+
+<div class="sidebar-footer"></div>
+</div>
+</div><a href="#" id="backtothetop-fixed" class="backtothetop"
+ data-backtothetop-duration="600"
+ data-backtothetop-easing="easeOutQuart"
+ data-backtothetop-fixed-fadeIn="1000"
+ data-backtothetop-fixed-fadeOut="1000"
+ data-backtothetop-fixed-bottom="10"
+ data-backtothetop-fixed-right="20">
+<span class="fa-layers fa-fw">
+<i class="fas fa-circle"></i>
+<i class="fas fa-arrow-circle-up"></i>
+</span></a>
+</div>
+</body>
+</html>

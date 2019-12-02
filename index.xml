@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>前言 on Bifrost Document</title>
+    <link>http://wiki.xbifrost.com/</link>
+    <description>Recent content in 前言 on Bifrost Document</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 23 Nov 2019 15:32:15 +0000</lastBuildDate>
+    
+	<atom:link href="http://wiki.xbifrost.com/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>编译安装</title>
+      <link>http://wiki.xbifrost.com/install/data_source_build/</link>
+      <pubDate>Sat, 23 Nov 2019 15:30:15 +0000</pubDate>
+      
+      <guid>http://wiki.xbifrost.com/install/data_source_build/</guid>
+      <description>安装好 go 语言环境，go 1.12+,如果这个搞不定的，请查看下面的 二进制包安装 下载源码包 git clone -b v1.1.x git clone https://github.com/brokercap/Bifrost.git 编译方式1 make install prefix=./target 编译方式2 ./build.sh linux ./build.sh windows ./build.sh freebsd ./build.sh</description>
+    </item>
+    
+    <item>
+      <title>二进制安装</title>
+      <link>http://wiki.xbifrost.com/install/install_binary/</link>
+      <pubDate>Sat, 23 Nov 2019 15:30:15 +0000</pubDate>
+      
+      <guid>http://wiki.xbifrost.com/install/install_binary/</guid>
+      <description>二进制包安装，不用安装 go 语言环境，下载二进制包可修改配置可直接运行 下载二进制包 以v1.1.0-release linux版本为例 wget https://github.com/jc3wish/Bifrost/releases/download/v1.1.0-release/linux.zip unzip linux.zip mv ./linux ./Bifrost_v1.1.0-release</description>
+    </item>
+    
+    <item>
+      <title>启动配置解析</title>
+      <link>http://wiki.xbifrost.com/install/config_doc/</link>
+      <pubDate>Sat, 23 Nov 2019 15:30:15 +0000</pubDate>
+      
+      <guid>http://wiki.xbifrost.com/install/config_doc/</guid>
+      <description>Bifrost 默认配置路径在 Bifrost 运行目录下的 etc/config.ini [user] #管理界面的用户名及密码 Bifrost=Bifrost123 [groups] #administrator 管理人员可以添加删除等操作 #monitor 只能查看数据 Bifrost=administrator BifrostMonitor=monitor [Bifrostd] #默认会当前启动文件夹 #log_dir=/data/log/ #默认</description>
+    </item>
+    
+    <item>
+      <title>数据源新增</title>
+      <link>http://wiki.xbifrost.com/data_source/add/</link>
+      <pubDate>Sat, 23 Nov 2019 10:05:00 +0000</pubDate>
+      
+      <guid>http://wiki.xbifrost.com/data_source/add/</guid>
+      <description>在线添加数据源,不需要重启服务 字段解析 Name : 数据源唯一名字,不能和其他数据源名字重复,30个数字或者字母以内 ConnectUri : 连接数据源的地址 BinlogFileName : 从哪一个位</description>
+    </item>
+    
+    <item>
+      <title>数据源修改</title>
+      <link>http://wiki.xbifrost.com/data_source/edit/</link>
+      <pubDate>Sat, 23 Nov 2019 10:05:00 +0000</pubDate>
+      
+      <guid>http://wiki.xbifrost.com/data_source/edit/</guid>
+      <description>可以在线修改数据源信息,唯独不能修改数据源的Name 数据源只有在 close 状态下才能进行修改 close 状态下, 数据源列表的 Position 列 会出现一个 修改 按钮, 点击 之后可</description>
+    </item>
+    
+    <item>
+      <title>目标库修改</title>
+      <link>http://wiki.xbifrost.com/dest/edit/</link>
+      <pubDate>Sat, 23 Nov 2019 10:05:00 +0000</pubDate>
+      
+      <guid>http://wiki.xbifrost.com/dest/edit/</guid>
+      <description>目标库配置是可以修改的 但只能修改目标库的连接地址,连接池大小及备注,不能修改绑定的插件及ToServerKey 修改了的信息,要待一个全新的插</description>
+    </item>
+    
+    <item>
+      <title>目标库新增</title>
+      <link>http://wiki.xbifrost.com/dest/add/</link>
+      <pubDate>Sat, 23 Nov 2019 10:05:00 +0000</pubDate>
+      
+      <guid>http://wiki.xbifrost.com/dest/add/</guid>
+      <description>在线添加数据源,不需要重启服务 一个插件可以绑定多个目标库 字段解析: ToServerKey : 全局唯一值,在数据表设置同步的时候,需要用到这个. 30个数字或者字母以</description>
+    </item>
+    
+    <item>
+      <title>数据表同步配置</title>
+      <link>http://wiki.xbifrost.com/syncdata/sync_config/</link>
+      <pubDate>Sat, 23 Nov 2019 15:30:15 +0000</pubDate>
+      
+      <guid>http://wiki.xbifrost.com/syncdata/sync_config/</guid>
+      <description>一. 配置过程 选择要同步的数据库 绑定表和通道的关系 选择数据表(只有ADD按钮 绑定了表和通道的关系之后才能选择) 选择这个表的数据要同步到哪一个目</description>
+    </item>
+    
+    <item>
+      <title>批量同步配置</title>
+      <link>http://wiki.xbifrost.com/syncdata/sync_batch/</link>
+      <pubDate>Wed, 27 Nov 2019 21:05:15 +0000</pubDate>
+      
+      <guid>http://wiki.xbifrost.com/syncdata/sync_batch/</guid>
+      <description>批量配置的使用场景: 有多个表要设置以同样的配置需要同步同一个 目标库里去 要设置整个所有库或者某一个库里的所有表,包括以后新增的表同步到kafk</description>
+    </item>
+    
+    <item>
+      <title>同步列表字段解析</title>
+      <link>http://wiki.xbifrost.com/syncdata/sync_list/</link>
+      <pubDate>Wed, 27 Nov 2019 21:05:15 +0000</pubDate>
+      
+      <guid>http://wiki.xbifrost.com/syncdata/sync_list/</guid>
+      <description>字段解析 sliceId/ID : 第几个同步 / 自增ID PluginType : 插件名称 ToServerKey : 绑定的目标库唯一名字,添加目标库时候的 ToServerKey FieldList : 选择了哪些字段要同步 Others : Bifrost 内部参数 1). MustBeSuccess : 每一条数</description>
+    </item>
+    
+    <item>
+      <title>全量任务配置</title>
+      <link>http://wiki.xbifrost.com/syncdata/sync_history_config/</link>
+      <pubDate>Sat, 23 Nov 2019 15:30:15 +0000</pubDate>
+      
+      <guid>http://wiki.xbifrost.com/syncdata/sync_history_config/</guid>
+      <description>全量任务同步 是建立在 表配置同步到目标库 之上 假如没有 配置表同步到目标库 则不能配置全量同步 配置过程 1. 点击 刷全量数据 按钮 2. 配置查询全量数据的条件 字</description>
+    </item>
+    
+    <item>
+      <title>为什么选择 Bifrost</title>
+      <link>http://wiki.xbifrost.com/other/why/</link>
+      <pubDate>Wed, 27 Nov 2019 23:04:15 +0000</pubDate>
+      
+      <guid>http://wiki.xbifrost.com/other/why/</guid>
+      <description>1. 很多人对于 Bifrost Binlog 解析及同步会有几个疑问 1). 为什么我不用 canal ,自己将数据 同步到 kafka ,然后业务再从 kafka 消费出来处理 . 这样我想怎么同步就怎么同步 2). Bifrost 有什么</description>
+    </item>
+    
+    <item>
+      <title>报警规则</title>
+      <link>http://wiki.xbifrost.com/warning/rule/</link>
+      <pubDate>Thu, 28 Nov 2019 22:59:15 +0000</pubDate>
+      
+      <guid>http://wiki.xbifrost.com/warning/rule/</guid>
+      <description>报警 数据源连接失败 数据源关闭(包括手动close或者因binlog解析致命性原因解析失败造成的close等) 数据同步到目标库,同一条数据连接</description>
+    </item>
+    
+    <item>
+      <title>微信</title>
+      <link>http://wiki.xbifrost.com/warning/weixin/</link>
+      <pubDate>Thu, 28 Nov 2019 22:59:15 +0000</pubDate>
+      
+      <guid>http://wiki.xbifrost.com/warning/weixin/</guid>
+      <description>CorpID : 微信企业号CorpID参数 Secret : 微信企业号Secret参数 agentid : 微信企业号 应用ID,数字类型 touser : 消息接收者，多个接收者用‘|’分隔，最多支持</description>
+    </item>
+    
+    <item>
+      <title>邮箱</title>
+      <link>http://wiki.xbifrost.com/warning/email/</link>
+      <pubDate>Thu, 28 Nov 2019 22:59:15 +0000</pubDate>
+      
+      <guid>http://wiki.xbifrost.com/warning/email/</guid>
+      <description>FROM : 采用哪一个邮箱发送邮件 NickName : 邮箱别名 Password : 邮箱密码 , 如果是 qq邮箱,不是你的QQ密码,也不是设置的你设置的QQ邮箱的独立密码,而是有一个用于</description>
+    </item>
+    
+  </channel>
+</rss>

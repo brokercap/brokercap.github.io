@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>数据源新增 - Bifrost Document</title>
+<meta name="description" content="Bifrost ---- 将  MySQL 数据 实时同步 到 Redis , MongoDB 等服务的高性能异构中间件">
+<meta name="generator" content="Hugo 0.59.1" />
+<link href="http://wiki.xbifrost.com/index.xml" rel="alternate" type="application/rss+xml">
+<link rel="canonical" href="http://wiki.xbifrost.com/data_source/add/">
+<link rel="stylesheet" href="http://wiki.xbifrost.com/css/theme.min.css">
+<script src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+<link rel="stylesheet" href="http://wiki.xbifrost.com/css/chroma.min.css">
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery.easing@1.4.1/jquery.easing.min.js"></script>
+<script src="http://wiki.xbifrost.com/js/bundle.js"></script><style>
+:root {
+  
+  
+}
+</style>
+</head>
+<body><div class="container"><header>
+<h1>Bifrost Document</h1>
+
+ <span class="version">Version 1.1.0</span>
+<a href="https://github.com/brokercap/Bifrost" class="github"><i class="fab fa-github"></i></a>
+<p class="description">Bifrost ---- 将  MySQL 数据 实时同步 到 Redis , MongoDB 等服务的高性能异构中间件</p>
+
+</header>
+<div class="global-menu">
+<nav>
+<ul>
+<li><a href="/">Home</a></li>
+<li><a href="https://github.com/brokercap/Bifrost">github</a></li></ul>
+</nav>
+</div>
+<div class="content-container">
+<main><h1>数据源新增</h1>
+
+<p><img src="/images/data_source/data_source_add.jpg" alt="image" /></p>
+
+<p>在线添加数据源,不需要重启服务</p>
+
+<h5 id="字段解析">字段解析</h5>
+
+<p>Name : 数据源唯一名字,不能和其他数据源名字重复,30个数字或者字母以内</p>
+
+<p>ConnectUri : 连接数据源的地址</p>
+
+<p>BinlogFileName : 从哪一个位点文件开始解析 , 如果为空的话,在点击 Check 按钮的时候,会自动填充当前 MySQL 最新的们点信息</p>
+
+<p>BinlogPosition : 从哪一个位点开始解析 , 如果为空的话,在点击 Check 按钮的时候,会自动填充当前 MySQL 最新的们点信息</p>
+
+<p>ServerId : 这个是 MySQL slave 里配置的  server_id 同一个概念,在添加数据源的时候,不能和 MySQL 主库及其其他从库 的 server_id 相同, 建议在配置 MySQL 主从的时候,用 IP 的后三位来当作  mysql 的 server_id .如果为空的话,在点击 Check 按钮的时候,会自动随机一个 数字出来</p>
+
+<p>MaxBinlogFileName ,MaxBinlogPosition : 解析到哪一个位点的时候,就close掉,不再进行binlog解析</p>
+
+<h5 id="其他">其他</h5>
+
+<p>新增了数据源之后 状态默认为 close 状态,在配置了数据表同步之后再去点击 start 按钮开始</p>
+
+<p>默认情况下会自动为这个数据源添加一个名为 default 的通道. default 通道默认为开始状态. 通道信息,请查阅 通道相关文档</p>
+<div class="edit-meta">
+Last updated on 23 Nov 2019
+
+
+<br><a href="https://github.com/brokercap/brokercap.github.io/edit/master/content/data_source/add.md" class="edit-page"><i class="fas fa-pen-square"></i> Edit on GitHub</a></div><nav class="pagination"><a class="nav nav-prev" href="/data_source/" title="数据源管理"><i class="fas fa-arrow-left" aria-hidden="true"></i> Prev - 数据源管理</a>
+<a class="nav nav-next" href="/data_source/edit/" title="数据源修改">Next - 数据源修改 <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+</nav><footer><p class="powered">Powered by <a href="https://gohugo.io">Hugo</a>. Theme by <a href="https://themes.gohugo.io/hugo-theme-techdoc/">TechDoc</a>. Designed by <a href="https://github.com/thingsym/hugo-theme-techdoc">Thingsym</a>.</p>
+</footer>
+</main><div class="sidebar">
+
+<nav class="open-menu">
+<ul>
+<li class=""><a href="http://wiki.xbifrost.com/">Home</a></li>
+
+<li class=""><a href="/install/">安装部署</a>
+  
+<ul class="sub-menu">
+<li class=""><a href="/install/data_source_build/">编译安装</a></li>
+<li class=""><a href="/install/install_binary/">二进制安装</a></li>
+<li class=""><a href="/install/config_doc/">启动配置解析</a></li>
+</ul>
+  
+</li>
+
+<li class="parent"><a href="/data_source/">数据源管理</a>
+  
+<ul class="sub-menu">
+<li class="active"><a href="/data_source/add/">数据源新增</a></li>
+<li class=""><a href="/data_source/edit/">数据源修改</a></li>
+</ul>
+  
+</li>
+
+<li class=""><a href="/plugin/">插件管理</a>
+  
+</li>
+
+<li class=""><a href="/dest/">目标库管理</a>
+  
+<ul class="sub-menu">
+<li class=""><a href="/dest/edit/">目标库修改</a></li>
+<li class=""><a href="/dest/add/">目标库新增</a></li>
+</ul>
+  
+</li>
+
+<li class=""><a href="/syncdata/">数据同步配置</a>
+  
+<ul class="sub-menu">
+<li class=""><a href="/syncdata/sync_config/">数据表同步配置</a></li>
+<li class=""><a href="/syncdata/sync_batch/">批量同步配置</a></li>
+<li class=""><a href="/syncdata/sync_list/">同步列表字段解析</a></li>
+<li class=""><a href="/syncdata/sync_history_config/">全量任务配置</a></li>
+</ul>
+  
+</li>
+
+<li class=""><a href="/channel/">通道</a>
+  
+</li>
+
+<li class=""><a href="/flow/">流量</a>
+  
+</li>
+
+<li class=""><a href="/warning/">报警</a>
+  
+<ul class="sub-menu">
+<li class=""><a href="/warning/rule/">报警规则</a></li>
+<li class=""><a href="/warning/weixin/">微信</a></li>
+<li class=""><a href="/warning/email/">邮箱</a></li>
+</ul>
+  
+</li>
+
+<li class=""><a href="/user/">用户管理</a>
+  
+</li>
+
+<li class=""><a href="/bristol/">二进制文件解析</a>
+  
+</li>
+
+<li class=""><a href="/other/">其他</a>
+  
+<ul class="sub-menu">
+<li class=""><a href="/other/why/">为什么选择 Bifrost</a></li>
+</ul>
+  
+</li>
+</ul>
+</nav>
+
+
+
+<div class="sidebar-footer"></div>
+</div>
+</div><a href="#" id="backtothetop-fixed" class="backtothetop"
+ data-backtothetop-duration="600"
+ data-backtothetop-easing="easeOutQuart"
+ data-backtothetop-fixed-fadeIn="1000"
+ data-backtothetop-fixed-fadeOut="1000"
+ data-backtothetop-fixed-bottom="10"
+ data-backtothetop-fixed-right="20">
+<span class="fa-layers fa-fw">
+<i class="fas fa-circle"></i>
+<i class="fas fa-arrow-circle-up"></i>
+</span></a>
+</div>
+</body>
+</html>

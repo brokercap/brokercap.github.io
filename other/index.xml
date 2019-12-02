@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>其他 on Bifrost Document</title>
+    <link>http://wiki.xbifrost.com/other/</link>
+    <description>Recent content in 其他 on Bifrost Document</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 23 Nov 2019 15:32:15 +0000</lastBuildDate>
+    
+	<atom:link href="http://wiki.xbifrost.com/other/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>为什么选择 Bifrost</title>
+      <link>http://wiki.xbifrost.com/other/why/</link>
+      <pubDate>Wed, 27 Nov 2019 23:04:15 +0000</pubDate>
+      
+      <guid>http://wiki.xbifrost.com/other/why/</guid>
+      <description>1. 很多人对于 Bifrost Binlog 解析及同步会有几个疑问 1). 为什么我不用 canal ,自己将数据 同步到 kafka ,然后业务再从 kafka 消费出来处理 . 这样我想怎么同步就怎么同步 2). Bifrost 有什么</description>
+    </item>
+    
+  </channel>
+</rss>

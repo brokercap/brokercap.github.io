@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>批量同步配置 - Bifrost Document</title>
+<meta name="description" content="Bifrost ---- 将  MySQL 数据 实时同步 到 Redis , MongoDB 等服务的高性能异构中间件">
+<meta name="generator" content="Hugo 0.59.1" />
+<link href="http://wiki.xbifrost.com/index.xml" rel="alternate" type="application/rss+xml">
+<link rel="canonical" href="http://wiki.xbifrost.com/syncdata/sync_batch/">
+<link rel="stylesheet" href="http://wiki.xbifrost.com/css/theme.min.css">
+<script src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+<link rel="stylesheet" href="http://wiki.xbifrost.com/css/chroma.min.css">
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery.easing@1.4.1/jquery.easing.min.js"></script>
+<script src="http://wiki.xbifrost.com/js/bundle.js"></script><style>
+:root {
+  
+  
+}
+</style>
+</head>
+<body><div class="container"><header>
+<h1>Bifrost Document</h1>
+
+ <span class="version">Version 1.1.0</span>
+<a href="https://github.com/brokercap/Bifrost" class="github"><i class="fab fa-github"></i></a>
+<p class="description">Bifrost ---- 将  MySQL 数据 实时同步 到 Redis , MongoDB 等服务的高性能异构中间件</p>
+
+</header>
+<div class="global-menu">
+<nav>
+<ul>
+<li><a href="/">Home</a></li>
+<li><a href="https://github.com/brokercap/Bifrost">github</a></li></ul>
+</nav>
+</div>
+<div class="content-container">
+<main><h1>批量同步配置</h1>
+
+<h4 id="批量配置的使用场景">批量配置的使用场景:</h4>
+
+<ol>
+<li><p>有多个表要设置以同样的配置需要同步同一个 目标库里去</p></li>
+
+<li><p>要设置整个所有库或者某一个库里的所有表,包括以后新增的表同步到kafka 等目标库里去</p></li>
+</ol>
+
+<p>Bifrost 支持两种批量配置的方式,一种是 选择多个表,点击批量添加的按钮,第二种是 配置整个库的表的所有表,包括以后新增的表</p>
+
+<h4 id="1-批量绑定表和通道">1. 批量绑定表和通道</h4>
+
+<p><img src="/images/syncData/tableBindChannel_batch_1.jpg" alt="image" />
+<img src="/images/syncData/tableBindChannel_batch_2.jpg" alt="image" /></p>
+
+<p>1). 选中要批量绑定表的 check 框</p>
+
+<p>2). 点击批量绑定,弹出一个框,点击保存</p>
+
+<p>3). 绑定成功会显示日志</p>
+
+<pre><code>开始添加
+
+binlog_field_hprose_plugin_test ADD Result:success
+
+binlog_field_http_plugin_test ADD Result:success
+
+添加完成
+
+
+</code></pre>
+
+<h4 id="2-批量设置多个表以同样的配置同步到同一个目标库">2. 批量设置多个表以同样的配置同步到同一个目标库</h4>
+
+<p><img src="/images/syncData/tableSyncAddBatch_1.jpg" alt="image" /></p>
+
+<p>1). 选中要批量设置同步表的 check 框 (必须绑定了同步的表才有生效,没绑定通道的表 无效)</p>
+
+<p>2). 按选择目标库配置来配置 , 批量批量的表,选择字段无效</p>
+
+<p>3). 点击 批量添加  的按钮, 假如不支持批量配置的插件,将会提示不支持</p>
+
+<p>4). 批量绑定成功后会日志</p>
+
+<pre><code>开始提交
+
+binlog_field_test success
+
+bristol_performance_test success
+
+执行完成
+</code></pre>
+
+<h4 id="3-设置所有库或者某个库所有表同步到同一个目标库">3. 设置所有库或者某个库所有表同步到同一个目标库</h4>
+
+<p><img src="/images/syncData/tableSyncAddBatch_2.jpg" alt="image" /></p>
+
+<p>1). 选择要同步的库名(假如库名为 AllDataBases ,则代表所有库)</p>
+
+<p>2). 选中 AllTables 表名( 假如选择的库为 AllDataBases ,又选择了 AllTables 表,则代表所有库及表)</p>
+
+<p>3). 按选择目标库配置来配置</p>
+
+<p>4). 点击 提交 按钮,假如不支持批量配置的插件,将会提示不支持</p>
+
+<h4 id="4-标签">4. 标签</h4>
+
+<p>在配置数据同步的插件模块里,是可以使用标签的</p>
+
+<p>标签支持程度，取决于各个插件的实现,请参考各插件的文档</p>
+
+<p>{$SchemaName} : 数据库名字</p>
+
+<p>{$TableName} : 表的名字</p>
+
+<p>{$EventType} : 当前记录的增删改事件,新增(insert); 修改(update) ; 删除(delete); SQL(sql)</p>
+
+<p>{$Timestamp} : 当前Bifrost同机器的时间戳</p>
+
+<p>{$BinlogTimestamp} : Binlog 发生的时间戳</p>
+
+<p>{$BinlogFileNum} : Binlog文件编号,并不是 整个Binlog文件名,比如 binlog 文件是 mysql-bin.000001 那这个 BinlogFileNum 的值 是1</p>
+
+<p>{$BinlogPosition} : Binlog position 位点</p>
+
+<p>{$字段名} : 表的字段数据</p>
+
+<h4 id="5-备注">5. 备注</h4>
+
+<p>1). 源数据的库名不能是关键字 AllDataBases</p>
+
+<p>2). 源数据的表名不能是关键字 AllTables</p>
+
+<p>3). 批量配置同步配置的时候,不支持选择字段,选择了也是无效</p>
+
+<p>4). 假如配置的时候,使用了 {$id} 这样的字段名标签 , 假如源表里没有这样的字段,将会转换成&rdquo;&rdquo;</p>
+<div class="edit-meta">
+Last updated on 27 Nov 2019
+
+
+<br><a href="https://github.com/brokercap/brokercap.github.io/edit/master/content/syncData/sync_batch.md" class="edit-page"><i class="fas fa-pen-square"></i> Edit on GitHub</a></div><nav class="pagination"><a class="nav nav-prev" href="/syncdata/sync_config/" title="数据表同步配置"><i class="fas fa-arrow-left" aria-hidden="true"></i> Prev - 数据表同步配置</a>
+<a class="nav nav-next" href="/syncdata/sync_list/" title="同步列表字段解析">Next - 同步列表字段解析 <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+</nav><footer><p class="powered">Powered by <a href="https://gohugo.io">Hugo</a>. Theme by <a href="https://themes.gohugo.io/hugo-theme-techdoc/">TechDoc</a>. Designed by <a href="https://github.com/thingsym/hugo-theme-techdoc">Thingsym</a>.</p>
+</footer>
+</main><div class="sidebar">
+
+<nav class="open-menu">
+<ul>
+<li class=""><a href="http://wiki.xbifrost.com/">Home</a></li>
+
+<li class=""><a href="/install/">安装部署</a>
+  
+<ul class="sub-menu">
+<li class=""><a href="/install/data_source_build/">编译安装</a></li>
+<li class=""><a href="/install/install_binary/">二进制安装</a></li>
+<li class=""><a href="/install/config_doc/">启动配置解析</a></li>
+</ul>
+  
+</li>
+
+<li class=""><a href="/data_source/">数据源管理</a>
+  
+<ul class="sub-menu">
+<li class=""><a href="/data_source/add/">数据源新增</a></li>
+<li class=""><a href="/data_source/edit/">数据源修改</a></li>
+</ul>
+  
+</li>
+
+<li class=""><a href="/plugin/">插件管理</a>
+  
+</li>
+
+<li class=""><a href="/dest/">目标库管理</a>
+  
+<ul class="sub-menu">
+<li class=""><a href="/dest/edit/">目标库修改</a></li>
+<li class=""><a href="/dest/add/">目标库新增</a></li>
+</ul>
+  
+</li>
+
+<li class="parent"><a href="/syncdata/">数据同步配置</a>
+  
+<ul class="sub-menu">
+<li class=""><a href="/syncdata/sync_config/">数据表同步配置</a></li>
+<li class="active"><a href="/syncdata/sync_batch/">批量同步配置</a></li>
+<li class=""><a href="/syncdata/sync_list/">同步列表字段解析</a></li>
+<li class=""><a href="/syncdata/sync_history_config/">全量任务配置</a></li>
+</ul>
+  
+</li>
+
+<li class=""><a href="/channel/">通道</a>
+  
+</li>
+
+<li class=""><a href="/flow/">流量</a>
+  
+</li>
+
+<li class=""><a href="/warning/">报警</a>
+  
+<ul class="sub-menu">
+<li class=""><a href="/warning/rule/">报警规则</a></li>
+<li class=""><a href="/warning/weixin/">微信</a></li>
+<li class=""><a href="/warning/email/">邮箱</a></li>
+</ul>
+  
+</li>
+
+<li class=""><a href="/user/">用户管理</a>
+  
+</li>
+
+<li class=""><a href="/bristol/">二进制文件解析</a>
+  
+</li>
+
+<li class=""><a href="/other/">其他</a>
+  
+<ul class="sub-menu">
+<li class=""><a href="/other/why/">为什么选择 Bifrost</a></li>
+</ul>
+  
+</li>
+</ul>
+</nav>
+
+
+
+<div class="sidebar-footer"></div>
+</div>
+</div><a href="#" id="backtothetop-fixed" class="backtothetop"
+ data-backtothetop-duration="600"
+ data-backtothetop-easing="easeOutQuart"
+ data-backtothetop-fixed-fadeIn="1000"
+ data-backtothetop-fixed-fadeOut="1000"
+ data-backtothetop-fixed-bottom="10"
+ data-backtothetop-fixed-right="20">
+<span class="fa-layers fa-fw">
+<i class="fas fa-circle"></i>
+<i class="fas fa-arrow-circle-up"></i>
+</span></a>
+</div>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>数据同步配置 on Bifrost Document</title>
+    <link>http://wiki.xbifrost.com/syncdata/</link>
+    <description>Recent content in 数据同步配置 on Bifrost Document</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 23 Nov 2019 15:32:15 +0000</lastBuildDate>
+    
+	<atom:link href="http://wiki.xbifrost.com/syncdata/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>数据表同步配置</title>
+      <link>http://wiki.xbifrost.com/syncdata/sync_config/</link>
+      <pubDate>Sat, 23 Nov 2019 15:30:15 +0000</pubDate>
+      
+      <guid>http://wiki.xbifrost.com/syncdata/sync_config/</guid>
+      <description>一. 配置过程 选择要同步的数据库 绑定表和通道的关系 选择数据表(只有ADD按钮 绑定了表和通道的关系之后才能选择) 选择这个表的数据要同步到哪一个目</description>
+    </item>
+    
+    <item>
+      <title>批量同步配置</title>
+      <link>http://wiki.xbifrost.com/syncdata/sync_batch/</link>
+      <pubDate>Wed, 27 Nov 2019 21:05:15 +0000</pubDate>
+      
+      <guid>http://wiki.xbifrost.com/syncdata/sync_batch/</guid>
+      <description>批量配置的使用场景: 有多个表要设置以同样的配置需要同步同一个 目标库里去 要设置整个所有库或者某一个库里的所有表,包括以后新增的表同步到kafk</description>
+    </item>
+    
+    <item>
+      <title>同步列表字段解析</title>
+      <link>http://wiki.xbifrost.com/syncdata/sync_list/</link>
+      <pubDate>Wed, 27 Nov 2019 21:05:15 +0000</pubDate>
+      
+      <guid>http://wiki.xbifrost.com/syncdata/sync_list/</guid>
+      <description>字段解析 sliceId/ID : 第几个同步 / 自增ID PluginType : 插件名称 ToServerKey : 绑定的目标库唯一名字,添加目标库时候的 ToServerKey FieldList : 选择了哪些字段要同步 Others : Bifrost 内部参数 1). MustBeSuccess : 每一条数</description>
+    </item>
+    
+    <item>
+      <title>全量任务配置</title>
+      <link>http://wiki.xbifrost.com/syncdata/sync_history_config/</link>
+      <pubDate>Sat, 23 Nov 2019 15:30:15 +0000</pubDate>
+      
+      <guid>http://wiki.xbifrost.com/syncdata/sync_history_config/</guid>
+      <description>全量任务同步 是建立在 表配置同步到目标库 之上 假如没有 配置表同步到目标库 则不能配置全量同步 配置过程 1. 点击 刷全量数据 按钮 2. 配置查询全量数据的条件 字</description>
+    </item>
+    
+  </channel>
+</rss>

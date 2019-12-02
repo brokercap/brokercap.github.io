@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>启动配置解析 - Bifrost Document</title>
+<meta name="description" content="Bifrost ---- 将  MySQL 数据 实时同步 到 Redis , MongoDB 等服务的高性能异构中间件">
+<meta name="generator" content="Hugo 0.59.1" />
+<link href="http://wiki.xbifrost.com/index.xml" rel="alternate" type="application/rss+xml">
+<link rel="canonical" href="http://wiki.xbifrost.com/install/config_doc/">
+<link rel="stylesheet" href="http://wiki.xbifrost.com/css/theme.min.css">
+<script src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+<link rel="stylesheet" href="http://wiki.xbifrost.com/css/chroma.min.css">
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery.easing@1.4.1/jquery.easing.min.js"></script>
+<script src="http://wiki.xbifrost.com/js/bundle.js"></script><style>
+:root {
+  
+  
+}
+</style>
+</head>
+<body><div class="container"><header>
+<h1>Bifrost Document</h1>
+
+ <span class="version">Version 1.1.0</span>
+<a href="https://github.com/brokercap/Bifrost" class="github"><i class="fab fa-github"></i></a>
+<p class="description">Bifrost ---- 将  MySQL 数据 实时同步 到 Redis , MongoDB 等服务的高性能异构中间件</p>
+
+</header>
+<div class="global-menu">
+<nav>
+<ul>
+<li><a href="/">Home</a></li>
+<li><a href="https://github.com/brokercap/Bifrost">github</a></li></ul>
+</nav>
+</div>
+<div class="content-container">
+<main><h1>启动配置解析</h1>
+
+<p><strong>Bifrost</strong> 默认配置路径在 Bifrost 运行目录下的 etc/config.ini</p>
+
+<pre><code>[user]
+#管理界面的用户名及密码
+Bifrost=Bifrost123
+
+[groups]
+#administrator 管理人员可以添加删除等操作
+#monitor 只能查看数据
+Bifrost=administrator
+BifrostMonitor=monitor
+
+[Bifrostd]
+#默认会当前启动文件夹
+#log_dir=/data/log/
+#默认21036端口
+listen=0.0.0.0:21036
+#默认会当前创建$data_dir/data文件夹，权限为 700
+data_dir=./
+#默认启动文件夹下Bifrost.pid
+#pid=/tmp/bifrost.pid
+
+#设置同步给第三方服务的队列大小，默认5000
+toserver_queue_size=5000
+
+#通道队列的大小，默认1000
+channel_queue_size=1000
+
+#保存们点磁盘之前的缓存池桶池大小,&lt;=0,则不开始 ,直接刷到leveldb,默认为50
+key_cache_pool_size=50
+
+#是否支持动态加plugin so 插件，默认为false
+#这个参数只在 linux 下有效，其他平台全部为false
+dynamic_plugin=false
+
+#是否支持https
+tls=true
+
+#server.key 及 server.crt 相对于 Bifrost 的路径，也可以填绝对路径
+tls_key_file=./etc/server.key
+tls_crt_file=./etc/server.crt
+
+#用于性能测试
+#key是界面添加的DBName
+#mysql-bin.000015,107175  位点信息
+#假如配置了这个值,则启动的时候,会强制使用这个位点,包括所有配置的toseverlist. 
+[PerformanceTesting]
+myTest=mysql-bin.000015,107175
+</code></pre>
+
+<h4 id="备注">备注</h4>
+
+<p>user,groups 只有在第一次启动初始化的有效,在线新增用户名和修改后,配置文件用户名和密码并不会进行修改</p>
+<div class="edit-meta">
+Last updated on 23 Nov 2019
+
+
+<br>
+Published on 23 Nov 2019
+<br><a href="https://github.com/brokercap/brokercap.github.io/edit/master/content/install/config_doc.md" class="edit-page"><i class="fas fa-pen-square"></i> Edit on GitHub</a></div><nav class="pagination"><a class="nav nav-prev" href="/install/install_binary/" title="二进制安装"><i class="fas fa-arrow-left" aria-hidden="true"></i> Prev - 二进制安装</a>
+<a class="nav nav-next" href="/data_source/" title="数据源管理">Next - 数据源管理 <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+</nav><footer><p class="powered">Powered by <a href="https://gohugo.io">Hugo</a>. Theme by <a href="https://themes.gohugo.io/hugo-theme-techdoc/">TechDoc</a>. Designed by <a href="https://github.com/thingsym/hugo-theme-techdoc">Thingsym</a>.</p>
+</footer>
+</main><div class="sidebar">
+
+<nav class="open-menu">
+<ul>
+<li class=""><a href="http://wiki.xbifrost.com/">Home</a></li>
+
+<li class="parent"><a href="/install/">安装部署</a>
+  
+<ul class="sub-menu">
+<li class=""><a href="/install/data_source_build/">编译安装</a></li>
+<li class=""><a href="/install/install_binary/">二进制安装</a></li>
+<li class="active"><a href="/install/config_doc/">启动配置解析</a></li>
+</ul>
+  
+</li>
+
+<li class=""><a href="/data_source/">数据源管理</a>
+  
+<ul class="sub-menu">
+<li class=""><a href="/data_source/add/">数据源新增</a></li>
+<li class=""><a href="/data_source/edit/">数据源修改</a></li>
+</ul>
+  
+</li>
+
+<li class=""><a href="/plugin/">插件管理</a>
+  
+</li>
+
+<li class=""><a href="/dest/">目标库管理</a>
+  
+<ul class="sub-menu">
+<li class=""><a href="/dest/edit/">目标库修改</a></li>
+<li class=""><a href="/dest/add/">目标库新增</a></li>
+</ul>
+  
+</li>
+
+<li class=""><a href="/syncdata/">数据同步配置</a>
+  
+<ul class="sub-menu">
+<li class=""><a href="/syncdata/sync_config/">数据表同步配置</a></li>
+<li class=""><a href="/syncdata/sync_batch/">批量同步配置</a></li>
+<li class=""><a href="/syncdata/sync_list/">同步列表字段解析</a></li>
+<li class=""><a href="/syncdata/sync_history_config/">全量任务配置</a></li>
+</ul>
+  
+</li>
+
+<li class=""><a href="/channel/">通道</a>
+  
+</li>
+
+<li class=""><a href="/flow/">流量</a>
+  
+</li>
+
+<li class=""><a href="/warning/">报警</a>
+  
+<ul class="sub-menu">
+<li class=""><a href="/warning/rule/">报警规则</a></li>
+<li class=""><a href="/warning/weixin/">微信</a></li>
+<li class=""><a href="/warning/email/">邮箱</a></li>
+</ul>
+  
+</li>
+
+<li class=""><a href="/user/">用户管理</a>
+  
+</li>
+
+<li class=""><a href="/bristol/">二进制文件解析</a>
+  
+</li>
+
+<li class=""><a href="/other/">其他</a>
+  
+<ul class="sub-menu">
+<li class=""><a href="/other/why/">为什么选择 Bifrost</a></li>
+</ul>
+  
+</li>
+</ul>
+</nav>
+
+
+
+<div class="sidebar-footer"></div>
+</div>
+</div><a href="#" id="backtothetop-fixed" class="backtothetop"
+ data-backtothetop-duration="600"
+ data-backtothetop-easing="easeOutQuart"
+ data-backtothetop-fixed-fadeIn="1000"
+ data-backtothetop-fixed-fadeOut="1000"
+ data-backtothetop-fixed-bottom="10"
+ data-backtothetop-fixed-right="20">
+<span class="fa-layers fa-fw">
+<i class="fas fa-circle"></i>
+<i class="fas fa-arrow-circle-up"></i>
+</span></a>
+</div>
+</body>
+</html>

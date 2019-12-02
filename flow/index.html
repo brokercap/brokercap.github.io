@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>流量 - Bifrost Document</title>
+<meta name="description" content="Bifrost ---- 将  MySQL 数据 实时同步 到 Redis , MongoDB 等服务的高性能异构中间件">
+<meta name="generator" content="Hugo 0.59.1" />
+<link href="http://wiki.xbifrost.com/index.xml" rel="alternate" type="application/rss+xml">
+<link rel="canonical" href="http://wiki.xbifrost.com/flow/">
+<link rel="stylesheet" href="http://wiki.xbifrost.com/css/theme.min.css">
+<script src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+<link rel="stylesheet" href="http://wiki.xbifrost.com/css/chroma.min.css">
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery.easing@1.4.1/jquery.easing.min.js"></script>
+<script src="http://wiki.xbifrost.com/js/bundle.js"></script><style>
+:root {
+  
+  
+}
+</style>
+</head>
+<body><div class="container"><header>
+<h1>Bifrost Document</h1>
+
+ <span class="version">Version 1.1.0</span>
+<a href="https://github.com/brokercap/Bifrost" class="github"><i class="fab fa-github"></i></a>
+<p class="description">Bifrost ---- 将  MySQL 数据 实时同步 到 Redis , MongoDB 等服务的高性能异构中间件</p>
+
+</header>
+<div class="global-menu">
+<nav>
+<ul>
+<li><a href="/">Home</a></li>
+<li><a href="https://github.com/brokercap/Bifrost">github</a></li></ul>
+</nav>
+</div>
+<div class="content-container">
+<main><h1>流量</h1>
+
+<h4 id="介绍">介绍</h4>
+
+<p>可以通过 数据源列表 , 通道列表 , 数据表同步配置界面 ,及 导航栏 进行流量显示面板</p>
+
+<p>从导航栏进去的流量面板,默认为全局流量显示</p>
+
+<p>从数据源列表进去的流量面板,显示的是当前这个数据源下处理的流量</p>
+
+<p>从通道列表进去的流量面板,显示的是当前通道流过的流量</p>
+
+<p>从数据表同步配置界面等和表有关进去的面板.显示的是当前数据表处理的流量情况</p>
+
+<h4 id="流量统计">流量统计</h4>
+
+<p>数据进入到了 数据表配置的目标库队列中 就进行了统计,每5秒进行一次聚合.</p>
+
+<p>并不是数据同步到目标库 再进行统计的,所有流量显示只能参考,不能认定为目标库处理的性能</p>
+
+<h5 id="字段解析">字段解析</h5>
+
+<p>Count : <font color=#F00>每一条数据从通道队列中消费出来,写到了目标库队列中之后 </font> +1 ,假如一个 update事件有 N 条数据, 就 +N</p>
+
+<p>ByteSize : 每一条数据从通道队列中消费出来,写到了目标库队列中之后 , + (单条消息大小 * 写到了多少个目标库队列中)</p>
+
+<h5 id="案例">案例</h5>
+
+<p>假如 T1 绑定了 default 通道, 写入了 10000 数据,每条数据大小 2Kb, 并且 T1 表配置同了 同步到 Redis,Mongodb,ClickHouse 三个目标库</p>
+
+<p>计算方式</p>
+
+<p>Count = 10000</p>
+
+<p>ByteSize = 10000 * 2 * 3 = 60000 Kb</p>
+
+<h4 id="显示面板">显示面板</h4>
+
+<p><img src="/images/flow/flow_1.jpg" alt="image" /></p>
+
+<p>增量 : 增量的方式进行数据显示</p>
+
+<p>全量 : 自 Bifrost 上一次启动以来,处理了总的多少数据流量</p>
+
+<p>1分钟 : 最近一分钟的流量</p>
+
+<p>10分钟 : 最近10分钟的流量情况</p>
+
+<p>1小时 : 最近1小时的流量情况</p>
+
+<p>8小时 : 最近8小时的流量情况</p>
+
+<p>24小时 : 最近24小时的流量情况</p>
+
+<p>不支持超过 24 小时以前的流量情况显示</p>
+
+<h4 id="首页流量">首页流量</h4>
+
+<p><img src="/images/flow/flow_home.jpg" alt="image" /></p>
+
+<p>首页里的流量是以增量的形式展示的</p>
+
+<p><font color=#F00>首页 条数 和  数据大小  是以选择了  最近多久的时间 的增量数据统计的</font></p>
+
+<p>比如首页默认显示的是 最近10分钟的流量情况</p>
+
+<p>则条数 和 数据大小 则是 统计 最近10分钟内 新增的 条数 和 数据大小</p>
+<div class="edit-meta">
+Last updated on 28 Nov 2018
+
+
+<br>
+Published on 28 Nov 2018
+<br><a href="https://github.com/brokercap/brokercap.github.io/edit/master/content/flow/_index.md" class="edit-page"><i class="fas fa-pen-square"></i> Edit on GitHub</a></div><nav class="pagination"><a class="nav nav-prev" href="/channel/" title="通道"><i class="fas fa-arrow-left" aria-hidden="true"></i> Prev - 通道</a>
+<a class="nav nav-next" href="/warning/" title="报警">Next - 报警 <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+</nav><footer><p class="powered">Powered by <a href="https://gohugo.io">Hugo</a>. Theme by <a href="https://themes.gohugo.io/hugo-theme-techdoc/">TechDoc</a>. Designed by <a href="https://github.com/thingsym/hugo-theme-techdoc">Thingsym</a>.</p>
+</footer>
+</main><div class="sidebar">
+
+<nav class="open-menu">
+<ul>
+<li class=""><a href="http://wiki.xbifrost.com/">Home</a></li>
+
+<li class=""><a href="/install/">安装部署</a>
+  
+<ul class="sub-menu">
+<li class=""><a href="/install/data_source_build/">编译安装</a></li>
+<li class=""><a href="/install/install_binary/">二进制安装</a></li>
+<li class=""><a href="/install/config_doc/">启动配置解析</a></li>
+</ul>
+  
+</li>
+
+<li class=""><a href="/data_source/">数据源管理</a>
+  
+<ul class="sub-menu">
+<li class=""><a href="/data_source/add/">数据源新增</a></li>
+<li class=""><a href="/data_source/edit/">数据源修改</a></li>
+</ul>
+  
+</li>
+
+<li class=""><a href="/plugin/">插件管理</a>
+  
+</li>
+
+<li class=""><a href="/dest/">目标库管理</a>
+  
+<ul class="sub-menu">
+<li class=""><a href="/dest/edit/">目标库修改</a></li>
+<li class=""><a href="/dest/add/">目标库新增</a></li>
+</ul>
+  
+</li>
+
+<li class=""><a href="/syncdata/">数据同步配置</a>
+  
+<ul class="sub-menu">
+<li class=""><a href="/syncdata/sync_config/">数据表同步配置</a></li>
+<li class=""><a href="/syncdata/sync_batch/">批量同步配置</a></li>
+<li class=""><a href="/syncdata/sync_list/">同步列表字段解析</a></li>
+<li class=""><a href="/syncdata/sync_history_config/">全量任务配置</a></li>
+</ul>
+  
+</li>
+
+<li class=""><a href="/channel/">通道</a>
+  
+</li>
+
+<li class="parent active"><a href="/flow/">流量</a>
+  
+</li>
+
+<li class=""><a href="/warning/">报警</a>
+  
+<ul class="sub-menu">
+<li class=""><a href="/warning/rule/">报警规则</a></li>
+<li class=""><a href="/warning/weixin/">微信</a></li>
+<li class=""><a href="/warning/email/">邮箱</a></li>
+</ul>
+  
+</li>
+
+<li class=""><a href="/user/">用户管理</a>
+  
+</li>
+
+<li class=""><a href="/bristol/">二进制文件解析</a>
+  
+</li>
+
+<li class=""><a href="/other/">其他</a>
+  
+<ul class="sub-menu">
+<li class=""><a href="/other/why/">为什么选择 Bifrost</a></li>
+</ul>
+  
+</li>
+</ul>
+</nav>
+
+
+
+<div class="sidebar-footer"></div>
+</div>
+</div><a href="#" id="backtothetop-fixed" class="backtothetop"
+ data-backtothetop-duration="600"
+ data-backtothetop-easing="easeOutQuart"
+ data-backtothetop-fixed-fadeIn="1000"
+ data-backtothetop-fixed-fadeOut="1000"
+ data-backtothetop-fixed-bottom="10"
+ data-backtothetop-fixed-right="20">
+<span class="fa-layers fa-fw">
+<i class="fas fa-circle"></i>
+<i class="fas fa-arrow-circle-up"></i>
+</span></a>
+</div>
+</body>
+</html>

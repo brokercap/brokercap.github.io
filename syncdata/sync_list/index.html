@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>同步列表字段解析 - Bifrost Document</title>
+<meta name="description" content="Bifrost ---- 将  MySQL 数据 实时同步 到 Redis , MongoDB 等服务的高性能异构中间件">
+<meta name="generator" content="Hugo 0.59.1" />
+<link href="http://wiki.xbifrost.com/index.xml" rel="alternate" type="application/rss+xml">
+<link rel="canonical" href="http://wiki.xbifrost.com/syncdata/sync_list/">
+<link rel="stylesheet" href="http://wiki.xbifrost.com/css/theme.min.css">
+<script src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+<link rel="stylesheet" href="http://wiki.xbifrost.com/css/chroma.min.css">
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery.easing@1.4.1/jquery.easing.min.js"></script>
+<script src="http://wiki.xbifrost.com/js/bundle.js"></script><style>
+:root {
+  
+  
+}
+</style>
+</head>
+<body><div class="container"><header>
+<h1>Bifrost Document</h1>
+
+ <span class="version">Version 1.1.0</span>
+<a href="https://github.com/brokercap/Bifrost" class="github"><i class="fab fa-github"></i></a>
+<p class="description">Bifrost ---- 将  MySQL 数据 实时同步 到 Redis , MongoDB 等服务的高性能异构中间件</p>
+
+</header>
+<div class="global-menu">
+<nav>
+<ul>
+<li><a href="/">Home</a></li>
+<li><a href="https://github.com/brokercap/Bifrost">github</a></li></ul>
+</nav>
+</div>
+<div class="content-container">
+<main><h1>同步列表字段解析</h1>
+
+<p><img src="/images/syncData/tableSync_list_1.jpg" alt="image" /></p>
+
+<h4 id="字段解析">字段解析</h4>
+
+<ol>
+<li><p>sliceId/ID   : 第几个同步 / 自增ID</p></li>
+
+<li><p>PluginType : 插件名称</p></li>
+
+<li><p>ToServerKey : 绑定的目标库唯一名字,添加目标库时候的 ToServerKey</p></li>
+
+<li><p>FieldList : 选择了哪些字段要同步</p></li>
+
+<li><p>Others : Bifrost 内部参数</p></li>
+</ol>
+
+<p>1). MustBeSuccess : 每一条数据是否必须同步成功,不成功就一直在重试</p>
+
+<p>2). FilterQuery : 是否过滤 sql 语句事件</p>
+
+<p>3). FilterUpdate : update事件中,选择的字段的数据都没有被更新,是否过滤</p>
+
+<p>4). BinlogFileNum : 最后一次同步成功的binlog文件编号</p>
+
+<p>5). BinlogPos : 最后一次同步成功的binlog文件位点</p>
+
+<p>6). LastBinlogFileNum : 最后一条进入到队列中的数据的binlog文件编号</p>
+
+<p>7). LastBinlogPosition : 最后一条进入到队列中的数据的binlog文件位点</p>
+
+<p>8). QueueMsgCount : 当前队列中待处理的消息条数</p>
+
+<ol>
+<li><p>PluginParam : 当前目标库同步 配置的参数</p></li>
+
+<li><p>Error : 当前目标库同步出错的错误内容,比如连接失败,数据转换失败等</p></li>
+</ol>
+
+<p>当出现了 Error 的时候, Error 后面会跟着 一个 Miss 按钮</p>
+
+<p>因为有一种可能,一条数据因为数据原因,一直同步到止目标库失败,比如数据转换失败等</p>
+
+<p>需要错过这条数据,不能影响业务</p>
+
+<p>所以需要点击 这个 Miss 按钮,进行错过这一条数据</p>
+
+<p>对于 Miss 按钮 的支持程度,取决于 插件的实现,请查询插件相关资料</p>
+<div class="edit-meta">
+Last updated on 27 Nov 2019
+
+
+<br><a href="https://github.com/brokercap/brokercap.github.io/edit/master/content/syncData/sync_list.md" class="edit-page"><i class="fas fa-pen-square"></i> Edit on GitHub</a></div><nav class="pagination"><a class="nav nav-prev" href="/syncdata/sync_batch/" title="批量同步配置"><i class="fas fa-arrow-left" aria-hidden="true"></i> Prev - 批量同步配置</a>
+<a class="nav nav-next" href="/syncdata/sync_history_config/" title="全量任务配置">Next - 全量任务配置 <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+</nav><footer><p class="powered">Powered by <a href="https://gohugo.io">Hugo</a>. Theme by <a href="https://themes.gohugo.io/hugo-theme-techdoc/">TechDoc</a>. Designed by <a href="https://github.com/thingsym/hugo-theme-techdoc">Thingsym</a>.</p>
+</footer>
+</main><div class="sidebar">
+
+<nav class="open-menu">
+<ul>
+<li class=""><a href="http://wiki.xbifrost.com/">Home</a></li>
+
+<li class=""><a href="/install/">安装部署</a>
+  
+<ul class="sub-menu">
+<li class=""><a href="/install/data_source_build/">编译安装</a></li>
+<li class=""><a href="/install/install_binary/">二进制安装</a></li>
+<li class=""><a href="/install/config_doc/">启动配置解析</a></li>
+</ul>
+  
+</li>
+
+<li class=""><a href="/data_source/">数据源管理</a>
+  
+<ul class="sub-menu">
+<li class=""><a href="/data_source/add/">数据源新增</a></li>
+<li class=""><a href="/data_source/edit/">数据源修改</a></li>
+</ul>
+  
+</li>
+
+<li class=""><a href="/plugin/">插件管理</a>
+  
+</li>
+
+<li class=""><a href="/dest/">目标库管理</a>
+  
+<ul class="sub-menu">
+<li class=""><a href="/dest/edit/">目标库修改</a></li>
+<li class=""><a href="/dest/add/">目标库新增</a></li>
+</ul>
+  
+</li>
+
+<li class="parent"><a href="/syncdata/">数据同步配置</a>
+  
+<ul class="sub-menu">
+<li class=""><a href="/syncdata/sync_config/">数据表同步配置</a></li>
+<li class=""><a href="/syncdata/sync_batch/">批量同步配置</a></li>
+<li class="active"><a href="/syncdata/sync_list/">同步列表字段解析</a></li>
+<li class=""><a href="/syncdata/sync_history_config/">全量任务配置</a></li>
+</ul>
+  
+</li>
+
+<li class=""><a href="/channel/">通道</a>
+  
+</li>
+
+<li class=""><a href="/flow/">流量</a>
+  
+</li>
+
+<li class=""><a href="/warning/">报警</a>
+  
+<ul class="sub-menu">
+<li class=""><a href="/warning/rule/">报警规则</a></li>
+<li class=""><a href="/warning/weixin/">微信</a></li>
+<li class=""><a href="/warning/email/">邮箱</a></li>
+</ul>
+  
+</li>
+
+<li class=""><a href="/user/">用户管理</a>
+  
+</li>
+
+<li class=""><a href="/bristol/">二进制文件解析</a>
+  
+</li>
+
+<li class=""><a href="/other/">其他</a>
+  
+<ul class="sub-menu">
+<li class=""><a href="/other/why/">为什么选择 Bifrost</a></li>
+</ul>
+  
+</li>
+</ul>
+</nav>
+
+
+
+<div class="sidebar-footer"></div>
+</div>
+</div><a href="#" id="backtothetop-fixed" class="backtothetop"
+ data-backtothetop-duration="600"
+ data-backtothetop-easing="easeOutQuart"
+ data-backtothetop-fixed-fadeIn="1000"
+ data-backtothetop-fixed-fadeOut="1000"
+ data-backtothetop-fixed-bottom="10"
+ data-backtothetop-fixed-right="20">
+<span class="fa-layers fa-fw">
+<i class="fas fa-circle"></i>
+<i class="fas fa-arrow-circle-up"></i>
+</span></a>
+</div>
+</body>
+</html>

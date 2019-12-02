@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>http://wiki.xbifrost.com/</loc>
+    <lastmod>2019-11-23T15:32:15+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://wiki.xbifrost.com/install/</loc>
+    <lastmod>2019-11-23T15:32:15+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://wiki.xbifrost.com/data_source/</loc>
+    <lastmod>2018-11-23T15:32:15+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://wiki.xbifrost.com/plugin/</loc>
+    <lastmod>2019-11-23T15:32:15+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://wiki.xbifrost.com/dest/</loc>
+    <lastmod>2019-11-23T15:32:15+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://wiki.xbifrost.com/syncdata/</loc>
+    <lastmod>2019-11-23T15:32:15+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://wiki.xbifrost.com/channel/</loc>
+    <lastmod>2018-11-23T15:32:15+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://wiki.xbifrost.com/install/data_source_build/</loc>
+    <lastmod>2019-11-23T15:30:15+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://wiki.xbifrost.com/flow/</loc>
+    <lastmod>2018-11-28T21:49:15+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://wiki.xbifrost.com/install/install_binary/</loc>
+    <lastmod>2019-11-23T15:30:15+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://wiki.xbifrost.com/warning/</loc>
+    <lastmod>2018-11-28T21:49:15+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://wiki.xbifrost.com/install/config_doc/</loc>
+    <lastmod>2019-11-23T15:30:15+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://wiki.xbifrost.com/user/</loc>
+    <lastmod>2018-11-28T21:49:15+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://wiki.xbifrost.com/data_source/add/</loc>
+    <lastmod>2019-11-23T10:05:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://wiki.xbifrost.com/data_source/edit/</loc>
+    <lastmod>2019-11-23T10:05:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://wiki.xbifrost.com/dest/edit/</loc>
+    <lastmod>2019-11-23T10:05:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://wiki.xbifrost.com/dest/add/</loc>
+    <lastmod>2019-11-23T10:05:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://wiki.xbifrost.com/syncdata/sync_config/</loc>
+    <lastmod>2019-11-23T15:30:15+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://wiki.xbifrost.com/syncdata/sync_batch/</loc>
+    <lastmod>2019-11-27T21:05:15+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://wiki.xbifrost.com/syncdata/sync_list/</loc>
+    <lastmod>2019-11-27T21:05:15+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://wiki.xbifrost.com/syncdata/sync_history_config/</loc>
+    <lastmod>2019-11-23T15:30:15+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://wiki.xbifrost.com/bristol/</loc>
+    <lastmod>2018-11-28T21:49:15+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://wiki.xbifrost.com/other/</loc>
+    <lastmod>2019-11-23T15:32:15+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://wiki.xbifrost.com/other/why/</loc>
+    <lastmod>2019-11-27T23:04:15+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://wiki.xbifrost.com/warning/rule/</loc>
+    <lastmod>2019-11-28T22:59:15+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://wiki.xbifrost.com/warning/weixin/</loc>
+    <lastmod>2019-11-28T22:59:15+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://wiki.xbifrost.com/warning/email/</loc>
+    <lastmod>2019-11-28T22:59:15+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://wiki.xbifrost.com/categories/</loc>
+  </url>
+  
+  <url>
+    <loc>http://wiki.xbifrost.com/tags/</loc>
+  </url>
+  
+</urlset>

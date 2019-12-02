@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>数据源管理 on Bifrost Document</title>
+    <link>http://wiki.xbifrost.com/data_source/</link>
+    <description>Recent content in 数据源管理 on Bifrost Document</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 23 Nov 2018 15:32:15 +0000</lastBuildDate>
+    
+	<atom:link href="http://wiki.xbifrost.com/data_source/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>数据源新增</title>
+      <link>http://wiki.xbifrost.com/data_source/add/</link>
+      <pubDate>Sat, 23 Nov 2019 10:05:00 +0000</pubDate>
+      
+      <guid>http://wiki.xbifrost.com/data_source/add/</guid>
+      <description>在线添加数据源,不需要重启服务 字段解析 Name : 数据源唯一名字,不能和其他数据源名字重复,30个数字或者字母以内 ConnectUri : 连接数据源的地址 BinlogFileName : 从哪一个位</description>
+    </item>
+    
+    <item>
+      <title>数据源修改</title>
+      <link>http://wiki.xbifrost.com/data_source/edit/</link>
+      <pubDate>Sat, 23 Nov 2019 10:05:00 +0000</pubDate>
+      
+      <guid>http://wiki.xbifrost.com/data_source/edit/</guid>
+      <description>可以在线修改数据源信息,唯独不能修改数据源的Name 数据源只有在 close 状态下才能进行修改 close 状态下, 数据源列表的 Position 列 会出现一个 修改 按钮, 点击 之后可</description>
+    </item>
+    
+  </channel>
+</rss>
