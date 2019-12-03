@@ -3,11 +3,11 @@
 <head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<title>其他 - Bifrost Document</title>
+<title>性能测试 - Bifrost Document</title>
 <meta name="description" content="Bifrost ---- 将  MySQL 数据 实时同步 到 Redis , MongoDB 等服务的高性能异构中间件">
 <meta name="generator" content="Hugo 0.59.1" />
 <link href="http://wiki.xbifrost.com/index.xml" rel="alternate" type="application/rss+xml">
-<link rel="canonical" href="http://wiki.xbifrost.com/other/">
+<link rel="canonical" href="http://wiki.xbifrost.com/other/performance_test/">
 <link rel="stylesheet" href="http://wiki.xbifrost.com/css/theme.min.css">
 <script src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 <link rel="stylesheet" href="http://wiki.xbifrost.com/css/chroma.min.css">
@@ -38,17 +38,55 @@
 </nav>
 </div>
 <div class="content-container">
-<main><h1>其他</h1>
+<main><h1>性能测试</h1>
 
-<h5 id="为什么选择-bifrost-why-md"><a href="./why.md">为什么选择 Bifrost</a></h5>
+<p><em>Bifrost</em> 提供了一些用于性能测试的方法</p>
+
+<h3 id="bristol性能测试">Bristol性能测试</h3>
+
+<p><a href="https://github.com/brokercap/Bifrost/tree/master/Bristol/test/BristolPerformanceTest">Bristol性能测试工具文档</a></p>
+
+<h3 id="bifrost性能测试">Bifrost性能测试</h3>
+
+<h4 id="1-首先先安装启动-bifrost-安装部署文档-http-wiki-xbifrost-com-install-data-source-build">1.首先先安装启动 Bifrost <a href="http://wiki.xbifrost.com/install/data_source_build/">安装部署文档</a></h4>
+
+<p>在管理界面添加数据源及目标库等配置信息,配置好哪一个表要同步到哪些目标库</p>
+
+<h4 id="2-修改-bifrost-ini-配置文件-新增-performancetesting-参数">2. 修改 Bifrost.ini 配置文件,新增 [PerformanceTesting]参数</h4>
+
+<pre><code>[PerformanceTesting]
+myTest=mysql-bin.000015,107175
+</code></pre>
+
+<p>myTest : 是界面添加数据源时候的 Name</p>
+
+<p>mysql-bin.000015,107175 : 当前数据源的最新位点信息</p>
+
+<h4 id="3-关闭-bifrost">3. 关闭 Bifrost</h4>
+
+<p>这里一定要关闭Bifrost</p>
+
+<h4 id="4-刷数据到数据库中">4. 刷数据到数据库中</h4>
+
+<p>这里采用 Biforst 自带的 <a href="https://github.com/brokercap/Bifrost/blob/master/test/insertDataTest.go">刷数据的工具</a>  这个工具会自动根据表里的字段类型创建指条条数的数据</p>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">go</span> <span class="nx">run</span> <span class="nx">insertDataTest</span><span class="p">.</span><span class="k">go</span> <span class="o">-</span><span class="nx">host</span> <span class="mf">127.0.0.1</span> <span class="o">-</span><span class="nx">user</span> <span class="nx">root</span> <span class="o">-</span><span class="nx">pwd</span> <span class="nx">root</span> <span class="o">-</span><span class="nx">port</span> <span class="mi">3306</span> <span class="o">-</span><span class="nx">schema</span> <span class="nx">bifrost_test</span> <span class="o">-</span><span class="nx">table</span> <span class="nx">test1</span> <span class="o">-</span><span class="nx">count</span> <span class="mi">100000</span></code></pre></div>
+<p>也可自行想办法刷数据</p>
+
+<h4 id="5-重启bifrost-会看到如下数据">5. 重启Bifrost,会看到如下数据:</h4>
+
+<pre><code>2019/04/19 20:33:37 myTest SchemaName: bifrost_test TableName: bristol_performance_test blackhole blackhole ToServer consume_to_server  start
+2019/04/19 20:33:37 myTest SchemaName: bifrost_test TableName: bristol_performance_test blackhole blackhole ToServer consume_to_server  start
+2019/04/19 20:33:49 consume_to_server: blackhole blackhole 3  start no data
+2019/04/19 20:33:49 consume_to_server: blackhole blackhole 1  start no data
+</code></pre>
+
+<p>start no data 的时间 减去 consume_to_server  start 的时候再减去 5秒 就是真正同步数据的时间</p>
 <div class="edit-meta">
-Last updated on 23 Nov 2019
+Last updated on 3 Dec 2019
 
 
-<br>
-Published on 23 Nov 2019
-<br><a href="https://github.com/brokercap/brokercap.github.io/edit/master/content/other/_index.md" class="edit-page"><i class="fas fa-pen-square"></i> Edit on GitHub</a></div><nav class="pagination"><a class="nav nav-prev" href="/bristol/" title="二进制文件解析"><i class="fas fa-arrow-left" aria-hidden="true"></i> Prev - 二进制文件解析</a>
-<a class="nav nav-next" href="/other/why/" title="为什么选择 Bifrost">Next - 为什么选择 Bifrost <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+<br><a href="https://github.com/brokercap/brokercap.github.io/edit/master/content/other/performance_test.md" class="edit-page"><i class="fas fa-pen-square"></i> Edit on GitHub</a></div><nav class="pagination"><a class="nav nav-prev" href="/other/cluster_may_design/" title="Bifrost 集群设想"><i class="fas fa-arrow-left" aria-hidden="true"></i> Prev - Bifrost 集群设想</a>
+<a class="nav nav-next" href="/other/support/" title="Bifrost 运维">Next - Bifrost 运维 <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
 </nav><footer><p class="powered">Powered by <a href="https://gohugo.io">Hugo</a>. Theme by <a href="https://themes.gohugo.io/hugo-theme-techdoc/">TechDoc</a>. Designed by <a href="https://github.com/thingsym/hugo-theme-techdoc">Thingsym</a>.</p>
 </footer>
 </main><div class="sidebar">
@@ -127,13 +165,13 @@ Published on 23 Nov 2019
   
 </li>
 
-<li class="parent active"><a href="/other/">其他</a>
+<li class="parent"><a href="/other/">其他</a>
   
 <ul class="sub-menu">
 <li class=""><a href="/other/why/">为什么选择 Bifrost</a></li>
 <li class=""><a href="/other/cluster_why_not/">Bifrost 为什么还不支持集群?</a></li>
 <li class=""><a href="/other/cluster_may_design/">Bifrost 集群设想</a></li>
-<li class=""><a href="/other/performance_test/">性能测试</a></li>
+<li class="active"><a href="/other/performance_test/">性能测试</a></li>
 <li class=""><a href="/other/support/">Bifrost 运维</a></li>
 </ul>
   

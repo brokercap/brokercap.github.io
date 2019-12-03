@@ -3,11 +3,11 @@
 <head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<title>其他 - Bifrost Document</title>
+<title>Bifrost 集群设想 - Bifrost Document</title>
 <meta name="description" content="Bifrost ---- 将  MySQL 数据 实时同步 到 Redis , MongoDB 等服务的高性能异构中间件">
 <meta name="generator" content="Hugo 0.59.1" />
 <link href="http://wiki.xbifrost.com/index.xml" rel="alternate" type="application/rss+xml">
-<link rel="canonical" href="http://wiki.xbifrost.com/other/">
+<link rel="canonical" href="http://wiki.xbifrost.com/other/cluster_may_design/">
 <link rel="stylesheet" href="http://wiki.xbifrost.com/css/theme.min.css">
 <script src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 <link rel="stylesheet" href="http://wiki.xbifrost.com/css/chroma.min.css">
@@ -38,17 +38,59 @@
 </nav>
 </div>
 <div class="content-container">
-<main><h1>其他</h1>
+<main><h1>Bifrost 集群设想</h1>
 
-<h5 id="为什么选择-bifrost-why-md"><a href="./why.md">为什么选择 Bifrost</a></h5>
+<p>Bifrost 当前并不支持高可用，但作者本人，一直在想，Bifrost 高可用要怎么实现。</p>
+
+<h4 id="bifrost-集群要求">Bifrost 集群要求</h4>
+
+<ol>
+<li><p>不强依懒第三方系统</p></li>
+
+<li><p>只有一个 Bifrost 应用，不需要部署多个应用</p></li>
+
+<li><p>一个界面可以管理整个集群的配置</p></li>
+
+<li><p>同一个同步配置，性能不能相对单机降低</p></li>
+
+<li><p>高可用切换的时候，数据源位点 要尽可能接近宕机那一个节点的位点</p></li>
+</ol>
+
+<h4 id="bifrost-集群设想">Bifrost 集群设想</h4>
+
+<ol>
+<li><p>Bifrost 自身集成 ETCD</p></li>
+
+<li><p>Bifrost 将配置及位点写到本进程中集成的 ETCD 节点上</p></li>
+
+<li><p>Bifrost 配置分配按数据源来分配，一个数据源的配置同步，只会运行在一个节点上</p></li>
+</ol>
+
+<h4 id="bifrost-集群设想要解决的问题">Bifrost 集群设想要解决的问题</h4>
+
+<ol>
+<li><p>作者对 ETCD 集成并不熟悉</p></li>
+
+<li><p>配置写到 ETCD ，管理界面获取数据的时候，数据源可能在多个节点上运行，位点，流量等等数据，得重新计算获取</p></li>
+
+<li><p>不同版本不能支持集群？因为不同版本插件等都不同，那通过什么办法热升级？</p></li>
+</ol>
+
+<h4 id="小结">小结</h4>
+
+<p>Bifrost 集群，包括主要是界面管理上那块数据展上，还有些地方需要考滤，不能为了做而做</p>
+
+<p>如果谁有兴趣，可以联系我们</p>
+
+<h3 id="qq群号-70331601">QQ群号： 70331601</h3>
+
+<p><img src="https://github.com/brokercap/Bifrost/blob/master/qq.jpg" width="250" alt="qq群"/></p>
 <div class="edit-meta">
-Last updated on 23 Nov 2019
+Last updated on 3 Dec 2019
 
 
-<br>
-Published on 23 Nov 2019
-<br><a href="https://github.com/brokercap/brokercap.github.io/edit/master/content/other/_index.md" class="edit-page"><i class="fas fa-pen-square"></i> Edit on GitHub</a></div><nav class="pagination"><a class="nav nav-prev" href="/bristol/" title="二进制文件解析"><i class="fas fa-arrow-left" aria-hidden="true"></i> Prev - 二进制文件解析</a>
-<a class="nav nav-next" href="/other/why/" title="为什么选择 Bifrost">Next - 为什么选择 Bifrost <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+<br><a href="https://github.com/brokercap/brokercap.github.io/edit/master/content/other/cluster_may_design.md" class="edit-page"><i class="fas fa-pen-square"></i> Edit on GitHub</a></div><nav class="pagination"><a class="nav nav-prev" href="/other/cluster_why_not/" title="Bifrost 为什么还不支持集群?"><i class="fas fa-arrow-left" aria-hidden="true"></i> Prev - Bifrost 为什么还不支持集群?</a>
+<a class="nav nav-next" href="/other/performance_test/" title="性能测试">Next - 性能测试 <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
 </nav><footer><p class="powered">Powered by <a href="https://gohugo.io">Hugo</a>. Theme by <a href="https://themes.gohugo.io/hugo-theme-techdoc/">TechDoc</a>. Designed by <a href="https://github.com/thingsym/hugo-theme-techdoc">Thingsym</a>.</p>
 </footer>
 </main><div class="sidebar">
@@ -127,12 +169,12 @@ Published on 23 Nov 2019
   
 </li>
 
-<li class="parent active"><a href="/other/">其他</a>
+<li class="parent"><a href="/other/">其他</a>
   
 <ul class="sub-menu">
 <li class=""><a href="/other/why/">为什么选择 Bifrost</a></li>
 <li class=""><a href="/other/cluster_why_not/">Bifrost 为什么还不支持集群?</a></li>
-<li class=""><a href="/other/cluster_may_design/">Bifrost 集群设想</a></li>
+<li class="active"><a href="/other/cluster_may_design/">Bifrost 集群设想</a></li>
 <li class=""><a href="/other/performance_test/">性能测试</a></li>
 <li class=""><a href="/other/support/">Bifrost 运维</a></li>
 </ul>

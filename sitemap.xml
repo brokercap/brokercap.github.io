@@ -49,12 +49,17 @@
   
   <url>
     <loc>http://wiki.xbifrost.com/install/install_binary/</loc>
-    <lastmod>2019-11-23T15:30:15+00:00</lastmod>
+    <lastmod>2019-12-03T22:25:15+00:00</lastmod>
   </url>
   
   <url>
     <loc>http://wiki.xbifrost.com/warning/</loc>
     <lastmod>2018-11-28T21:49:15+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://wiki.xbifrost.com/install/https_certificate/</loc>
+    <lastmod>2019-12-03T22:51:15+00:00</lastmod>
   </url>
   
   <url>
@@ -123,6 +128,21 @@
   </url>
   
   <url>
+    <loc>http://wiki.xbifrost.com/other/cluster_why_not/</loc>
+    <lastmod>2019-12-03T22:19:15+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://wiki.xbifrost.com/other/cluster_may_design/</loc>
+    <lastmod>2019-12-03T22:20:15+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://wiki.xbifrost.com/other/performance_test/</loc>
+    <lastmod>2019-12-03T23:00:15+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://wiki.xbifrost.com/warning/rule/</loc>
     <lastmod>2019-11-28T22:59:15+00:00</lastmod>
   </url>
@@ -135,6 +155,11 @@
   <url>
     <loc>http://wiki.xbifrost.com/warning/email/</loc>
     <lastmod>2019-11-28T22:59:15+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://wiki.xbifrost.com/other/support/</loc>
+    <lastmod>2019-12-03T22:22:15+00:00</lastmod>
   </url>
   
   <url>

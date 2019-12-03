@@ -23,10 +23,19 @@
     <item>
       <title>二进制安装</title>
       <link>http://wiki.xbifrost.com/install/install_binary/</link>
-      <pubDate>Sat, 23 Nov 2019 15:30:15 +0000</pubDate>
+      <pubDate>Tue, 03 Dec 2019 22:25:15 +0000</pubDate>
       
       <guid>http://wiki.xbifrost.com/install/install_binary/</guid>
       <description>二进制包安装，不用安装 go 语言环境，下载二进制包可修改配置可直接运行 下载二进制包 以v1.1.0-release linux版本为例 wget https://github.com/jc3wish/Bifrost/releases/download/v1.1.0-release/linux.zip unzip linux.zip mv ./linux ./Bifrost_v1.1.0-release</description>
+    </item>
+    
+    <item>
+      <title>HTTPS证书</title>
+      <link>http://wiki.xbifrost.com/install/https_certificate/</link>
+      <pubDate>Tue, 03 Dec 2019 22:51:15 +0000</pubDate>
+      
+      <guid>http://wiki.xbifrost.com/install/https_certificate/</guid>
+      <description>脚本生成 cd etc/ ./crt_create.sh 自行生成 openssl genrsa -out server.key 2048 openssl req -new -x509 -sha256 -key server.key -out server.crt -days 3650 证书生成参考 免费证书 Let’s Encrypt</description>
     </item>
     
     <item>
@@ -120,6 +129,33 @@
     </item>
     
     <item>
+      <title>Bifrost 为什么还不支持集群?</title>
+      <link>http://wiki.xbifrost.com/other/cluster_why_not/</link>
+      <pubDate>Tue, 03 Dec 2019 22:19:15 +0000</pubDate>
+      
+      <guid>http://wiki.xbifrost.com/other/cluster_why_not/</guid>
+      <description>有不少用户，一直在问 Bifrost 什么时候支持集群功能 虽然有用户一直很想要集群功能，包括我本人在内，也很想立马就支持集群 有集群多好呀，高可用，还可以多台</description>
+    </item>
+    
+    <item>
+      <title>Bifrost 集群设想</title>
+      <link>http://wiki.xbifrost.com/other/cluster_may_design/</link>
+      <pubDate>Tue, 03 Dec 2019 22:20:15 +0000</pubDate>
+      
+      <guid>http://wiki.xbifrost.com/other/cluster_may_design/</guid>
+      <description>Bifrost 当前并不支持高可用，但作者本人，一直在想，Bifrost 高可用要怎么实现。 Bifrost 集群要求 不强依懒第三方系统 只有一个 Bifrost 应用，不需要部署多个应用 一</description>
+    </item>
+    
+    <item>
+      <title>性能测试</title>
+      <link>http://wiki.xbifrost.com/other/performance_test/</link>
+      <pubDate>Tue, 03 Dec 2019 23:00:15 +0000</pubDate>
+      
+      <guid>http://wiki.xbifrost.com/other/performance_test/</guid>
+      <description>Bifrost 提供了一些用于性能测试的方法 Bristol性能测试 Bristol性能测试工具文档 Bifrost性能测试 1.首先先安装启动 Bifrost 安装部署文档 在管</description>
+    </item>
+    
+    <item>
       <title>报警规则</title>
       <link>http://wiki.xbifrost.com/warning/rule/</link>
       <pubDate>Thu, 28 Nov 2019 22:59:15 +0000</pubDate>
@@ -144,6 +180,15 @@
       
       <guid>http://wiki.xbifrost.com/warning/email/</guid>
       <description>FROM : 采用哪一个邮箱发送邮件 NickName : 邮箱别名 Password : 邮箱密码 , 如果是 qq邮箱,不是你的QQ密码,也不是设置的你设置的QQ邮箱的独立密码,而是有一个用于</description>
+    </item>
+    
+    <item>
+      <title>Bifrost 运维</title>
+      <link>http://wiki.xbifrost.com/other/support/</link>
+      <pubDate>Tue, 03 Dec 2019 22:22:15 +0000</pubDate>
+      
+      <guid>http://wiki.xbifrost.com/other/support/</guid>
+      <description>Bifrost 常见问题 1. 全量同步没有问题，但insert,update等增量没过去 1). 检查数据源是不是 running 状态,重新启动一下数据源 2). 检查数据表绑定的通道是不</description>
     </item>
     
   </channel>

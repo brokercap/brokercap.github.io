@@ -23,10 +23,19 @@
     <item>
       <title>二进制安装</title>
       <link>http://wiki.xbifrost.com/install/install_binary/</link>
-      <pubDate>Sat, 23 Nov 2019 15:30:15 +0000</pubDate>
+      <pubDate>Tue, 03 Dec 2019 22:25:15 +0000</pubDate>
       
       <guid>http://wiki.xbifrost.com/install/install_binary/</guid>
       <description>二进制包安装，不用安装 go 语言环境，下载二进制包可修改配置可直接运行 下载二进制包 以v1.1.0-release linux版本为例 wget https://github.com/jc3wish/Bifrost/releases/download/v1.1.0-release/linux.zip unzip linux.zip mv ./linux ./Bifrost_v1.1.0-release</description>
+    </item>
+    
+    <item>
+      <title>HTTPS证书</title>
+      <link>http://wiki.xbifrost.com/install/https_certificate/</link>
+      <pubDate>Tue, 03 Dec 2019 22:51:15 +0000</pubDate>
+      
+      <guid>http://wiki.xbifrost.com/install/https_certificate/</guid>
+      <description>脚本生成 cd etc/ ./crt_create.sh 自行生成 openssl genrsa -out server.key 2048 openssl req -new -x509 -sha256 -key server.key -out server.crt -days 3650 证书生成参考 免费证书 Let’s Encrypt</description>
     </item>
     
     <item>
