@@ -17,6 +17,8 @@ weight: 1
 
 提供 [Linux](https://github.com/brokercap/Bifrost/releases) , [mac](https://github.com/brokercap/Bifrost/releases) , [windows](https://github.com/brokercap/Bifrost/releases) , [freebsd](https://github.com/brokercap/Bifrost/releases)  平台二进制可执行文件下载.
 
+源码下载(你的点击 star 就是对 Bifrost 最大的支持!!!): [github](https://github.com/brokercap/Bifrost/)  , [gitee](https://gitee.com/jc3wish/Bifrost)
+
 
 *Bifrsot* 支持同步到多种目标库, for example:
 

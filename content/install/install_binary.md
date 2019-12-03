@@ -1,6 +1,6 @@
 ---
 title: "二进制安装"
-lastmod: 2019-11-23T15:30:15Z
+lastmod: 2019-12-03T22:25:15Z
 draft: false
 weight: 12
 ---
@@ -25,6 +25,14 @@ cd ./Bifrost_v1.1.0-release
 chmod a+x ./Bifrost ./Bifrost-server
 
 ./Bifrost-server start
+```
+
+
+windows 下启动
+
+```
+Bifrost.exe -config ./etc/Bifrost.ini
+
 ```
 
 浏览器打开 管理界面  https://127.0.0.1:21036

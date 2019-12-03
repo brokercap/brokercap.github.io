@@ -55,11 +55,21 @@ enableMissingTranslationPlaceholders = false
 
 # Global menu section
 [[menu.main]]
-    name = "Home"
-    url = "/"
+    name = "首页"
+    url = "http://www.xbifrost.com"
     weight = 1
 
 [[menu.main]]
     name = "github"
     url = "https://github.com/brokercap/Bifrost"
     weight = 2
+
+[[menu.main]]
+    name = "gitee"
+    url = "https://gitee.com/jc3wish/Bifrost"
+    weight = 3
+
+[[menu.main]]
+    name = "作者博客"
+    url = "https://jc3wish.github.io"
+    weight = 4
