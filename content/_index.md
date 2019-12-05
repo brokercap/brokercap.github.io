@@ -48,19 +48,20 @@ http://www.xbifrost.com/demo/
 
 ### Bifrost 特点
 
+
 * 支持 MySQL 所有存储类型
 
-* 界面化动态灵活配置不同的数据表及目标库
+* **界面化**动态灵活配置不同的数据表及目标库
 
-* 多数据源,多种目标库支持
+* 多数据源,**多种目标库**支持
 
-* 同时支持 *增量* 及 *全量* 数据同步
+* 同时支持 **增量** 及 **全量** 数据同步
 
 * 宕机后重启自动恢复配置
 
 * 支持自定义插件开发，动态加载
 
-* 支持 Email 及 微信企业号等报警功能
+* 支持 Email 及 微信企业号等**监控报警**功能
 
 * 提供第三方监控平台访问接口(Http Basic验证)
 
@@ -228,7 +229,7 @@ cluster_name=bifrostTestClusterName
 - github.com/streadway/amqp
 - github.com/go-redis/redis
 - github.com/syndtr/goleveldb/leveldb
-- github.com/kshvakov/clickhouse
+- github.com/ClickHouse/clickhouse-go
 
 ### QQ群号： 70331601
 
