@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>使用手册 - Bifrost Document</title>
+<meta name="description" content="Bifrost ---- 将  MySQL 数据 实时同步 到 Redis , MongoDB 等服务的高性能异构中间件">
+<meta name="generator" content="Hugo 0.59.1" />
+<link href="http://wiki.xbifrost.com/index.xml" rel="alternate" type="application/rss+xml">
+<link rel="canonical" href="http://wiki.xbifrost.com/other/how_used/">
+<link rel="stylesheet" href="http://wiki.xbifrost.com/css/theme.min.css">
+<script src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+<link rel="stylesheet" href="http://wiki.xbifrost.com/css/chroma.min.css">
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery.easing@1.4.1/jquery.easing.min.js"></script>
+<script src="http://wiki.xbifrost.com/js/bundle.js"></script><style>
+:root {
+  
+  
+}
+</style>
+</head>
+<body><div class="container"><header>
+<h1>Bifrost Document</h1>
+
+ <span class="version">Version 1.1.0</span>
+<a href="https://github.com/brokercap/Bifrost" class="github"><i class="fab fa-github"></i></a>
+<p class="description">Bifrost ---- 将  MySQL 数据 实时同步 到 Redis , MongoDB 等服务的高性能异构中间件</p>
+
+</header>
+<div class="global-menu">
+<nav>
+<ul>
+<li><a href="http://www.xbifrost.com">首页</a></li>
+<li><a href="https://github.com/brokercap/Bifrost">github</a></li>
+<li><a href="https://gitee.com/jc3wish/Bifrost">gitee</a></li>
+<li><a href="https://jc3wish.github.io">作者博客</a></li></ul>
+</nav>
+</div>
+<div class="content-container">
+<main><h1>使用手册</h1>
+
+<h2 id="导航栏">导航栏</h2>
+
+<p>导航栏里有 首页 ，数据源 , 目标库列表 , 表同步列表 ,全量任务, 流量 ,插件,报警, 文档</p>
+
+<p>每个导航菜单采用不同的功能。</p>
+
+<h2 id="插件">插件</h2>
+
+<p><em>插件</em> 点击进去后，显示的是当前版本 Bifrost 支持 插件信息。在 ToServer 模块里添加ToServer 的时候，需要进行选择插件信息。Linux 平台，是可以自行开发插件，并且动态加载的。请参考 <a href="https://github.com/jc3wish/Bifrost/wiki/%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91%E6%95%99%E7%A8%8B">插件开发教程</a></p>
+
+<h2 id="目标库列表">目标库列表</h2>
+
+<p><em>目标库列表</em> 就是数据需要同步到哪些地方去，就是目标库的配置。</p>
+
+<p>比如 要同步Redis的哪一个实例，要同步到RabbitMQ 哪一个vhost上去等连接信息。就在 ToServer 模块下配置。</p>
+
+<p>ToServerKey 是用来标识整个服务中 ToServer 的唯一值，不能重复。 ToServerKey 用于在绑定 MySQL 数据库指定表同步到哪一个目标库的关系。</p>
+
+<p>在添加 ToServer 的时候，需要点击一下 Check 按扭。确认一下当前配置的 uri 连接地址是否正常。<strong>假如 当前选择的插件连接 填写的 uri 失败是不能添加成功的</strong>。</p>
+
+<h2 id="文档">文档</h2>
+
+<p><em>Bifrost</em> 当前版本通用文档及各插件的使用文档</p>
+
+<h5 id="通用">通用</h5>
+
+<p><strong>数据类型转换</strong></p>
+
+<p>从Binlog解析出来的数据,在转成 map[string]interface{} 的数据格式的时候</p>
+
+<p>MySQL里的存储类型对应Golang里的数据类型不一样</p>
+
+<p>括号里的代表是Golang里的数据类型</p>
+
+<p>TINYINT ( int8 | unit8 ) , SMALLINT ( int16 | unit16 ) , MEDIUMINT ( int32 | uint32 ), INT ( int32 | uint32 ) , BIGINT ( int64 | uint64 )</p>
+
+<p>FLOAT ( float32 ) , DOUBLE ( float64 ) ,REAL ( float64 )</p>
+
+<p>DECIMAL , NUMERIC( 返回string类型 )</p>
+
+<p>DATE , TIME , YEAR , DATETIME , TIMESTAMP ( string类型 )</p>
+
+<p>CHAR , VARCHAR ( string )</p>
+
+<p>TEXT , TINYTEXT , MEDIUMINTTEXT , LONGTEXT ( string )</p>
+
+<p>BLOB, TINYBLOB , MEDIUMINTBLOB , LONGBLOB ( string )</p>
+
+<p>ENUM ( string类型 )</p>
+
+<p>SET ( []string )</p>
+
+<p>BIT ( int64类型 )</p>
+
+<p><strong>DDL 支持说明</strong></p>
+
+<p>当前只支持字段在表结构末尾追加新字段，如果配置的二进制位点是在DDL 之前的位点，会出现数据和字段对应不上</p>
+
+<p>数据类型修改之后，如果配置的二进制位点是在DDL 之前的位点，可能会出现数据出错</p>
+
+<p><strong>标签</strong>
+{$SchemaName} : 数据库名字</p>
+
+<p>{$TableName} : 表的名字</p>
+
+<p>{$EventType} : 当前记录的增删改事件,新增(insert); 修改(update) ; 删除(delete); SQL(sql)</p>
+
+<p>{$字段名} : 表的字段数据</p>
+
+<h5 id="插件配置">插件配置</h5>
+
+<p>选择不同的插件，显示不同的插件文档信息。不同的插件使用文档不一致，在设置表的同步信息的时候，所要填写的参数信息也不一样。</p>
+
+<h2 id="流量">流量</h2>
+
+<p>流量显示。支持增量及全量的方式进行显示。支持按 最近1分钟，10分钟，1小时，8小时，24小时 进行查询显示。</p>
+
+<p>增量：规定时间内的处理了数据量</p>
+
+<p>全量：Bifrost 中间件启动之后的处理所有数据量</p>
+
+<p>流量分 处理了多少条数据(Count) , 处理了总的消息大小(ByteSize). 可以进行点击过滤哪一个流量。默认为 Count 和 ByteSize 都同时显示</p>
+
+<p>从菜单栏点击 进入 Flow ，则显示的是整个 Bifrost 服务的流量信息</p>
+
+<p>从 DBList 列表里点击进去的流量信息则是当前 设置的数据源的所有流量信息</p>
+
+<p>从 Channel 列表里点击进去的流量信息则是当前 Channel 通道的所有流量信息</p>
+
+<p>从 DB Detail 详情页，选择了某珍上数据库的数据表之后 进击详情页里的 Flow 按钮之后则显示的是当前表的流量信息</p>
+
+<p>Flow 的流量信息当前不支持持久化。每次 Bifrost 重启之后，统计归零</p>
+
+<h2 id="数据源">数据源</h2>
+
+<p>数据源 是 MySQL 数据源信息。可以添加多个 MySQL 源信息。</p>
+
+<p>每个 MySQL 数据源信息，下面可以继续设置 通道 Channel ,及在详情里可以设置某一个表的数据，要以什么格式通过某一个插件下的ToServer 进行同步数据。一个表的数据可以设置同步到多个地方去。</p>
+
+<p>数据源列表提供展示 当前数据源 同步数据的位点信息，连接状态 及可以点击查看当前数据源连接的 MySQL 库的最新位点进行查看</p>
+
+<h3 id="数据源添加">数据源添加</h3>
+
+<p>Name ：全局 DBList 中一值。不能重复
+ConnUri ： Bifrost 连接 MySQL 的信息uri ，例如：root:root@tcp(127.0.0.1:3306)/test。 连接状态必须要有主从连接的权限</p>
+
+<p>BinlogFileName,BinlogPosition ：从哪一个位点开始监控数据变更。这个值在点击 Check 按钮后，如果测试 ConnUri 能连接成功并且连接的 MySQL 开启了 Binlog 的情况下会自填弃当前 MySQL 主库的当前的位点信息</p>
+
+<p>ServerId ：这个配置不能和主库的 ServerID 一致。点击Check 按钮后会自动随机填充一个ID值</p>
+
+<p>MaxBinlogFileName,MaxBinlogPosition : 解析二进制日志文件到了 Max 配置的位点信息之后就不再解析，自动停止。默认为空。不做限制。</p>
+
+<p>DB默认添加之后是 Close 状态，可以先去详情页设置表的同步信息之后再点击 Start 按钮再开始。</p>
+
+<h3 id="channellist通道">ChannelList通道</h3>
+
+<p>每加一个DB连接之后，会默会 名字为 default 的通道。默认状态为 stop。需要手工点击 Start 按钮进行开启。</p>
+
+<p>Channel通道就是一个队列。Channel通道是用于在设置 数据表信息同步的时候，选择表的数据采用哪一个 Channel通道进行缓存。假如 Bifrost.bifrost_field_test 这个表在设置了采用和 default 这个通道进行绑定，那 Bifrost 解析Binlog信息的时候，Bifrost.bifrost_field_test 这个表的数据信息将通过 进入到 default 这个通道队列。Channel通道的队列大小，可以通过配置文件中 channel_queue_size 进行配。请参数 <a href="https://github.com/jc3wish/Bifrost/wiki/%E9%85%8D%E7%BD%AE%E8%A7%A3%E6%9E%90">配置解析</a></p>
+
+<h5 id="channel添加">Channel添加</h5>
+
+<p>channel_name ： 通道的名字，这个用于在设置数据表时候的会让进行选择哪一个通道</p>
+
+<p>CosumerCount ： 当前这个通道队列的数据，由多少个消费者同时消费数据。默认为1。假如 CosumerCount &gt; 0 的情况下，消息不能保证有序性。所以有某些对数据有序性没有要求。可以创建一个多少消息者的你通道，和那些没有有序性要求的表进行绑定。提升性能</p>
+
+<h5 id="flow">Flow</h5>
+
+<p>当前通道的流量信息</p>
+
+<h5 id="tablelist">TableList</h5>
+
+<p>进行查询有哪些表绑定了当前通道。通道在 DEL 删除的时候，必须要先删除绑定的所有表信息才能进行删除</p>
+
+<h5 id="channel状态">Channel状态</h5>
+
+<p>stop ： 暂停状态，新添加的DB之后默认的default 状态为stop
+close : 通道关闭状态。代表这个通道没有任何消息在处理消息
+running ：正常处理数据状态</p>
+
+<p>通道只在 close 状态并且没有数据表绑定了当前Channel 的时候才可以点击删除</p>
+
+<h3 id="设置数据表同步">设置数据表同步</h3>
+
+<p>数据表的同步信息在 DBList 里的 Detail 模块里设置设置</p>
+
+<p>DB - Detail 详情页里面</p>
+
+<p>Schema List ： 数据库列表</p>
+
+<p>Table List ： 选择的数据库之后的表列表</p>
+
+<p>表列表里的表右边假如出现了 ADD 按钮则代表 这个表已经被过滤掉了，不会进行任何同步数据处理。</p>
+
+<ol>
+<li><p>点击 ADD 按钮 之后会弹一个窗出来，让选择绑定哪一个Channel通道，这个请参数 Channel 文档</p></li>
+
+<li><p>点击弹窗的 保存 按钮后，ADD 按钮会变成 DEL 按钮。说明这个表已经注册到了需要 Bifrost，需要进行同步</p></li>
+
+<li><p>然后再点 表名，右边的 Table ToServer List 模块，会显示出当前表设置了哪些同步信息</p></li>
+</ol>
+
+<h5 id="table-toserver-添加">Table ToServer 添加</h5>
+
+<p>一个数据表，可以设置多个目标库的同步，设置不同的插件同步到的不同的目标库</p>
+
+<p>ToServerKey,MustBeSuccess,FilterQuery,FilterUpdate,Fields 几个参数为 <em>Bifrost</em> 固定选择参数。其他参数则是 各个插件特有参数信息</p>
+
+<p>ToServerKey ： 导航菜单栏 ToServer 里设置的目标库选择。不同的表可以选择同一个ToServerKey</p>
+
+<p>MustBeSuccess : 表示必须成功，假如插件返回失败的时候情况下，会一直重试，直到成功为止。</p>
+
+<p>FilterQuery : 是否过滤 DDL 等 SQL 语句。如果选择的同步插件不支持 sql 语句或者你的业务逻辑中只用的行模式里的数据的，不要更改，默认为过滤</p>
+
+<p>FilterUpdate ：假如开启了这个功能，假如是更新事件的情况下，并且选中的表字段里的内容都没有变更，则不会进行推送。</p>
+
+<p>Fields : 在写入，更新，删除 事件的情况下，要推送哪些字段。默认不选 的情况下为全选</p>
+
+<h2 id="表同步列表">表同步列表</h2>
+
+<p><em>表同步列表</em> 是查看到所有设置了同步信息的列的信息列表</p>
+
+<p>列表里可以查看 表的同步位点，及 同步状态和报错内容</p>
+
+<p>在 <em>表同步列表</em> 可以进行 数据源，通道，及ToServerKey 进行过滤筛选</p>
+
+<p>可以从 数据源列表　，通道列表　及　目标库列表  进行点击进入到 表同步列表</p>
+
+<h2 id="全量任务">全量任务</h2>
+
+<p>可以在设置表设置同步界面,进行添加 表全量数据同步 配置</p>
+
+<p>一个表可以添加多个全量同步配置,每个全量同步配置,可以指定同步到哪些目标库</p>
+
+<p>全量任务 不会进行持久化,在重启之后会自动被清除</p>
+
+<p>全量任务在运行过程中,可以点击 stop 按钮进行停目,当再次点击 start 按钮的时候 ,将完全重复跑任务,而不是断点续跑</p>
+
+<h2 id="报警">报警</h2>
+
+<p>可以设置 Email 及 微信企业号的报警配置信息</p>
+
+<p>在 <em>数据源</em> 连接失败 或者 数据表数据同步到第三方服务 连续报错的情况下会进行 通过 报警配置进行报警。</p>
+
+<p>并且报警过后 数据源连接恢复 ，或者同步数据成功之后，会再次通过报警配置发出一条 恢复成功 的信息</p>
+
+<h4 id="email">Email</h4>
+
+<p>需要配置 smtp 服务器</p>
+
+<p>假如是 QQ邮箱，密码不是QQ密码，需要去QQ邮箱界面 <a href="https://jingyan.baidu.com/article/6079ad0eb14aaa28fe86db5a.html">申请授权码</a></p>
+
+<h4 id="微信企业号">微信企业号</h4>
+
+<p>个人也是可以 <a href="https://work.weixin.qq.com/">申请微信企业号</a></p>
+<div class="edit-meta">
+Last updated on 5 Dec 2019
+
+
+<br><a href="https://github.com/brokercap/brokercap.github.io/edit/master/content/other/how_used.md" class="edit-page"><i class="fas fa-pen-square"></i> Edit on GitHub</a></div><nav class="pagination"><a class="nav nav-prev" href="/other/" title="其他"><i class="fas fa-arrow-left" aria-hidden="true"></i> Prev - 其他</a>
+<a class="nav nav-next" href="/other/why/" title="为什么选择 Bifrost">Next - 为什么选择 Bifrost <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+</nav><footer><p class="powered">Powered by <a href="https://gohugo.io">Hugo</a>. Theme by <a href="https://themes.gohugo.io/hugo-theme-techdoc/">TechDoc</a>. Designed by <a href="https://github.com/thingsym/hugo-theme-techdoc">Thingsym</a>.</p>
+</footer>
+</main><div class="sidebar">
+
+<nav class="open-menu">
+<ul>
+<li class=""><a href="http://wiki.xbifrost.com/">Home</a></li>
+
+<li class=""><a href="/install/">安装部署</a>
+  
+<ul class="sub-menu">
+<li class=""><a href="/install/data_source_build/">编译安装</a></li>
+<li class=""><a href="/install/install_binary/">二进制安装</a></li>
+<li class=""><a href="/install/https_certificate/">HTTPS证书</a></li>
+<li class=""><a href="/install/config_doc/">启动配置解析</a></li>
+</ul>
+  
+</li>
+
+<li class=""><a href="/data_source/">数据源管理</a>
+  
+<ul class="sub-menu">
+<li class=""><a href="/data_source/add/">数据源新增</a></li>
+<li class=""><a href="/data_source/edit/">数据源修改</a></li>
+</ul>
+  
+</li>
+
+<li class=""><a href="/plugin/">插件管理</a>
+  
+<ul class="sub-menu">
+<li class=""><a href="/plugin/plugin_dev/">插件开发教程</a></li>
+</ul>
+  
+</li>
+
+<li class=""><a href="/dest/">目标库管理</a>
+  
+<ul class="sub-menu">
+<li class=""><a href="/dest/edit/">目标库修改</a></li>
+<li class=""><a href="/dest/add/">目标库新增</a></li>
+</ul>
+  
+</li>
+
+<li class=""><a href="/syncdata/">数据同步配置</a>
+  
+<ul class="sub-menu">
+<li class=""><a href="/syncdata/sync_config/">数据表同步配置</a></li>
+<li class=""><a href="/syncdata/sync_batch/">批量同步配置</a></li>
+<li class=""><a href="/syncdata/sync_list/">同步列表字段解析</a></li>
+<li class=""><a href="/syncdata/sync_history_config/">全量任务配置</a></li>
+</ul>
+  
+</li>
+
+<li class=""><a href="/channel/">通道</a>
+  
+</li>
+
+<li class=""><a href="/flow/">流量</a>
+  
+</li>
+
+<li class=""><a href="/warning/">报警</a>
+  
+<ul class="sub-menu">
+<li class=""><a href="/warning/rule/">报警规则</a></li>
+<li class=""><a href="/warning/weixin/">微信</a></li>
+<li class=""><a href="/warning/email/">邮箱</a></li>
+</ul>
+  
+</li>
+
+<li class=""><a href="/user/">用户管理</a>
+  
+</li>
+
+<li class=""><a href="/bristol/">二进制文件解析</a>
+  
+</li>
+
+<li class="parent"><a href="/other/">其他</a>
+  
+<ul class="sub-menu">
+<li class="active"><a href="/other/how_used/">使用手册</a></li>
+<li class=""><a href="/other/why/">为什么选择 Bifrost</a></li>
+<li class=""><a href="/other/cluster_why_not/">Bifrost 为什么还不支持集群?</a></li>
+<li class=""><a href="/other/cluster_may_design/">Bifrost 集群设想</a></li>
+<li class=""><a href="/other/performance_test/">性能测试</a></li>
+<li class=""><a href="/other/web_api/">API接口</a></li>
+<li class=""><a href="/other/support/">Bifrost 运维</a></li>
+<li class=""><a href="/other/contact_us/">联系我们</a></li>
+</ul>
+  
+</li>
+</ul>
+</nav>
+
+
+
+<div class="sidebar-footer"></div>
+</div>
+</div><a href="#" id="backtothetop-fixed" class="backtothetop"
+ data-backtothetop-duration="600"
+ data-backtothetop-easing="easeOutQuart"
+ data-backtothetop-fixed-fadeIn="1000"
+ data-backtothetop-fixed-fadeOut="1000"
+ data-backtothetop-fixed-bottom="10"
+ data-backtothetop-fixed-right="20">
+<span class="fa-layers fa-fw">
+<i class="fas fa-circle"></i>
+<i class="fas fa-arrow-circle-up"></i>
+</span></a>
+</div>
+</body>
+</html>

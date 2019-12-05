@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>插件开发教程 - Bifrost Document</title>
+<meta name="description" content="Bifrost ---- 将  MySQL 数据 实时同步 到 Redis , MongoDB 等服务的高性能异构中间件">
+<meta name="generator" content="Hugo 0.59.1" />
+<link href="http://wiki.xbifrost.com/index.xml" rel="alternate" type="application/rss+xml">
+<link rel="canonical" href="http://wiki.xbifrost.com/plugin/plugin_dev/">
+<link rel="stylesheet" href="http://wiki.xbifrost.com/css/theme.min.css">
+<script src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+<link rel="stylesheet" href="http://wiki.xbifrost.com/css/chroma.min.css">
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery.easing@1.4.1/jquery.easing.min.js"></script>
+<script src="http://wiki.xbifrost.com/js/bundle.js"></script><style>
+:root {
+  
+  
+}
+</style>
+</head>
+<body><div class="container"><header>
+<h1>Bifrost Document</h1>
+
+ <span class="version">Version 1.1.0</span>
+<a href="https://github.com/brokercap/Bifrost" class="github"><i class="fab fa-github"></i></a>
+<p class="description">Bifrost ---- 将  MySQL 数据 实时同步 到 Redis , MongoDB 等服务的高性能异构中间件</p>
+
+</header>
+<div class="global-menu">
+<nav>
+<ul>
+<li><a href="http://www.xbifrost.com">首页</a></li>
+<li><a href="https://github.com/brokercap/Bifrost">github</a></li>
+<li><a href="https://gitee.com/jc3wish/Bifrost">gitee</a></li>
+<li><a href="https://jc3wish.github.io">作者博客</a></li></ul>
+</nav>
+</div>
+<div class="content-container">
+<main><h1>插件开发教程</h1>
+
+<p><strong>Bifrost</strong>  v1.1.x 版本开始提供接口，在 linux 下支持通过 go1.12+ 版本的 plugin 包生成的 so 进行动态的加载到正在运行的 Bifrost 进程中去</p>
+
+<p>Bifrost 本身提供了相关的接口进行插件注入，也同样提供了相关的测试接口，方便插件开过程中进行调试</p>
+
+<h4 id="创建插件目录">创建插件目录</h4>
+
+<ul>
+<li>在 github.com/brokercap/Bifrost/plugin 目录下创建和插件名称一致的目录名称
+(当然这个你也可以在自己的新建一个项目开发插件，但这个目录名必须和插件名保持一致)</li>
+</ul>
+
+<p>拿redis插件作为案例来讲，创建redis 目录</p>
+
+<pre><code>github.com/brokercap/Bifrost/plugin/redis
+</code></pre>
+
+<ul>
+<li><p>在插件目录下子目录及文件</p>
+
+<pre><code>-rwxr-xr-x 1 root root    90 Mar 18 18:38 redis.go
+-rwxr-xr-x 1 root root 14732 Mar 27 10:30 redisTest.go
+drwxr-xr-x 0 root root     0 Mar 26 18:41 src
+drwxr-xr-x 0 root root     0 Mar 26 08:58 www
+</code></pre></li>
+</ul>
+
+<p>src 目录</p>
+
+<pre><code>-rwxr-xr-x 1 root root 5783 Mar 26 18:41 redis.go
+</code></pre>
+
+<p>www 目录</p>
+
+<pre><code>-rwxr-xr-x 1 root root 1325 Mar 26 08:58 doc.html
+-rwxr-xr-x 1 root root 3864 Mar 18 10:57 redis.html
+-rwxr-xr-x 1 root root 1839 Mar 20 08:50 redis.js
+</code></pre>
+
+<pre><code>
+**src** 是插件go源码处理逻辑所放目录，当然这个你可以根据自己的意愿改，只要在编译的时候，指定这个目录就行了
+
+**www** 是插件存放html及js等静态文件的目录，这个目录名必须为www, 当编译完运行的时候，需要前 当前插件目录及www拷贝到 Bifrost 运行目录下的 plugin 下
+
+redis.html 及 redis.js 两个文件名必须和插件名保持一致，在Bifrsot 管理界面进行加载插件界面的时候，是通过插件名 + .html ,+ .js 进行加载的，
+先加载html 再加载 js
+
+doc.html 为插件使用手册界面
+
+#### 插件接口
+
+</code></pre>
+
+<p>github.com/brokercap/Bifrost/plugin/driver</p>
+
+<pre><code>
+- **往bifrost注册插件**
+
+</code></pre>
+
+<p>func init(){
+    driver.Register(&ldquo;redis&rdquo;,&amp;MyConn{},VERSION,BIFROST_VERION)
+}</p>
+
+<pre><code>
+redis : 插件名称，这个名称必须和插件目录名保持一致，以及www目录下的html及js文件名
+&amp;MyConn{} : 插件提供bifrost调用的 对象
+VERSION : 当前自己开发的插件版本
+BIFROST_VERION : 当前开发时候bifrost的版本
+
+- **MyConn 实现接口**
+</code></pre>
+
+<p>type MyConn struct {}</p>
+
+<p>func (MyConn *MyConn) Open(uri string) driver.ConnFun{
+    return newConn(uri)
+}</p>
+
+<p>func (MyConn *MyConn) GetUriExample() string{
+    return &ldquo;pwd@tcp(127.0.0.1:6379)/0 or 127.0.0.1:6379&rdquo;
+}</p>
+
+<p>func (MyConn *MyConn) CheckUri(uri string) error{
+    c:= newConn(uri)
+    if c.err != nil{
+        return c.err
+    }
+    c.Close()
+    return nil
+}</p>
+
+<pre><code>
+Open : Bifrost调用插件接口
+
+GetUriExample ：提供插件连接uri，比如连接 redis 的ip+port
+
+CheckUri ：用于bifrost调用，确认用户输入的连接地址是否有效
+
+- **实现传输数据的接口**
+
+</code></pre>
+
+<p>type Conn struct {
+    Uri         string
+}</p>
+
+<p>func (This *Conn) SetParam(p interface{}) (interface{},error){}</p>
+
+<p>func (This *Conn) Connect() bool {}
+func (This *Conn) Insert(data *driver.PluginDataType) (*driver.PluginBinlog,error) {}</p>
+
+<p>func (This *Conn) Update(data *driver.PluginDataType) (*driver.PluginBinlog,error) {}
+func (This *Conn) Del(data *driver.PluginDataType) (*driver.PluginBinlog,error) {}
+func (This *Conn) Query(data *driver.PluginDataType) (*driver.PluginBinlog,error) {}
+func (This *Conn) Commit() (*driver.PluginBinlog,error){}</p>
+
+<pre><code>
+Connect :  用户在调用 MyConn 对象Open方法的时候,会进行进行Connet的方法，这个方法里进行连接Redis等第三方服务
+
+SetParam :
+每一次执行Insrt,Update,Delete,Query及Commit 接口之行,都会执行一次SetParam. 每个表第一次执行SetParam的时时候,提交的是 
+
+*用户在插件界面配置的参数信息。传进来的参数是由插件js ，方法doGetPluginParam() 里返回的result.data 的数据*.. 数据结构为 map[string]interface{}
+
+但是在第二次以后执行的时候,传入的是 由上一次SetParam 接口返回的 第一个结果值.
+
+例如A同步数据.伪代码如下:
+
+</code></pre>
+
+<p>var tableParamOriginal = map[sting]interface{}
+var tableParam interface{}
+var err error
+for{
+    slect{
+        case data := &lt;- ch
+        pluginObj := GetPlugin(ToServerKey)
+        if tableParam == nil{
+            tableParam,err = pluginObj.SetParam(tableParamOriginal)
+        }
+        switch data.EventType{
+        case &ldquo;insert&rdquo;:
+        pluginObj.Insert(data)
+        break
+        case &ldquo;update&rdquo;:
+        pluginObj.Update(data)
+        break
+        case &ldquo;delete&rdquo;:
+        pluginObj.Delete(data)
+        break
+        case &ldquo;sql&rdquo;:
+        pluginObj.Query(data)
+        break
+        }
+        break</p>
+
+<pre><code>    case &lt;-time.After(5 * time.Second):
+        pluginObj := GetPlugin(ToServerKey)
+        if tableParam == nil{
+            tableParam,err = pluginObj.SetParam(tableParamOriginal)
+        }
+        pluginObj.Commit()
+    }
+}
+</code></pre>
+
+<p>}</p>
+
+<p>````</p>
+
+<p>编写插件的时候,应该判断一下SetParam传进来的是什么数据结构,进行优化</p>
+
+<p>因为可以自行在SetParam 接口里接传进来的map数据结构转面struct之后再以指针的时候再返回回去,这样下一次数据数据同步的时候,就只要传递指标了.</p>
+
+<p>以 Redis 插件为例:</p>
+
+<pre><code>func (This *Conn) GetParam(p interface{}) (*PluginParam,error){
+    s,err := json.Marshal(p)
+    if err != nil{
+        return nil,err
+    }
+    var param PluginParam
+    err2 := json.Unmarshal(s,&amp;param)
+    if err2 != nil{
+        return nil,err2
+    }
+    This.p = &amp;param
+    return &amp;param,nil
+}
+
+func (This *Conn) SetParam(p interface{}) (interface{},error){
+    if p == nil{
+        return nil,fmt.Errorf(&quot;param is nil&quot;)
+    }
+    switch p.(type) {
+    case *PluginParam:
+        This.p = p.(*PluginParam)
+        return p,nil
+    default:
+        return This.GetParam(p)
+    }
+}
+</code></pre>
+
+<p>Insert : 是数据库中新增数据的情况下会进行回调的方法,数据结构为
+github.com/brokercap/Bifrost/plugin/driver 下面的 PluginBinlog</p>
+
+<p>Update ：在数据进行修改的时候，回调的方法</p>
+
+<p>Delete : 数据被删除的时候回调的方法</p>
+
+<p>Query : Binlog 中记录的日志为sql 格式的时候，比如alter等语句，进行回调的方法</p>
+
+<p>Commit ：假如连续5秒都没有数据更新，回调一次这个方法</p>
+
+<h4 id="插件接口数据结构">插件接口数据结构</h4>
+
+<pre><code>type PluginDataType struct {
+    Timestamp       uint32
+    EventType       string
+    Rows            []map[string]interface{}
+    Query           string
+    SchemaName      string
+    TableName       string
+    BinlogFileNum   int
+    BinlogPosition  uint32
+}
+</code></pre>
+
+<p><strong>TimeStamp</strong> : 事件发生的时间戳</p>
+
+<p><strong>EventType</strong> ：事件类型，insert,uupdate,delete,sql</p>
+
+<p><strong>Rows</strong>      ：在事件类型为 insert ,update,delete 的时候，这个数组里会有数据，insert , delete ，只有有Rows[0],但是在update类型的时候，Rows[0]为更新之前的数据，Rows[1] 为更新之后的数据。</p>
+
+<p><strong>Query</strong>    : 当EventType == sql 的时候，这个字段不为空，存储的是执行的sql语句</p>
+
+<p><strong>SchemaName</strong>: 数据名名称</p>
+
+<p><strong>TableName</strong> : 表名</p>
+
+<p><strong>BinlogFileNum</strong> : 二进制日志文件后缀名，去掉了多余了000，比如二进制文件为 mysql-bin.000070，而这个字段存的是70</p>
+
+<p><strong>BinlogPosition</strong> : 二进制位点</p>
+
+<pre><code>type PluginBinlog struct {
+    BinlogFileNum int
+    BinlogPosition uint32
+}
+</code></pre>
+
+<p><strong>BinlogFileNum</strong> : 对标PluginDataType.BinlogFileNum
+<strong>BinlogPosition</strong> : 对标PluginDataType.BinlogPosition</p>
+
+<h4 id="其他函数">其他函数</h4>
+
+<pre><code>func TransfeResult(val string, data *PluginDataType,rowIndex int) string {}
+</code></pre>
+
+<p>这个函数是由插件调用,将用户input输入的参数里的{$SchemaName} 等标签进行替换的方法</p>
+
+<p>val : 拥有标签的字符串</p>
+
+<p>data : 事件数据</p>
+
+<p>rowIndex : 这个为Rows[] 里的下标值，代表用哪一个Rows[rowIndex]里的数据进行替换指定的标签</p>
+
+<p>{$TableName} ： 会被替换成 data.TableName的值</p>
+
+<p>{$SchemaName} ： 会被替换成 data.SchemaName</p>
+
+<p>{$EventType} ： 会被替换成 data.EventType</p>
+
+<p>{$字段名} : 会被替换成 个Rows[rowIndex][字段名] 的值</p>
+
+<ul>
+<li><p>插件开发测试</p>
+
+<pre><code>github.com/brokercap/Bifrost/sdk/pluginTestData
+</code></pre></li>
+</ul>
+
+<p>pluginTestData 包提供了 新增，更新，删除，及 SQL 事件的模拟数据</p>
+
+<p>在src 下新增 *_test.go 文件 进行单元测试，案例如下：</p>
+
+<pre><code>package src_test
+
+import (
+    &quot;testing&quot;
+    &quot;log&quot;
+    &quot;github.com/brokercap/Bifrost/sdk/pluginTestData&quot;
+    MyPlugin &quot;github.com/brokercap/Bifrost/plugin/redis/src&quot;
+    &quot;github.com/brokercap/Bifrost/test/pluginTest&quot;
+    //&quot;github.com/garyburd/redigo/redis&quot;
+    &quot;github.com/go-redis/redis&quot;
+    &quot;fmt&quot;
+    &quot;strings&quot;
+)
+
+var url string = &quot;10.40.2.41:6379&quot;
+
+var redisConn *redis.Client
+func getParam() map[string]interface{}{
+    p := make(map[string]interface{},0)
+    p[&quot;KeyConfig&quot;] = &quot;{$SchemaName}-{$TableName}-{$id}&quot;
+    p[&quot;DataType&quot;] = &quot;json&quot;
+    p[&quot;Type&quot;] = &quot;set&quot;
+    p[&quot;DataType&quot;] = &quot;json&quot;
+    return p
+}
+
+func initRedisConn() error{
+    redisConn =  redis.NewClient(&amp;redis.Options{
+        Addr:       url,
+        Password:   &quot;&quot;, // no password set
+        DB:         0,
+    })
+    if redisConn == nil{
+        return fmt.Errorf(&quot;connect error&quot;)
+    }
+    return nil
+}
+
+func TestChechUri(t *testing.T){
+    var url string = &quot;127.0.0.1:6379&quot;
+    myConn := MyPlugin.MyConn{}
+    if err := myConn.CheckUri(url);err!= nil{
+        log.Println(&quot;TestChechUri err:&quot;,err)
+    }else{
+        log.Println(&quot;TestChechUri success&quot;)
+    }
+}
+
+func TestSetParam(t *testing.T){
+    myConn := MyPlugin.MyConn{}
+    conn := myConn.Open(url)
+    conn.SetParam(getParam())
+}
+
+func TestInsert(t *testing.T){
+    myConn := MyPlugin.MyConn{}
+    conn := myConn.Open(url)
+    conn.SetParam(getParam())
+    conn.Insert(pluginTest.GetTestInsertData())
+    log.Println(&quot;test over&quot;)
+}
+
+func TestUpate(t *testing.T){
+    myConn := MyPlugin.MyConn{}
+    conn := myConn.Open(url)
+    conn.SetParam(getParam())
+    conn.Insert(pluginTest.GetTestUpdateData())
+    log.Println(&quot;test over&quot;)
+}
+
+
+func TestDelete(t *testing.T){
+    myConn := MyPlugin.MyConn{}
+    conn := myConn.Open(url)
+    conn.SetParam(getParam())
+    conn.Insert(pluginTest.GetTestDeleteData())
+    log.Println(&quot;test over&quot;)
+}
+
+
+func TestQuery(t *testing.T){
+    myConn := MyPlugin.MyConn{}
+    conn := myConn.Open(url)
+    conn.SetParam(getParam())
+    conn.Insert(pluginTest.GetTestQueryData())
+    log.Println(&quot;test over&quot;)
+}
+
+func TestCommit(t *testing.T){
+    myConn := MyPlugin.MyConn{}
+    conn := myConn.Open(url)
+    conn.Commit()
+    log.Println(&quot;test over&quot;)
+}
+
+func TestCheckData(t *testing.T){
+
+    var err error
+    err = initRedisConn()
+    if err!=nil{
+        t.Fatal(err)
+    }
+    myConn := MyPlugin.MyConn{}
+    conn := myConn.Open(url)
+    conn.SetParam(getParam())
+
+    e := pluginTestData.NewEvent()
+
+    var checkResult map[string][]string
+
+    t.Log(&quot;&quot;)
+    t.Log(&quot;insert test start&quot;)
+
+    insertData := e.GetTestInsertData()
+    //log.Println(insertData)
+    _, err = conn.Insert(insertData)
+    if err != nil{
+        t.Fatal(err)
+    }
+    var key string
+    key = insertData.SchemaName+&quot;-&quot;+insertData.TableName+&quot;-&quot;+fmt.Sprint(insertData.Rows[0][&quot;id&quot;])
+    var c string
+    c,err = redisConn.Get( key).Result()
+    if err!=nil{
+        t.Fatal(err)
+    }
+
+    checkResult,err = e.CheckData(insertData.Rows[0],c)
+    if err != nil{
+        log.Fatal(err)
+        t.Fatal(err)
+    }
+
+
+    for _,v := range checkResult[&quot;ok&quot;]{
+        t.Log(v)
+    }
+
+    for _,v := range checkResult[&quot;error&quot;]{
+        t.Error(v)
+    }
+
+
+    t.Log(&quot;&quot;)
+    t.Log(&quot;update test start&quot;)
+
+    updateData := e.GetTestUpdateData()
+    _, err = conn.Update(updateData)
+    if err != nil{
+        t.Fatal(err)
+    }
+
+    key = updateData.SchemaName+&quot;-&quot;+updateData.TableName+&quot;-&quot;+fmt.Sprint(updateData.Rows[1][&quot;id&quot;])
+    c,err = redisConn.Get( key).Result()
+    if err!=nil{
+        t.Fatal(err)
+    }
+
+    checkResult,err = e.CheckData(updateData.Rows[1],c)
+    if err != nil{
+        t.Fatal(err)
+    }
+
+    for _,v := range checkResult[&quot;ok&quot;]{
+        t.Log(v)
+    }
+
+    for _,v := range checkResult[&quot;error&quot;]{
+        t.Error(v)
+    }
+
+
+    t.Log(&quot;&quot;)
+    t.Log(&quot;delete test start&quot;)
+
+    deleteData := e.GetTestDeleteData()
+
+    _, err = conn.Del(deleteData)
+    if err != nil{
+        t.Fatal(err)
+    }
+
+    key = deleteData.SchemaName+&quot;-&quot;+deleteData.TableName+&quot;-&quot;+fmt.Sprint(deleteData.Rows[0][&quot;id&quot;])
+    c,err = redisConn.Get( key).Result()
+    if strings.Contains(fmt.Sprint(err),&quot;redis: nil&quot;) {
+        t.Log(&quot;key:&quot;,key, &quot; delete success&quot;)
+    }else{
+        t.Error(&quot;key:&quot;,key, &quot; delete error,&quot;,err)
+    }
+
+    log.Println(&quot;test over&quot;)
+}
+
+//模拟正式环境刷数据
+func TestSyncLikeProduct(t *testing.T)  {
+    p := pluginTestData.NewPlugin(&quot;redis&quot;,url)
+    err0 := p.SetParam(getParam())
+    if err0 != nil{
+        t.Fatal(err0)
+    }
+
+    var n uint = 10
+    err := p.DoTestStart(n)
+
+    if err != nil{
+        t.Fatal(err)
+    }else{
+        t.Log(&quot;test success&quot;)
+    }
+
+}
+
+
+//模拟正式环境性能测试(只随机生成一条数据。循环提交)
+func TestSyncLikeProductForSpeed(t *testing.T)  {
+    p := pluginTestData.NewPlugin(&quot;redis&quot;,url)
+    err0 := p.SetParam(getParam())
+    p.SetEventType(pluginTestData.INSERT)
+    if err0 != nil{
+        t.Fatal(err0)
+    }
+
+    var n uint = 100
+    err := p.DoTestStartForSpeed(n)
+
+    if err != nil{
+        t.Fatal(err)
+    }else{
+        t.Log(&quot;test success&quot;)
+    }
+
+}
+
+</code></pre>
+
+<ul>
+<li>插件编译</li>
+</ul>
+
+<p>和 Bifrost 源码一起静态编译</p>
+
+<ol>
+<li><p>修改Bifrost import_toserver.go文件</p>
+
+<pre><code>github.com/brokercap/Bifrost/plugin/import_toserver.go
+</code></pre></li>
+</ol>
+
+<p>在import_toserver.go 文件里 import 插件源码</p>
+
+<ol>
+<li><p>go build ./Bifrost.go</p></li>
+
+<li><p>将插插目录下的 www 目录拷贝到 github.com/brokercap/Bifrost/plugin/插件名/www</p></li>
+</ol>
+
+<p>独立编译成so</p>
+
+<p>在插件根目录新建 插件名.go 文件名，案例如下:</p>
+
+<pre><code># ll plugin/redis/
+total 17
+-rwxr-xr-x 1 root root    90 Mar 18 18:38 redis.go
+
+# cat plugin/redis/redis.go 
+package main
+
+import (
+_ &quot;github.com/brokercap/Bifrost/plugin/redis/src&quot;
+)
+
+func main() {
+
+}
+</code></pre>
+
+<pre><code># cd plugin/redis/
+# go build --buildmode=plugin -o redis.so redis.go
+# ll
+total 7885
+-rwxr-xr-x 1 root root      90 Mar 18 18:38 redis.go
+-rwxr-xr-x 1 root root 8055309 Mar 29 17:32 redis.so
+-rwxr-xr-x 1 root root   14732 Mar 27 10:30 redisTest.go
+drwxr-xr-x 0 root root       0 Mar 26 18:41 src
+drwxr-xr-x 0 root root       0 Mar 26 08:58 www
+
+</code></pre>
+
+<p>将生成 redis.so 及 www 拷贝到 Bifrost运行目录下的redis目录下即可</p>
+
+<p>但这个只限linux 平台下，并且Bifrost 配置文件中配置 dynamic_plugin=true才有效，这个配置默认是false</p>
+<div class="edit-meta">
+Last updated on 28 Nov 2019
+
+
+<br><a href="https://github.com/brokercap/brokercap.github.io/edit/master/content/plugin/plugin_dev.md" class="edit-page"><i class="fas fa-pen-square"></i> Edit on GitHub</a></div><nav class="pagination"><a class="nav nav-prev" href="/plugin/" title="插件管理"><i class="fas fa-arrow-left" aria-hidden="true"></i> Prev - 插件管理</a>
+<a class="nav nav-next" href="/dest/" title="目标库管理">Next - 目标库管理 <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+</nav><footer><p class="powered">Powered by <a href="https://gohugo.io">Hugo</a>. Theme by <a href="https://themes.gohugo.io/hugo-theme-techdoc/">TechDoc</a>. Designed by <a href="https://github.com/thingsym/hugo-theme-techdoc">Thingsym</a>.</p>
+</footer>
+</main><div class="sidebar">
+
+<nav class="open-menu">
+<ul>
+<li class=""><a href="http://wiki.xbifrost.com/">Home</a></li>
+
+<li class=""><a href="/install/">安装部署</a>
+  
+<ul class="sub-menu">
+<li class=""><a href="/install/data_source_build/">编译安装</a></li>
+<li class=""><a href="/install/install_binary/">二进制安装</a></li>
+<li class=""><a href="/install/https_certificate/">HTTPS证书</a></li>
+<li class=""><a href="/install/config_doc/">启动配置解析</a></li>
+</ul>
+  
+</li>
+
+<li class=""><a href="/data_source/">数据源管理</a>
+  
+<ul class="sub-menu">
+<li class=""><a href="/data_source/add/">数据源新增</a></li>
+<li class=""><a href="/data_source/edit/">数据源修改</a></li>
+</ul>
+  
+</li>
+
+<li class="parent"><a href="/plugin/">插件管理</a>
+  
+<ul class="sub-menu">
+<li class="active"><a href="/plugin/plugin_dev/">插件开发教程</a></li>
+</ul>
+  
+</li>
+
+<li class=""><a href="/dest/">目标库管理</a>
+  
+<ul class="sub-menu">
+<li class=""><a href="/dest/edit/">目标库修改</a></li>
+<li class=""><a href="/dest/add/">目标库新增</a></li>
+</ul>
+  
+</li>
+
+<li class=""><a href="/syncdata/">数据同步配置</a>
+  
+<ul class="sub-menu">
+<li class=""><a href="/syncdata/sync_config/">数据表同步配置</a></li>
+<li class=""><a href="/syncdata/sync_batch/">批量同步配置</a></li>
+<li class=""><a href="/syncdata/sync_list/">同步列表字段解析</a></li>
+<li class=""><a href="/syncdata/sync_history_config/">全量任务配置</a></li>
+</ul>
+  
+</li>
+
+<li class=""><a href="/channel/">通道</a>
+  
+</li>
+
+<li class=""><a href="/flow/">流量</a>
+  
+</li>
+
+<li class=""><a href="/warning/">报警</a>
+  
+<ul class="sub-menu">
+<li class=""><a href="/warning/rule/">报警规则</a></li>
+<li class=""><a href="/warning/weixin/">微信</a></li>
+<li class=""><a href="/warning/email/">邮箱</a></li>
+</ul>
+  
+</li>
+
+<li class=""><a href="/user/">用户管理</a>
+  
+</li>
+
+<li class=""><a href="/bristol/">二进制文件解析</a>
+  
+</li>
+
+<li class=""><a href="/other/">其他</a>
+  
+<ul class="sub-menu">
+<li class=""><a href="/other/how_used/">使用手册</a></li>
+<li class=""><a href="/other/why/">为什么选择 Bifrost</a></li>
+<li class=""><a href="/other/cluster_why_not/">Bifrost 为什么还不支持集群?</a></li>
+<li class=""><a href="/other/cluster_may_design/">Bifrost 集群设想</a></li>
+<li class=""><a href="/other/performance_test/">性能测试</a></li>
+<li class=""><a href="/other/web_api/">API接口</a></li>
+<li class=""><a href="/other/support/">Bifrost 运维</a></li>
+<li class=""><a href="/other/contact_us/">联系我们</a></li>
+</ul>
+  
+</li>
+</ul>
+</nav>
+
+
+
+<div class="sidebar-footer"></div>
+</div>
+</div><a href="#" id="backtothetop-fixed" class="backtothetop"
+ data-backtothetop-duration="600"
+ data-backtothetop-easing="easeOutQuart"
+ data-backtothetop-fixed-fadeIn="1000"
+ data-backtothetop-fixed-fadeOut="1000"
+ data-backtothetop-fixed-bottom="10"
+ data-backtothetop-fixed-right="20">
+<span class="fa-layers fa-fw">
+<i class="fas fa-circle"></i>
+<i class="fas fa-arrow-circle-up"></i>
+</span></a>
+</div>
+</body>
+</html>

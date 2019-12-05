@@ -82,17 +82,17 @@
 <ul>
 <li><p>支持 MySQL 所有存储类型</p></li>
 
-<li><p>界面化动态灵活配置不同的数据表及目标库</p></li>
+<li><p><strong>界面化</strong>动态灵活配置不同的数据表及目标库</p></li>
 
-<li><p>多数据源,多种目标库支持</p></li>
+<li><p>多数据源,<strong>多种目标库</strong>支持</p></li>
 
-<li><p>同时支持 <em>增量</em> 及 <em>全量</em> 数据同步</p></li>
+<li><p>同时支持 <strong>增量</strong> 及 <strong>全量</strong> 数据同步</p></li>
 
 <li><p>宕机后重启自动恢复配置</p></li>
 
 <li><p>支持自定义插件开发，动态加载</p></li>
 
-<li><p>支持 Email 及 微信企业号等报警功能</p></li>
+<li><p>支持 Email 及 微信企业号等<strong>监控报警</strong>功能</p></li>
 
 <li><p>提供第三方监控平台访问接口(Http Basic验证)</p></li>
 
@@ -228,7 +228,7 @@ docker run -d -p21036:21036 -v /data/BifrostData:/linux/data jc3wish/bifrost</co
 <li>github.com/streadway/amqp</li>
 <li>github.com/go-redis/redis</li>
 <li>github.com/syndtr/goleveldb/leveldb</li>
-<li>github.com/kshvakov/clickhouse</li>
+<li>github.com/ClickHouse/clickhouse-go</li>
 </ul>
 
 <h3 id="qq群号-70331601">QQ群号： 70331601</h3>
@@ -271,6 +271,10 @@ Published on 23 Nov 2019
 
 <li class=""><a href="/plugin/">插件管理</a>
   
+<ul class="sub-menu">
+<li class=""><a href="/plugin/plugin_dev/">插件开发教程</a></li>
+</ul>
+  
 </li>
 
 <li class=""><a href="/dest/">目标库管理</a>
@@ -285,6 +289,10 @@ Published on 23 Nov 2019
 <li class=""><a href="/syncdata/">数据同步配置</a>
   
 <ul class="sub-menu">
+<li class=""><a href="/syncdata/sync_config/">数据表同步配置</a></li>
+<li class=""><a href="/syncdata/sync_batch/">批量同步配置</a></li>
+<li class=""><a href="/syncdata/sync_list/">同步列表字段解析</a></li>
+<li class=""><a href="/syncdata/sync_history_config/">全量任务配置</a></li>
 </ul>
   
 </li>
@@ -318,11 +326,14 @@ Published on 23 Nov 2019
 <li class=""><a href="/other/">其他</a>
   
 <ul class="sub-menu">
+<li class=""><a href="/other/how_used/">使用手册</a></li>
 <li class=""><a href="/other/why/">为什么选择 Bifrost</a></li>
 <li class=""><a href="/other/cluster_why_not/">Bifrost 为什么还不支持集群?</a></li>
 <li class=""><a href="/other/cluster_may_design/">Bifrost 集群设想</a></li>
 <li class=""><a href="/other/performance_test/">性能测试</a></li>
+<li class=""><a href="/other/web_api/">API接口</a></li>
 <li class=""><a href="/other/support/">Bifrost 运维</a></li>
+<li class=""><a href="/other/contact_us/">联系我们</a></li>
 </ul>
   
 </li>

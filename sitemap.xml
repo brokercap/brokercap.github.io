@@ -118,6 +118,11 @@
   </url>
   
   <url>
+    <loc>http://wiki.xbifrost.com/other/how_used/</loc>
+    <lastmod>2019-12-05T22:37:15+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://wiki.xbifrost.com/other/</loc>
     <lastmod>2019-11-23T15:32:15+00:00</lastmod>
   </url>
@@ -148,7 +153,17 @@
   </url>
   
   <url>
+    <loc>http://wiki.xbifrost.com/other/web_api/</loc>
+    <lastmod>2019-12-05T22:52:15+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://wiki.xbifrost.com/warning/weixin/</loc>
+    <lastmod>2019-11-28T22:59:15+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://wiki.xbifrost.com/plugin/plugin_dev/</loc>
     <lastmod>2019-11-28T22:59:15+00:00</lastmod>
   </url>
   
@@ -160,6 +175,11 @@
   <url>
     <loc>http://wiki.xbifrost.com/other/support/</loc>
     <lastmod>2019-12-03T22:22:15+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://wiki.xbifrost.com/other/contact_us/</loc>
+    <lastmod>2019-12-05T22:52:15+00:00</lastmod>
   </url>
   
   <url>

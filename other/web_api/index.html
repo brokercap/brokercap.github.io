@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>API接口 - Bifrost Document</title>
+<meta name="description" content="Bifrost ---- 将  MySQL 数据 实时同步 到 Redis , MongoDB 等服务的高性能异构中间件">
+<meta name="generator" content="Hugo 0.59.1" />
+<link href="http://wiki.xbifrost.com/index.xml" rel="alternate" type="application/rss+xml">
+<link rel="canonical" href="http://wiki.xbifrost.com/other/web_api/">
+<link rel="stylesheet" href="http://wiki.xbifrost.com/css/theme.min.css">
+<script src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+<link rel="stylesheet" href="http://wiki.xbifrost.com/css/chroma.min.css">
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery.easing@1.4.1/jquery.easing.min.js"></script>
+<script src="http://wiki.xbifrost.com/js/bundle.js"></script><style>
+:root {
+  
+  
+}
+</style>
+</head>
+<body><div class="container"><header>
+<h1>Bifrost Document</h1>
+
+ <span class="version">Version 1.1.0</span>
+<a href="https://github.com/brokercap/Bifrost" class="github"><i class="fab fa-github"></i></a>
+<p class="description">Bifrost ---- 将  MySQL 数据 实时同步 到 Redis , MongoDB 等服务的高性能异构中间件</p>
+
+</header>
+<div class="global-menu">
+<nav>
+<ul>
+<li><a href="http://www.xbifrost.com">首页</a></li>
+<li><a href="https://github.com/brokercap/Bifrost">github</a></li>
+<li><a href="https://gitee.com/jc3wish/Bifrost">gitee</a></li>
+<li><a href="https://jc3wish.github.io">作者博客</a></li></ul>
+</nav>
+</div>
+<div class="content-container">
+<main><h1>API接口</h1>
+
+<p><em>Bifrost</em> 提供相应的监控接口,用于第三方监控服务器对Bifrost进行监控</p>
+
+<h4 id="数据源列表">数据源列表</h4>
+
+<p>URL: /db/list?format=json</p>
+
+<p>METHOD: GET</p>
+
+<p>返回数据结构:</p>
+
+<pre><code>
+map[string]DbListStruct
+
+type DbListStruct struct {
+    Name                    string    // DbName
+    ConnectUri              string    // 连接地址
+    ConnStatus              string    // close,stop,starting,running
+    ConnErr                 string    // 连接错误
+    ChannelCount            int       // 通道数量
+    LastChannelID           int       // 最大的通道ID
+    TableCount              int       // 设置了同步的表的数量
+    BinlogDumpFileName      string    // 位点文件
+    BinlogDumpPosition      uint32    // 位点
+    MaxBinlogDumpFileName           string    // 到哪一个位点文件停止解析
+    MaxBinlogDumpPosition           uint32    // 到哪一个位点停止解析
+    ReplicateDoDb           map[string]uint8  // 需要同步的库 
+    ServerId                uint32    // 模拟从库的ServerId
+    AddTime             int64    // 添加数据源时候的时间戳
+}
+</code></pre>
+
+<h5 id="案例">案例</h5>
+
+<pre><code>func main(){
+    //跳过证书验证
+    tr := &amp;http.Transport{
+        TLSClientConfig: &amp;tls.Config{InsecureSkipVerify: true},
+    }
+    url := &quot;https://127.0.0.1:21036/db/list?format=json&quot;
+    client := &amp;http.Client{Timeout:10 * time.Second,Transport: tr,}
+    req, err := http.NewRequest(&quot;GET&quot;,url, nil)
+    if err != nil {
+        log.Println(err)
+        return
+    }
+    req.SetBasicAuth(&quot;Bifrost&quot;,&quot;Bifrost123&quot;)
+    resp, err2 := client.Do(req)
+    if err2 != nil{
+        log.Println(err2)
+        return
+    }
+    defer resp.Body.Close()
+
+    body, err := ioutil.ReadAll(resp.Body)
+
+    log.Println(&quot;body:&quot;,string(body))
+}
+</code></pre>
+
+<pre><code>https://127.0.0.1:21036/db/list?format=json
+</code></pre>
+
+<pre><code>{&quot;myTest&quot;:{&quot;Name&quot;:&quot;myTest&quot;,&quot;ConnectUri&quot;:&quot;root:@tcp(127.0.0.1:3306)/test&quot;,&quot;ConnStatus&quot;:&quot;running&quot;,&quot;ConnErr&quot;:&quot;running&quot;,&quot;ChannelCount&quot;:1,&quot;LastChannelID&quot;:1,&quot;TableCount&quot;:2,&quot;BinlogDumpFileName&quot;:&quot;mysql-bin.000015&quot;,&quot;BinlogDumpPosition&quot;:43311,&quot;MaxBinlogDumpFileName&quot;:&quot;&quot;,&quot;MaxBinlogDumpPosition&quot;:0,&quot;ReplicateDoDb&quot;:{&quot;bifrost_test&quot;:1,&quot;test&quot;:1},&quot;ServerId&quot;:167,&quot;AddTime&quot;:0}}
+</code></pre>
+
+<h4 id="表同步列表">表同步列表</h4>
+
+<p>表同步列表是设置了需要同步的表的列表</p>
+
+<p>URL : /synclist?format=json</p>
+
+<p>METHOD : POST | GET</p>
+
+<h5 id="参数">参数</h5>
+
+<pre><code>dbname       string  数据源名称             可选
+
+toserverkey  string  目标库 ToServerKey    可选
+
+channelid    int     通道id,不是通道名字     可选
+
+schema_name  string  数据库名称             可选
+
+table_name   string  表名称                可选
+
+</code></pre>
+
+<p>返回数据结构:</p>
+
+<pre><code>
+[]syncListStruct
+
+type syncListStruct struct {
+    DbName string `json:&quot;DbName&quot;`   // 数据源名称
+    SchemaName string `json:&quot;SchemaName&quot;`  // 数据库名
+    TableName string `json:&quot;TableName&quot;`    // 表名
+    ToServerList []*server.ToServer `json:&quot;ToServerList&quot;`
+}
+
+type ToServer struct {
+    ToServerID      int         
+    PluginName          string
+    MustBeSuccess       bool
+    FilterQuery     bool
+    FilterUpdate        bool
+    FieldList           []string
+    ToServerKey         string
+    BinlogFileNum       int                     // 当前同步的位点文件
+    BinlogPosition      uint32                  // 当前同步的位点
+    PluginParam         map[string]interface{}  // 插件参数
+    Status              string                  // 同步状态
+    Error               string                  // 同步失败时候产生的错误信息.假如这个错误不为空,则说明同步有问题了
+    ErrorWaitDeal       int                     // 1 为下一次重试的时候,则错过一条数据,界面上Miss 按钮,就是将这个值个性为 1
+    ErrorWaitData       interface{}             // 当前同步失败的时候的 数据
+}
+</code></pre>
+
+<p>这个接口可以用于监控同步是否正常,当 Error 不为空的时候,则说明同步可能存在问题</p>
+
+<p>监控也要以参考 <em>Bifrost</em> 报警模块</p>
+
+<h5 id="案例-1">案例</h5>
+
+<pre><code>https://127.0.0.1:21036/synclist?dbname=myTest&amp;schema_name=&amp;table_name=&amp;toserverkey=&amp;channelid=0&amp;format=json
+
+</code></pre>
+
+<pre><code>[{&quot;DbName&quot;:&quot;myTest&quot;,&quot;SchemaName&quot;:&quot;bifrost_test&quot;,&quot;TableName&quot;:&quot;binlog_field_test&quot;,&quot;ToServerList&quot;:[{&quot;ToServerID&quot;:1,&quot;PluginName&quot;:&quot;hprose&quot;,&quot;MustBeSuccess&quot;:true,&quot;FilterQuery&quot;:false,&quot;FilterUpdate&quot;:false,&quot;FieldList&quot;:[],&quot;ToServerKey&quot;:&quot;sdfsdfsf&quot;,&quot;BinlogFileNum&quot;:0,&quot;BinlogPosition&quot;:0,&quot;PluginParam&quot;:{},&quot;Status&quot;:&quot;&quot;,&quot;Error&quot;:&quot;&quot;,&quot;ErrorWaitDeal&quot;:0,&quot;ErrorWaitData&quot;:null}]},{&quot;DbName&quot;:&quot;myTest&quot;,&quot;SchemaName&quot;:&quot;test&quot;,&quot;TableName&quot;:&quot;test&quot;,&quot;ToServerList&quot;:[]}]
+
+</code></pre>
+
+<h4 id="流量">流量</h4>
+
+<p>流量接口,可提供 1分钟,10分钟,1小时,8小时,24小时内的的流量信息</p>
+
+<p>返回的流量是全量信息,不是增量,但可以自行通过全量数据的差值算出增量数据</p>
+
+<p>URL : /flow/get?format=json</p>
+
+<p>METHOD : GET</p>
+
+<h5 id="参数-1">参数</h5>
+
+<pre><code>
+dbname       string  数据源名称             可选
+
+channelid    int     通道id,不是通道名字     可选
+
+schema       string  数据库名称             可选
+
+table_name   string  表名称                可选
+
+type         string  查询数据类型(minute,tenminute,hour,eighthour,day)          必填      
+
+</code></pre>
+
+<p>返回数据结构:</p>
+
+<pre><code>[]CountContent
+
+type CountContent struct {
+    Time int64               // 时间戳
+    Count int64              // 全量条数
+    ByteSize int64           // 全量大小,单位 byte
+}
+
+</code></pre>
+
+<h5 id="案例-2">案例</h5>
+
+<pre><code>https://127.0.0.1:21036/flow/get?format=json&amp;type=minute
+</code></pre>
+
+<pre><code>[
+{&quot;Time&quot;:1555079740,&quot;Count&quot;:0,&quot;ByteSize&quot;:0},{&quot;Time&quot;:1555079745,&quot;Count&quot;:0,&quot;ByteSize&quot;:0},
+{&quot;Time&quot;:1555079750,&quot;Count&quot;:0,&quot;ByteSize&quot;:0},{&quot;Time&quot;:1555079755,&quot;Count&quot;:0,&quot;ByteSize&quot;:0},
+{&quot;Time&quot;:1555079760,&quot;Count&quot;:0,&quot;ByteSize&quot;:0},{&quot;Time&quot;:1555079765,&quot;Count&quot;:0,&quot;ByteSize&quot;:0},
+{&quot;Time&quot;:1555079770,&quot;Count&quot;:0,&quot;ByteSize&quot;:0},{&quot;Time&quot;:1555079775,&quot;Count&quot;:0,&quot;ByteSize&quot;:0},
+{&quot;Time&quot;:1555079780,&quot;Count&quot;:0,&quot;ByteSize&quot;:0},{&quot;Time&quot;:1555079790,&quot;Count&quot;:0,&quot;ByteSize&quot;:0},{&quot;Time&quot;:1555079800,&quot;Count&quot;:0,&quot;ByteSize&quot;:0},{&quot;Time&quot;:1555079805,&quot;Count&quot;:0,&quot;ByteSize&quot;:0}
+]
+</code></pre>
+<div class="edit-meta">
+Last updated on 5 Dec 2019
+
+
+<br><a href="https://github.com/brokercap/brokercap.github.io/edit/master/content/other/web_api.md" class="edit-page"><i class="fas fa-pen-square"></i> Edit on GitHub</a></div><nav class="pagination"><a class="nav nav-prev" href="/other/performance_test/" title="性能测试"><i class="fas fa-arrow-left" aria-hidden="true"></i> Prev - 性能测试</a>
+<a class="nav nav-next" href="/other/support/" title="Bifrost 运维">Next - Bifrost 运维 <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+</nav><footer><p class="powered">Powered by <a href="https://gohugo.io">Hugo</a>. Theme by <a href="https://themes.gohugo.io/hugo-theme-techdoc/">TechDoc</a>. Designed by <a href="https://github.com/thingsym/hugo-theme-techdoc">Thingsym</a>.</p>
+</footer>
+</main><div class="sidebar">
+
+<nav class="open-menu">
+<ul>
+<li class=""><a href="http://wiki.xbifrost.com/">Home</a></li>
+
+<li class=""><a href="/install/">安装部署</a>
+  
+<ul class="sub-menu">
+<li class=""><a href="/install/data_source_build/">编译安装</a></li>
+<li class=""><a href="/install/install_binary/">二进制安装</a></li>
+<li class=""><a href="/install/https_certificate/">HTTPS证书</a></li>
+<li class=""><a href="/install/config_doc/">启动配置解析</a></li>
+</ul>
+  
+</li>
+
+<li class=""><a href="/data_source/">数据源管理</a>
+  
+<ul class="sub-menu">
+<li class=""><a href="/data_source/add/">数据源新增</a></li>
+<li class=""><a href="/data_source/edit/">数据源修改</a></li>
+</ul>
+  
+</li>
+
+<li class=""><a href="/plugin/">插件管理</a>
+  
+<ul class="sub-menu">
+<li class=""><a href="/plugin/plugin_dev/">插件开发教程</a></li>
+</ul>
+  
+</li>
+
+<li class=""><a href="/dest/">目标库管理</a>
+  
+<ul class="sub-menu">
+<li class=""><a href="/dest/edit/">目标库修改</a></li>
+<li class=""><a href="/dest/add/">目标库新增</a></li>
+</ul>
+  
+</li>
+
+<li class=""><a href="/syncdata/">数据同步配置</a>
+  
+<ul class="sub-menu">
+<li class=""><a href="/syncdata/sync_config/">数据表同步配置</a></li>
+<li class=""><a href="/syncdata/sync_batch/">批量同步配置</a></li>
+<li class=""><a href="/syncdata/sync_list/">同步列表字段解析</a></li>
+<li class=""><a href="/syncdata/sync_history_config/">全量任务配置</a></li>
+</ul>
+  
+</li>
+
+<li class=""><a href="/channel/">通道</a>
+  
+</li>
+
+<li class=""><a href="/flow/">流量</a>
+  
+</li>
+
+<li class=""><a href="/warning/">报警</a>
+  
+<ul class="sub-menu">
+<li class=""><a href="/warning/rule/">报警规则</a></li>
+<li class=""><a href="/warning/weixin/">微信</a></li>
+<li class=""><a href="/warning/email/">邮箱</a></li>
+</ul>
+  
+</li>
+
+<li class=""><a href="/user/">用户管理</a>
+  
+</li>
+
+<li class=""><a href="/bristol/">二进制文件解析</a>
+  
+</li>
+
+<li class="parent"><a href="/other/">其他</a>
+  
+<ul class="sub-menu">
+<li class=""><a href="/other/how_used/">使用手册</a></li>
+<li class=""><a href="/other/why/">为什么选择 Bifrost</a></li>
+<li class=""><a href="/other/cluster_why_not/">Bifrost 为什么还不支持集群?</a></li>
+<li class=""><a href="/other/cluster_may_design/">Bifrost 集群设想</a></li>
+<li class=""><a href="/other/performance_test/">性能测试</a></li>
+<li class="active"><a href="/other/web_api/">API接口</a></li>
+<li class=""><a href="/other/support/">Bifrost 运维</a></li>
+<li class=""><a href="/other/contact_us/">联系我们</a></li>
+</ul>
+  
+</li>
+</ul>
+</nav>
+
+
+
+<div class="sidebar-footer"></div>
+</div>
+</div><a href="#" id="backtothetop-fixed" class="backtothetop"
+ data-backtothetop-duration="600"
+ data-backtothetop-easing="easeOutQuart"
+ data-backtothetop-fixed-fadeIn="1000"
+ data-backtothetop-fixed-fadeOut="1000"
+ data-backtothetop-fixed-bottom="10"
+ data-backtothetop-fixed-right="20">
+<span class="fa-layers fa-fw">
+<i class="fas fa-circle"></i>
+<i class="fas fa-arrow-circle-up"></i>
+</span></a>
+</div>
+</body>
+</html>

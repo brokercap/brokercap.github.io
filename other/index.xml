@@ -12,6 +12,15 @@
     
     
     <item>
+      <title>使用手册</title>
+      <link>http://wiki.xbifrost.com/other/how_used/</link>
+      <pubDate>Thu, 05 Dec 2019 22:37:15 +0000</pubDate>
+      
+      <guid>http://wiki.xbifrost.com/other/how_used/</guid>
+      <description>导航栏 导航栏里有 首页 ，数据源 , 目标库列表 , 表同步列表 ,全量任务, 流量 ,插件,报警, 文档 每个导航菜单采用不同的功能。 插件 插件 点击进去后，显示的</description>
+    </item>
+    
+    <item>
       <title>为什么选择 Bifrost</title>
       <link>http://wiki.xbifrost.com/other/why/</link>
       <pubDate>Wed, 27 Nov 2019 23:04:15 +0000</pubDate>
@@ -48,12 +57,30 @@
     </item>
     
     <item>
+      <title>API接口</title>
+      <link>http://wiki.xbifrost.com/other/web_api/</link>
+      <pubDate>Thu, 05 Dec 2019 22:52:15 +0000</pubDate>
+      
+      <guid>http://wiki.xbifrost.com/other/web_api/</guid>
+      <description>Bifrost 提供相应的监控接口,用于第三方监控服务器对Bifrost进行监控 数据源列表 URL: /db/list?format=json METHOD: GET 返回数据结构: map[string]DbListStruct type DbListStruct struct { Name string // DbName ConnectUri string // 连接地址 ConnStatus string // close,stop,starting,running ConnErr</description>
+    </item>
+    
+    <item>
       <title>Bifrost 运维</title>
       <link>http://wiki.xbifrost.com/other/support/</link>
       <pubDate>Tue, 03 Dec 2019 22:22:15 +0000</pubDate>
       
       <guid>http://wiki.xbifrost.com/other/support/</guid>
       <description>Bifrost 常见问题 1. 全量同步没有问题，但insert,update等增量没过去 1). 检查数据源是不是 running 状态,重新启动一下数据源 2). 检查数据表绑定的通道是不</description>
+    </item>
+    
+    <item>
+      <title>联系我们</title>
+      <link>http://wiki.xbifrost.com/other/contact_us/</link>
+      <pubDate>Thu, 05 Dec 2019 22:52:15 +0000</pubDate>
+      
+      <guid>http://wiki.xbifrost.com/other/contact_us/</guid>
+      <description></description>
     </item>
     
   </channel>

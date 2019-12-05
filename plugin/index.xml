@@ -11,5 +11,14 @@
 	<atom:link href="http://wiki.xbifrost.com/plugin/index.xml" rel="self" type="application/rss+xml" />
     
     
+    <item>
+      <title>插件开发教程</title>
+      <link>http://wiki.xbifrost.com/plugin/plugin_dev/</link>
+      <pubDate>Thu, 28 Nov 2019 22:59:15 +0000</pubDate>
+      
+      <guid>http://wiki.xbifrost.com/plugin/plugin_dev/</guid>
+      <description>Bifrost v1.1.x 版本开始提供接口，在 linux 下支持通过 go1.12+ 版本的 plugin 包生成的 so 进行动态的加载到正在运行的 Bifrost 进程中去 Bifrost 本身提供了相关的接口进行插件注入，也同样提供了</description>
+    </item>
+    
   </channel>
 </rss>
