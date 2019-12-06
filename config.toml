@@ -17,7 +17,7 @@ enableMissingTranslationPlaceholders = false
 [Params]
 
     # Souce Code repository section
-    description = "Bifrost ---- 将  MySQL 数据 实时同步 到 Redis , MongoDB 等服务的高性能异构中间件"
+    description = "Bifrost ---- 面向生产环境的 MySQL 同步到 Redis,MongoDB 等服务的异构中间件"
     github_repository = "https://github.com/brokercap/Bifrost"
     version = "1.1.0"
 
@@ -60,12 +60,12 @@ enableMissingTranslationPlaceholders = false
     weight = 1
 
 [[menu.main]]
-    name = "github"
+    name = "Github"
     url = "https://github.com/brokercap/Bifrost"
     weight = 2
 
 [[menu.main]]
-    name = "gitee"
+    name = "Gitee"
     url = "https://gitee.com/jc3wish/Bifrost"
     weight = 3
 
@@ -73,3 +73,9 @@ enableMissingTranslationPlaceholders = false
     name = "作者博客"
     url = "https://jc3wish.github.io"
     weight = 4
+
+[[menu.main]]
+    name = "联系我们"
+    url = "/other/contact_us/"
+    weight = 5
+
