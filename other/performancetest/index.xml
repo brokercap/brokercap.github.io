@@ -17,7 +17,7 @@
       <pubDate>Sun, 08 Dec 2019 12:36:15 +0000</pubDate>
       
       <guid>http://wiki.xbifrost.com/other/performancetest/testresult_1/</guid>
-      <description>查看当前 MySQL 位点 连接上 MySQL 后 执行 show master status\G; *************************** 1. row *************************** File: mysql-bin.000020 Position: 739 Binlog_Do_DB: Binlog_Ignore_DB: 1 row in set (0.00 sec) 造数据 往 bifrost_test.bristol_performance_test 表里写 100000 条数据 如果 bifrost_test 库 和 bristol_performance_test 表不存在的情况下会自动创建 /BristolPerformanceTest -count 100000 -u root -P</description>
+      <description>查看当前 MySQL 位点 连接上 MySQL 后 执行 show master status\G; *************************** 1. row *************************** File: mysql-bin.000020 Position: 739 Binlog_Do_DB: Binlog_Ignore_DB: 1 row in set (0.00 sec) 造数据 往 bifrost_test.bristol_performance_test 表里写 100000 条数据 如果 bifrost_test 库 和 bristol_performance_test 表不存在的情况下会自动创建 ./BristolPerformanceTest -count 100000 -u root -P</description>
     </item>
     
   </channel>
