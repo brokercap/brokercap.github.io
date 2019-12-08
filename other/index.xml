@@ -48,15 +48,6 @@
     </item>
     
     <item>
-      <title>性能测试</title>
-      <link>http://wiki.xbifrost.com/other/performance_test/</link>
-      <pubDate>Tue, 03 Dec 2019 23:00:15 +0000</pubDate>
-      
-      <guid>http://wiki.xbifrost.com/other/performance_test/</guid>
-      <description>Bifrost 提供了一些用于性能测试的方法 Bristol性能测试 Bristol性能测试工具文档 Bifrost性能测试 1.首先先安装启动 Bifrost 安装部署文档 在管</description>
-    </item>
-    
-    <item>
       <title>API接口</title>
       <link>http://wiki.xbifrost.com/other/web_api/</link>
       <pubDate>Thu, 05 Dec 2019 22:52:15 +0000</pubDate>

@@ -44,7 +44,7 @@
       <pubDate>Sat, 23 Nov 2019 15:30:15 +0000</pubDate>
       
       <guid>http://wiki.xbifrost.com/install/config_doc/</guid>
-      <description>Bifrost 默认配置路径在 Bifrost 运行目录下的 etc/config.ini [user] #管理界面的用户名及密码 Bifrost=Bifrost123 [groups] #administrator 管理人员可以添加删除等操作 #monitor 只能查看数据 Bifrost=administrator BifrostMonitor=monitor [Bifrostd] #默认会当前启动文件夹 #log_dir=/data/log/ #默认</description>
+      <description>Bifrost 默认配置路径在 Bifrost 运行目录下的 etc/Bifrost.ini [user] #管理界面的用户名及密码 Bifrost=Bifrost123 [groups] #administrator 管理人员可以添加删除等操作 #monitor 只能查看数据 Bifrost=administrator BifrostMonitor=monitor [Bifrostd] #默认会当前启动文件夹 #log_dir=/data/log/ #默认</description>
     </item>
     
   </channel>

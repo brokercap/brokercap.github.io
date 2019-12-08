@@ -44,7 +44,7 @@
       <pubDate>Sat, 23 Nov 2019 15:30:15 +0000</pubDate>
       
       <guid>http://wiki.xbifrost.com/install/config_doc/</guid>
-      <description>Bifrost 默认配置路径在 Bifrost 运行目录下的 etc/config.ini [user] #管理界面的用户名及密码 Bifrost=Bifrost123 [groups] #administrator 管理人员可以添加删除等操作 #monitor 只能查看数据 Bifrost=administrator BifrostMonitor=monitor [Bifrostd] #默认会当前启动文件夹 #log_dir=/data/log/ #默认</description>
+      <description>Bifrost 默认配置路径在 Bifrost 运行目录下的 etc/Bifrost.ini [user] #管理界面的用户名及密码 Bifrost=Bifrost123 [groups] #administrator 管理人员可以添加删除等操作 #monitor 只能查看数据 Bifrost=administrator BifrostMonitor=monitor [Bifrostd] #默认会当前启动文件夹 #log_dir=/data/log/ #默认</description>
     </item>
     
     <item>
@@ -156,15 +156,6 @@
     </item>
     
     <item>
-      <title>性能测试</title>
-      <link>http://wiki.xbifrost.com/other/performance_test/</link>
-      <pubDate>Tue, 03 Dec 2019 23:00:15 +0000</pubDate>
-      
-      <guid>http://wiki.xbifrost.com/other/performance_test/</guid>
-      <description>Bifrost 提供了一些用于性能测试的方法 Bristol性能测试 Bristol性能测试工具文档 Bifrost性能测试 1.首先先安装启动 Bifrost 安装部署文档 在管</description>
-    </item>
-    
-    <item>
       <title>报警规则</title>
       <link>http://wiki.xbifrost.com/warning/rule/</link>
       <pubDate>Thu, 28 Nov 2019 22:59:15 +0000</pubDate>
@@ -225,6 +216,15 @@
       
       <guid>http://wiki.xbifrost.com/other/contact_us/</guid>
       <description></description>
+    </item>
+    
+    <item>
+      <title>Mac 测试结果 1</title>
+      <link>http://wiki.xbifrost.com/other/performancetest/testresult_1/</link>
+      <pubDate>Sun, 08 Dec 2019 12:36:15 +0000</pubDate>
+      
+      <guid>http://wiki.xbifrost.com/other/performancetest/testresult_1/</guid>
+      <description>查看当前 MySQL 位点 连接上 MySQL 后 执行 show master status\G; *************************** 1. row *************************** File: mysql-bin.000020 Position: 739 Binlog_Do_DB: Binlog_Ignore_DB: 1 row in set (0.00 sec) 造数据 往 bifrost_test.bristol_performance_test 表里写 100000 条数据 如果 bifrost_test 库 和 bristol_performance_test 表不存在的情况下会自动创建 /BristolPerformanceTest -count 100000 -u root -P</description>
     </item>
     
   </channel>

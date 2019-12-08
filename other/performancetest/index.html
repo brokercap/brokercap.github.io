@@ -3,11 +3,11 @@
 <head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<title>通道 - Bifrost Document</title>
+<title>性能测试 - Bifrost Document</title>
 <meta name="description" content="Bifrost ---- 面向生产环境的 MySQL 同步到 Redis,MongoDB 等服务的异构中间件">
 <meta name="generator" content="Hugo 0.59.1" />
 <link href="http://wiki.xbifrost.com/index.xml" rel="alternate" type="application/rss+xml">
-<link rel="canonical" href="http://wiki.xbifrost.com/channel/">
+<link rel="canonical" href="http://wiki.xbifrost.com/other/performancetest/">
 <link rel="stylesheet" href="http://wiki.xbifrost.com/css/theme.min.css">
 <script src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 <link rel="stylesheet" href="http://wiki.xbifrost.com/css/chroma.min.css">
@@ -48,67 +48,57 @@
 </nav>
 </div>
 <div class="content-container">
-<main><h1>通道</h1>
+<main><h1>性能测试</h1>
 
-<p>每个数据源下面都可以配置多个通道</p>
+<p><em>Bifrost</em> 提供了一些用于性能测试的方法</p>
 
-<p>每个数据源添加的时候,默认会启动一个名为 default 的通道</p>
+<h3 id="bristol性能测试">Bristol性能测试</h3>
 
-<h4 id="通道的作用">通道的作用:</h4>
+<p><a href="https://github.com/brokercap/Bifrost/tree/master/Bristol/test/ v">Bristol性能测试工具文档</a></p>
 
-<ol>
-<li><p>一个通道就是一个阻塞队列,队列大小,默认为 1000,可以通过 channel_queue_size 修改</p></li>
+<h3 id="bifrost性能测试">Bifrost性能测试</h3>
 
-<li><p>一个通道,可以绑定多个数据表</p></li>
+<h4 id="1-首先先安装启动-bifrost-安装部署文档-http-wiki-xbifrost-com-install-data-source-build">1.首先先安装启动 Bifrost <a href="http://wiki.xbifrost.com/install/data_source_build/">安装部署文档</a></h4>
 
-<li><p>绑定了表的数据,从 Binlog 解析出来之后,写到入 通道队列中</p></li>
+<p>在管理界面添加数据源及目标库等配置信息,配置好哪一个表要同步到哪些目标库</p>
 
-<li><p>一个通道 可以设置 N 个消费者,默认情况下为 1 个,如果要顺序,请设置为 1</p></li>
+<h4 id="2-修改-bifrost-ini-配置文件-新增-performancetesting-参数">2. 修改 Bifrost.ini 配置文件,新增 [PerformanceTesting]参数</h4>
 
-<li><p>通道队列的消费者消费数据出来之后,判断数据表配置同步到哪些目标库里去,再将数据写到 目标库的队列中去</p></li>
-</ol>
+<pre><code>[PerformanceTesting]
+myTest=mysql-bin.000015,107175
+</code></pre>
 
-<h4 id="通道管理">通道管理</h4>
+<p>myTest : 是界面添加数据源时候的 Name</p>
 
-<ol>
-<li>进入通道管理界面</li>
-</ol>
+<p>mysql-bin.000015,107175 : 当前数据源的最新位点信息</p>
 
-<p><img src="/images/channel/channel_1.jpg" alt="image" /></p>
+<h4 id="3-关闭-bifrost">3. 关闭 Bifrost</h4>
 
-<ol>
-<li>通道管理</li>
-</ol>
+<p>这里一定要关闭Bifrost</p>
 
-<p><img src="/images/channel/channel_2.jpg" alt="image" /></p>
+<h4 id="4-刷数据到数据库中">4. 刷数据到数据库中</h4>
 
-<p>1). 通道在线启动关闭</p>
+<p>这里采用 Biforst 自带的 <a href="https://github.com/brokercap/Bifrost/blob/master/test/insertDataTest.go">刷数据的工具</a>  这个工具会自动根据表里的字段类型创建指条条数的数据</p>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">go</span> <span class="nx">run</span> <span class="nx">insertDataTest</span><span class="p">.</span><span class="k">go</span> <span class="o">-</span><span class="nx">host</span> <span class="mf">127.0.0.1</span> <span class="o">-</span><span class="nx">user</span> <span class="nx">root</span> <span class="o">-</span><span class="nx">pwd</span> <span class="nx">root</span> <span class="o">-</span><span class="nx">port</span> <span class="mi">3306</span> <span class="o">-</span><span class="nx">schema</span> <span class="nx">bifrost_test</span> <span class="o">-</span><span class="nx">table</span> <span class="nx">test1</span> <span class="o">-</span><span class="nx">count</span> <span class="mi">100000</span></code></pre></div>
+<p>也可自行想办法刷数据</p>
 
-<p>Stop : 在线暂停通道队列数据消费,消费协程不退出, Status 会修改为 stop</p>
+<h4 id="5-重启bifrost-会看到如下数据">5. 重启Bifrost,会看到如下数据:</h4>
 
-<p>Close : 完全关闭队列的消费者,退出消费者协程. Status 个性为 close</p>
+<pre><code>2019/04/19 20:33:37 myTest SchemaName: bifrost_test TableName: bristol_performance_test blackhole blackhole ToServer consume_to_server  start
+2019/04/19 20:33:37 myTest SchemaName: bifrost_test TableName: bristol_performance_test blackhole blackhole ToServer consume_to_server  start
+2019/04/19 20:33:49 consume_to_server: blackhole blackhole 3  start no data
+2019/04/19 20:33:49 consume_to_server: blackhole blackhole 1  start no data
+</code></pre>
 
-<p>Start : 在 stop 或者 close 状态下, 点击 Start 按钮后 ,会进行恢复消费队列数据的能力,状态修改为 running</p>
-
-<p>2). 在线通道添加</p>
-
-<p>channel_name : 通道的名字</p>
-
-<p>CosumerCount : 通道队列消费者的数量,如果数据需要顺序,请设置为 1</p>
-
-<p>3). 其他字段解析</p>
-
-<p>CurrentThreadNum : 当前有多少个消费者正在运行</p>
-
-<p>Status : 当前通道状态, running 正在运行, stop 暂停 , close 关闭</p>
+<p>start no data 的时间 减去 consume_to_server  start 的时候再减去 5秒 就是真正同步数据的时间</p>
 <div class="edit-meta">
-Last updated on 23 Nov 2018
+Last updated on 3 Dec 2019
 
 
 <br>
-Published on 23 Nov 2018
-<br><a href="https://github.com/brokercap/brokercap.github.io/edit/master/content/channel/_index.md" class="edit-page"><i class="fas fa-pen-square"></i> Edit on GitHub</a></div><nav class="pagination"><a class="nav nav-prev" href="/syncdata/sync_history_config/" title="全量任务配置"><i class="fas fa-arrow-left" aria-hidden="true"></i> Prev - 全量任务配置</a>
-<a class="nav nav-next" href="/flow/" title="流量">Next - 流量 <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+Published on 3 Dec 2019
+<br><a href="https://github.com/brokercap/brokercap.github.io/edit/master/content/other/performanceTest/_index.md" class="edit-page"><i class="fas fa-pen-square"></i> Edit on GitHub</a></div><nav class="pagination"><a class="nav nav-prev" href="/other/contact_us/" title="联系我们"><i class="fas fa-arrow-left" aria-hidden="true"></i> Prev - 联系我们</a>
+<a class="nav nav-next" href="/other/performancetest/testresult_1/" title="Mac 测试结果 1">Next - Mac 测试结果 1 <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
 </nav><footer><p class="powered">Powered by <a href="https://gohugo.io">Hugo</a>. Theme by <a href="https://themes.gohugo.io/hugo-theme-techdoc/">TechDoc</a>. Designed by <a href="https://github.com/thingsym/hugo-theme-techdoc">Thingsym</a>.</p>
 </footer>
 </main><div class="sidebar">
@@ -165,7 +155,7 @@ Published on 23 Nov 2018
   
 </li>
 
-<li class="parent active"><a href="/channel/">通道</a>
+<li class=""><a href="/channel/">通道</a>
   
 </li>
 
@@ -191,7 +181,7 @@ Published on 23 Nov 2018
   
 </li>
 
-<li class=""><a href="/other/">其他</a>
+<li class="parent"><a href="/other/">其他</a>
   
 <ul class="sub-menu">
 <li class=""><a href="/other/how_used/">使用手册</a></li>
@@ -199,7 +189,7 @@ Published on 23 Nov 2018
 <li class=""><a href="/other/cluster_why_not/">Bifrost 为什么还不支持集群?</a></li>
 <li class=""><a href="/other/cluster_may_design/">Bifrost 集群设想</a></li>
 
-<li class=""><a href="/other/performancetest/">性能测试</a>
+<li class="parent active"><a href="/other/performancetest/">性能测试</a>
   
 <ul class="sub-menu">
 <li class=""><a href="/other/performancetest/testresult_1/">Mac 测试结果 1</a></li>
