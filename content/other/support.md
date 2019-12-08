@@ -39,3 +39,16 @@ toserver_queue_size=10000
 3). 检查同步到目标库性能否扛得住
 
 - - -
+
+##### 3. Bifrost 管理界面显示内存比较大
+
+Bifrost 显示的是最大使用过多少内存,并不是当前 Bifrost 进程占了多少内存,这个内存显示只能参考
+
+Bifrost 实现内存使用情况,请使用top命令查看
+
+```
+top -p Bifrost进程PID
+
+```
+
+top 命令中 RES 列显示的内在则为 实际使用内存大小

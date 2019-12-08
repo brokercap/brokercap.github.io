@@ -30,7 +30,7 @@ Binlog_Ignore_DB:
 如果 bifrost_test 库 和 bristol_performance_test 表不存在的情况下会自动创建 
 
 ```
-/BristolPerformanceTest -count 100000 -u root  -P 3306 -conndb test -schema bifrost_test -table bristol_performance_test -onlydata true
+./BristolPerformanceTest -count 100000 -u root  -P 3306 -conndb test -schema bifrost_test -table bristol_performance_test -onlydata true
 ```
 
 
