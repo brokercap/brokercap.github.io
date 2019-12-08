@@ -1,6 +1,6 @@
 ---
 title: "性能测试"
-lastmod: 2019-12-03T23:00:15Z
+publishdate: 2019-12-03T23:00:15Z
 draft: false
 weight: 110
 ---
@@ -9,7 +9,7 @@ weight: 110
 
 ### Bristol性能测试
 
-[Bristol性能测试工具文档](https://github.com/brokercap/Bifrost/tree/master/Bristol/test/BristolPerformanceTest)
+[Bristol性能测试工具文档](https://github.com/brokercap/Bifrost/tree/master/Bristol/test/ v)
 
 ### Bifrost性能测试
 

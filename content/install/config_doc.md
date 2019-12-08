@@ -6,7 +6,7 @@ weight: 13
 ---
 
 
-**Bifrost** 默认配置路径在 Bifrost 运行目录下的 etc/config.ini
+**Bifrost** 默认配置路径在 Bifrost 运行目录下的 etc/Bifrost.ini
 
 ```
 [user]
