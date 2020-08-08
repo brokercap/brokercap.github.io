@@ -43,8 +43,10 @@
 <li><a href="http://www.xbifrost.com">首页</a></li>
 <li><a href="https://github.com/brokercap/Bifrost">Github</a></li>
 <li><a href="https://gitee.com/jc3wish/Bifrost">Gitee</a></li>
+<li><a href="https://github.com/brokercap/Bifrost/blob/master/changelog.txt">版本差异</a></li>
 <li><a href="https://jc3wish.github.io">作者博客</a></li>
-<li><a href="/other/contact_us/">联系我们</a></li></ul>
+<li><a href="/other/contact_us/">联系我们</a></li>
+<li><a href="/other/donate/">捐赠</a></li></ul>
 </nav>
 </div>
 <div class="content-container">
@@ -84,7 +86,13 @@ binlog_field_http_plugin_test ADD Result:success
 
 <h4 id="2-批量设置多个表以同样的配置同步到同一个目标库">2. 批量设置多个表以同样的配置同步到同一个目标库</h4>
 
+<h5 id="2-1-不同表结构的表">2.1 不同表结构的表</h5>
+
 <p><img src="/images/syncData/tableSyncAddBatch_1.jpg" alt="image" /></p>
+
+<p>不同表结构的表,批量配置同步到同一个目标库,取决于插件的实现是否支持,Kafka,http,Redis 等没有数据结构要求的表,是支持</p>
+
+<p>请查看相关插件,是否支持不同表结构的表批量配置</p>
 
 <p>1). 选中要批量设置同步表的 check 框 (必须绑定了同步的表才有生效,没绑定通道的表 无效)</p>
 
@@ -102,6 +110,30 @@ bristol_performance_test success
 
 执行完成
 </code></pre>
+
+<h5 id="2-2-进行横拆的表-数据结构相同-有规律的表名的表">2.2 进行横拆的表,数据结构相同,有规律的表名的表</h5>
+
+<p>Bifrost V1.4 版本之后支持将多个相同表结构的表,统一配置同步,并且后续新增的表,也自动匹配</p>
+
+<p><img src="/images/syncData/tableMathingSyncAddBatch_1.png" alt="image" /></p>
+
+<p>假如横拆的表全名规则 是 表名_1,表名_2 这样的规则</p>
+
+<p>例如:  binlog_field_test_1,binlog_field_test_2,binlog_field_test_3</p>
+
+<p>1). 点击其中一个表的ADD按钮</p>
+
+<p>2). 将 FuzzyMatching 选项修改为 YES</p>
+
+<p>3). 修改 TableName 为 binlog_field<em>test</em>*</p>
+
+<p>4). 选择通道</p>
+
+<p>5). 点击 添加 按钮</p>
+
+<p>添加完之后,在表列表末尾将会出现一个 binlog_field<em>test</em>* 虚拟表名,可以对这个虚拟表,进行设置同步</p>
+
+<p><img src="/images/syncData/tableMathingSyncAddBatch_2.png" alt="image" /></p>
 
 <h4 id="3-设置所有库或者某个库所有表同步到同一个目标库">3. 设置所有库或者某个库所有表同步到同一个目标库</h4>
 
@@ -147,7 +179,7 @@ bristol_performance_test success
 
 <p>4). 假如配置的时候,使用了 {$id} 这样的字段名标签 , 假如源表里没有这样的字段,将会转换成&rdquo;&rdquo;</p>
 <div class="edit-meta">
-Last updated on 27 Nov 2019
+Last updated on 8 Aug 2020
 
 
 <br><a href="https://github.com/brokercap/brokercap.github.io/edit/master/content/syncData/sync_batch.md" class="edit-page"><i class="fas fa-pen-square"></i> Edit on GitHub</a></div><nav class="pagination"><a class="nav nav-prev" href="/syncdata/sync_config/" title="数据表同步配置"><i class="fas fa-arrow-left" aria-hidden="true"></i> Prev - 数据表同步配置</a>
@@ -252,6 +284,7 @@ Last updated on 27 Nov 2019
 <li class=""><a href="/other/web_api/">API接口</a></li>
 <li class=""><a href="/other/support/">Bifrost 运维</a></li>
 <li class=""><a href="/other/contact_us/">联系我们</a></li>
+<li class=""><a href="/other/donate/">捐赠</a></li>
 </ul>
   
 </li>

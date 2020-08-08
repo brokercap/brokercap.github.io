@@ -43,8 +43,10 @@
 <li><a href="http://www.xbifrost.com">首页</a></li>
 <li><a href="https://github.com/brokercap/Bifrost">Github</a></li>
 <li><a href="https://gitee.com/jc3wish/Bifrost">Gitee</a></li>
+<li><a href="https://github.com/brokercap/Bifrost/blob/master/changelog.txt">版本差异</a></li>
 <li><a href="https://jc3wish.github.io">作者博客</a></li>
-<li><a href="/other/contact_us/">联系我们</a></li></ul>
+<li><a href="/other/contact_us/">联系我们</a></li>
+<li><a href="/other/donate/">捐赠</a></li></ul>
 </nav>
 </div>
 <div class="content-container">
@@ -57,7 +59,7 @@
 
 <li><p>数据源关闭(包括手动close或者因binlog解析致命性原因解析失败造成的close等)</p></li>
 
-<li><p>数据同步到目标库,同一条数据连接发送 15 次(包括连接不上目标库等原因)</p></li>
+<li><p>数据同步到目标库,同一条数据超过30秒没有同步成功(包括连接不上目标库等原因)</p></li>
 </ol>
 
 <h4 id="数据恢复">数据恢复</h4>
@@ -67,7 +69,7 @@
 
 <li><p>数据源因网络原因连接断开重试连接恢复后</p></li>
 
-<li><p>当一条数据同步到目标库连续15次失败已经报警出来之后,继续重试恢复成功之后</p></li>
+<li><p>当一条数据同步到目标库超过30秒没有同步成功并且已报警出来之后,继续重试恢复成功之后</p></li>
 </ol>
 <div class="edit-meta">
 Last updated on 28 Nov 2019
@@ -175,6 +177,7 @@ Last updated on 28 Nov 2019
 <li class=""><a href="/other/web_api/">API接口</a></li>
 <li class=""><a href="/other/support/">Bifrost 运维</a></li>
 <li class=""><a href="/other/contact_us/">联系我们</a></li>
+<li class=""><a href="/other/donate/">捐赠</a></li>
 </ul>
   
 </li>

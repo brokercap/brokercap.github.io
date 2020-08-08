@@ -4,7 +4,7 @@
   
   <url>
     <loc>http://wiki.xbifrost.com/</loc>
-    <lastmod>2019-11-23T15:32:15+00:00</lastmod>
+    <lastmod>2020-08-08T19:00:15+00:00</lastmod>
   </url>
   
   <url>
@@ -29,7 +29,7 @@
   
   <url>
     <loc>http://wiki.xbifrost.com/syncdata/</loc>
-    <lastmod>2019-11-23T15:32:15+00:00</lastmod>
+    <lastmod>2020-08-08T17:56:15+00:00</lastmod>
   </url>
   
   <url>
@@ -48,13 +48,12 @@
   </url>
   
   <url>
-    <loc>http://wiki.xbifrost.com/install/install_binary/</loc>
-    <lastmod>2019-12-03T22:25:15+00:00</lastmod>
+    <loc>http://wiki.xbifrost.com/warning/</loc>
+    <lastmod>2018-11-28T21:49:15+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://wiki.xbifrost.com/warning/</loc>
-    <lastmod>2018-11-28T21:49:15+00:00</lastmod>
+    <loc>http://wiki.xbifrost.com/install/install_binary/</loc>
   </url>
   
   <url>
@@ -94,12 +93,12 @@
   
   <url>
     <loc>http://wiki.xbifrost.com/syncdata/sync_config/</loc>
-    <lastmod>2019-11-23T15:30:15+00:00</lastmod>
+    <lastmod>2020-08-08T18:32:15+00:00</lastmod>
   </url>
   
   <url>
     <loc>http://wiki.xbifrost.com/syncdata/sync_batch/</loc>
-    <lastmod>2019-11-27T21:05:15+00:00</lastmod>
+    <lastmod>2020-08-08T18:31:15+00:00</lastmod>
   </url>
   
   <url>
@@ -180,6 +179,11 @@
   <url>
     <loc>http://wiki.xbifrost.com/other/contact_us/</loc>
     <lastmod>2019-12-05T22:52:15+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://wiki.xbifrost.com/other/donate/</loc>
+    <lastmod>2020-08-08T18:38:18+00:00</lastmod>
   </url>
   
   <url>

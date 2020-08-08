@@ -6,7 +6,7 @@
     <description>Recent content in 前言 on Bifrost Document</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 23 Nov 2019 15:32:15 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 08 Aug 2020 19:00:15 +0000</lastBuildDate>
     
 	<atom:link href="http://wiki.xbifrost.com/index.xml" rel="self" type="application/rss+xml" />
     
@@ -23,10 +23,10 @@
     <item>
       <title>二进制安装</title>
       <link>http://wiki.xbifrost.com/install/install_binary/</link>
-      <pubDate>Tue, 03 Dec 2019 22:25:15 +0000</pubDate>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>http://wiki.xbifrost.com/install/install_binary/</guid>
-      <description>二进制包安装，不用安装 go 语言环境，下载二进制包可修改配置可直接运行 下载二进制包 以v1.1.0-release linux版本为例 wget https://github.com/jc3wish/Bifrost/releases/download/v1.1.0-release/linux.zip unzip linux.zip mv ./linux ./Bifrost_v1.1.0-release</description>
+      <description>二进制包安装，不用安装 go 语言环境，下载二进制包可修改配置可直接运行 下载二进制包 以v1.3.2-release linux版本为例 wget https://github.com/jc3wish/Bifrost/releases/download/v1.3.2-release/linux.zip unzip linux.zip mv ./linux ./Bifrost_v1.3.2-release</description>
     </item>
     
     <item>
@@ -86,7 +86,7 @@
     <item>
       <title>数据表同步配置</title>
       <link>http://wiki.xbifrost.com/syncdata/sync_config/</link>
-      <pubDate>Sat, 23 Nov 2019 15:30:15 +0000</pubDate>
+      <pubDate>Sat, 08 Aug 2020 18:32:15 +0000</pubDate>
       
       <guid>http://wiki.xbifrost.com/syncdata/sync_config/</guid>
       <description>一. 配置过程 选择要同步的数据库 绑定表和通道的关系 选择数据表(只有ADD按钮 绑定了表和通道的关系之后才能选择) 选择这个表的数据要同步到哪一个目</description>
@@ -95,7 +95,7 @@
     <item>
       <title>批量同步配置</title>
       <link>http://wiki.xbifrost.com/syncdata/sync_batch/</link>
-      <pubDate>Wed, 27 Nov 2019 21:05:15 +0000</pubDate>
+      <pubDate>Sat, 08 Aug 2020 18:31:15 +0000</pubDate>
       
       <guid>http://wiki.xbifrost.com/syncdata/sync_batch/</guid>
       <description>批量配置的使用场景: 有多个表要设置以同样的配置需要同步同一个 目标库里去 要设置整个所有库或者某一个库里的所有表,包括以后新增的表同步到kafk</description>
@@ -161,7 +161,7 @@
       <pubDate>Thu, 28 Nov 2019 22:59:15 +0000</pubDate>
       
       <guid>http://wiki.xbifrost.com/warning/rule/</guid>
-      <description>报警 数据源连接失败 数据源关闭(包括手动close或者因binlog解析致命性原因解析失败造成的close等) 数据同步到目标库,同一条数据连接</description>
+      <description>报警 数据源连接失败 数据源关闭(包括手动close或者因binlog解析致命性原因解析失败造成的close等) 数据同步到目标库,同一条数据超过</description>
     </item>
     
     <item>
@@ -216,6 +216,15 @@
       
       <guid>http://wiki.xbifrost.com/other/contact_us/</guid>
       <description></description>
+    </item>
+    
+    <item>
+      <title>捐赠</title>
+      <link>http://wiki.xbifrost.com/other/donate/</link>
+      <pubDate>Sat, 08 Aug 2020 18:38:18 +0000</pubDate>
+      
+      <guid>http://wiki.xbifrost.com/other/donate/</guid>
+      <description>捐赠 感谢大家的支持 在捐赠的时候,请大家备注一下是Bifrost捐赠,及 您的名字(昵称也可).</description>
     </item>
     
     <item>

@@ -6,7 +6,7 @@
     <description>Recent content in 数据同步配置 on Bifrost Document</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 23 Nov 2019 15:32:15 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 08 Aug 2020 17:56:15 +0000</lastBuildDate>
     
 	<atom:link href="http://wiki.xbifrost.com/syncdata/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,7 +14,7 @@
     <item>
       <title>数据表同步配置</title>
       <link>http://wiki.xbifrost.com/syncdata/sync_config/</link>
-      <pubDate>Sat, 23 Nov 2019 15:30:15 +0000</pubDate>
+      <pubDate>Sat, 08 Aug 2020 18:32:15 +0000</pubDate>
       
       <guid>http://wiki.xbifrost.com/syncdata/sync_config/</guid>
       <description>一. 配置过程 选择要同步的数据库 绑定表和通道的关系 选择数据表(只有ADD按钮 绑定了表和通道的关系之后才能选择) 选择这个表的数据要同步到哪一个目</description>
@@ -23,7 +23,7 @@
     <item>
       <title>批量同步配置</title>
       <link>http://wiki.xbifrost.com/syncdata/sync_batch/</link>
-      <pubDate>Wed, 27 Nov 2019 21:05:15 +0000</pubDate>
+      <pubDate>Sat, 08 Aug 2020 18:31:15 +0000</pubDate>
       
       <guid>http://wiki.xbifrost.com/syncdata/sync_batch/</guid>
       <description>批量配置的使用场景: 有多个表要设置以同样的配置需要同步同一个 目标库里去 要设置整个所有库或者某一个库里的所有表,包括以后新增的表同步到kafk</description>
