@@ -17,9 +17,9 @@ enableMissingTranslationPlaceholders = false
 [Params]
 
     # Souce Code repository section
-    description = "Bifrost ---- 面向生产环境的 MySQL 同步到 Redis,MongoDB 等服务的异构中间件"
+    description = "Bifrost ---- 面向生产环境的 MySQL 同步到 Redis,MongoDB,ClickHouse 等服务的异构中间件"
     github_repository = "https://github.com/brokercap/Bifrost"
-    version = "1.1.0"
+    version = "1.4.0"
 
     # Documentation repository section
     # documentation repository (set edit link to documentation repository)

@@ -1,11 +1,11 @@
 ---
 title: "前言"
-publishdate: 2020-08-08T19:00:15Z
+publishdate: "2020-08-07T21:49:15Z"
 draft: false
 weight: 1
 ---
 
-## Bifrost ---- 面向生产环境的 MySQL 同步到 Redis,MongoDB 等服务的异构中间件
+## Bifrost ---- 面向生产环境的 MySQL 同步到 Redis,MongoDB,ClickHouse 等服务的异构中间件
 
 
 *Bifrost* 是一个可以通过界面配置,将 MySQL 数据库中的数据异构的方式同步到Redis,Mongodb,RabbitMQ等甚至自定义RPC服务里的 *简单 高效* 的 异构中间件 .
