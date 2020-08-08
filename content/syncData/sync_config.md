@@ -1,6 +1,6 @@
 ---
 title: "数据表同步配置"
-lastmod: 2019-11-23T15:30:15Z
+lastmod: 2020-08-08T18:32:15Z
 draft: false
 weight: 51
 ---
@@ -30,6 +30,8 @@ weight: 51
 #### 2. 绑定表和通道的关系
 
 ![image](/images/syncData/tableSyncAdd_2.jpg)
+
+横拆的分表,批量配置, 请参考 [批量配置同步](/syncData/sync_batch/)
 
 
 #### 3. 选择数据表及配置同步

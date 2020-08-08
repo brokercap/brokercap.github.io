@@ -70,12 +70,22 @@ enableMissingTranslationPlaceholders = false
     weight = 3
 
 [[menu.main]]
+    name = "版本差异"
+    url = "https://github.com/brokercap/Bifrost/blob/master/changelog.txt"
+    weight = 4
+
+[[menu.main]]
     name = "作者博客"
     url = "https://jc3wish.github.io"
-    weight = 4
+    weight = 5
 
 [[menu.main]]
     name = "联系我们"
     url = "/other/contact_us/"
-    weight = 5
+    weight = 6
+
+[[menu.main]]
+    name = "捐赠"
+    url = "/other/donate/"
+    weight = 7
 

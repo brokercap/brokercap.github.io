@@ -1,6 +1,6 @@
 ---
 title: "批量同步配置"
-lastmod: 2019-11-27T21:05:15Z
+lastmod: 2020-08-08T18:31:15Z
 draft: false
 weight: 52
 ---
@@ -41,7 +41,14 @@ binlog_field_http_plugin_test ADD Result:success
 
 #### 2. 批量设置多个表以同样的配置同步到同一个目标库
 
+##### 2.1 不同表结构的表
+
 ![image](/images/syncData/tableSyncAddBatch_1.jpg)
+
+不同表结构的表,批量配置同步到同一个目标库,取决于插件的实现是否支持,Kafka,http,Redis 等没有数据结构要求的表,是支持
+
+请查看相关插件,是否支持不同表结构的表批量配置
+
 
 1). 选中要批量设置同步表的 check 框 (必须绑定了同步的表才有生效,没绑定通道的表 无效)
 
@@ -60,6 +67,31 @@ bristol_performance_test success
 
 执行完成
 ```
+
+##### 2.2 进行横拆的表,数据结构相同,有规律的表名的表
+
+Bifrost V1.4 版本之后支持将多个相同表结构的表,统一配置同步,并且后续新增的表,也自动匹配
+
+![image](/images/syncData/tableMathingSyncAddBatch_1.png)
+
+假如横拆的表全名规则 是 表名_1,表名_2 这样的规则
+
+例如:  binlog_field_test_1,binlog_field_test_2,binlog_field_test_3
+
+1). 点击其中一个表的ADD按钮
+
+2). 将 FuzzyMatching 选项修改为 YES
+
+3). 修改 TableName 为 binlog_field_test_*
+
+4). 选择通道
+
+5). 点击 添加 按钮
+
+添加完之后,在表列表末尾将会出现一个 binlog_field_test_* 虚拟表名,可以对这个虚拟表,进行设置同步
+
+![image](/images/syncData/tableMathingSyncAddBatch_2.png)
+
 
 
 #### 3. 设置所有库或者某个库所有表同步到同一个目标库

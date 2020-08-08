@@ -1,6 +1,6 @@
 ---
 title: "二进制安装"
-lastmod: 2019-12-03T22:25:15Z
+lastmod: 2020-08-008T19:12:15Z
 draft: false
 weight: 12
 ---
@@ -11,16 +11,16 @@ weight: 12
 
 下载二进制包
 
-以v1.1.0-release linux版本为例
+以v1.3.2-release linux版本为例
 
 ```
-wget https://github.com/jc3wish/Bifrost/releases/download/v1.1.0-release/linux.zip
+wget https://github.com/jc3wish/Bifrost/releases/download/v1.3.2-release/linux.zip
 
 unzip linux.zip 
 
-mv ./linux ./Bifrost_v1.1.0-release
+mv ./linux ./Bifrost_v1.3.2-release
 
-cd ./Bifrost_v1.1.0-release
+cd ./Bifrost_v1.3.2-release
 
 chmod a+x ./Bifrost ./Bifrost-server
 

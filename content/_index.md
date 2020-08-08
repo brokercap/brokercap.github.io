@@ -1,6 +1,6 @@
 ---
 title: "前言"
-publishdate: 2019-11-23T15:32:15Z
+publishdate: 2020-08-08T19:00:15Z
 draft: false
 weight: 1
 ---
@@ -102,7 +102,7 @@ make install prefix=./target
 ##### 二进制文件安装
 `````sh
 
-wget https://github.com/brokercap/Bifrost/releases/download/v1.1.x-release/linux.zip
+wget https://github.com/brokercap/Bifrost/releases/download/v1.3.2-release/linux.zip
 
 unzip linux.zip
 
