@@ -3,11 +3,11 @@
 <head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<title>全量任务配置 - Bifrost Document</title>
+<title>文件队列 - Bifrost Document</title>
 <meta name="description" content="Bifrost ---- 面向生产环境的 MySQL 同步到 Redis,MongoDB,ClickHouse 等服务的异构中间件">
 <meta name="generator" content="Hugo 0.59.1" />
 <link href="http://wiki.xbifrost.com/index.xml" rel="alternate" type="application/rss+xml">
-<link rel="canonical" href="http://wiki.xbifrost.com/syncdata/sync_history_config/">
+<link rel="canonical" href="http://wiki.xbifrost.com/filequeue/">
 <link rel="stylesheet" href="http://wiki.xbifrost.com/css/theme.min.css">
 
 <link rel="stylesheet" href="http://wiki.xbifrost.com/css/chroma.min.css">
@@ -50,89 +50,46 @@
 </nav>
 </div>
 <div class="content-container">
-<main><h1>全量任务配置</h1>
+<main><h1>文件队列</h1>
 
-<p>全量任务同步 是建立在  表配置同步到目标库  之上</p>
+<h4 id="bifrsot-diagram"><em>Bifrsot</em> Diagram</h4>
 
-<p>假如没有 配置表同步到目标库 则不能配置全量同步</p>
+<p><img src="/images/diagram.png" alt="image" /></p>
 
-<h3 id="配置过程">配置过程</h3>
+<p>Bifrsot 架构中采用了 通道队列缓存 , 同步队列缓存 两层队列缓存来实现 一个 Binlog 解析, 各个同步配置同时进行同步</p>
 
-<h4 id="1-点击-刷全量数据-按钮">1. 点击 刷全量数据 按钮</h4>
+<p>但是由于只有一个 Binlog , 多个地方都用到数据,那就存在一个可能,某一个同步出问题了, 然后就造成了,Binlog 解析阻塞,间接着影响了其他同步延时</p>
 
-<p><img src="/images/syncData/tableSync_history_add_1.jpg" alt="image" /></p>
+<p>在 <em>Bifrost v1.2.1</em> 版本开始 , Bifrost 新增了一个文件队列功能,在同步出现阻塞的时候,自动启动文件队列,并不影响 Binlog 解析</p>
 
-<h4 id="2-配置查询全量数据的条件">2. 配置查询全量数据的条件</h4>
+<h4 id="文件队列配置">文件队列配置</h4>
 
-<p><img src="/images/syncData/tableSync_history_add_2.jpg" alt="image" /></p>
+<pre><code>#是否开启文件队列功能 true|false
+file_queue_usable=true
 
-<p><em>字段解析</em></p>
+#统计是否启文件队列的时间，单位毫秒
+file_queue_usable_count_time_diff=5000
 
-<p>Where : 支持写 where 条件 ,比如  update_time &gt;= &lsquo;2019-11-23 00:00:00&rsquo; AND user_id = 100</p>
+#file_queue_usable_count_time_diff 时间内内存队列被挤满的次数
+file_queue_usable_count=10
 
-<p>ThreadNum : 开启多少个连接同步进行 SELECT 语句查询</p>
+</code></pre>
 
-<p>ThreadCountPer : 每次 SELECT 查询多少条数据</p>
+<p>可以通过 file_queue_usable 控制,是否自动文件队列,如果这个 配置 为 false 的时候,不管情况 下都不会启用文件队列的</p>
 
-<p>ToServer : 选择此次刷全量数据,需要刷到哪些目标库里去</p>
+<p>默认自动启用条件</p>
 
-<h4 id="3-点击保存">3. 点击保存</h4>
+<p>5000ms 的时间里,每次往队列写入数据,连续10次,内存队列都是满了的情况</p>
 
-<p>假如写的 where 条件有问题,则会提示 错误 ,保存不了</p>
-
-<h4 id="4-保存成功之后-提示成功-并点击确认跳转到-全量任务列表">4. 保存成功之后 提示成功,并点击确认跳转到 全量任务列表</h4>
-
-<h4 id="5-点击-start-按钮">5. 点击 start 按钮</h4>
-
-<h4 id="6-全量任务-列表查询">6. 全量任务 列表查询</h4>
-
-<p>DbName : 数据源名称</p>
-
-<p>SchemaName : 数据库名</p>
-
-<p>TableName : 表名</p>
-
-<h5 id="property-连接配置同步">Property : 连接配置同步</h5>
-
-<p>1). ThreadNum : 几个连接</p>
-
-<p>2). ThreadCountPer : 每个连接每次最多查询几条数据</p>
-
-<p>3). Where : where 条件</p>
-
-<p>NowStartI : 下一次查询从第几条数据开始</p>
-
-<h5 id="threadpool-连接池的查询情况">ThreadPool : 连接池的查询情况</h5>
-
-<p>1). Num : 第几个连接</p>
-
-<p>2). NowStartI : 当前连接是从第几条数据开始查询 ,LIMIT N,100 中的 N</p>
-
-<p>3). Error : 查询过程中遇到的错误信息</p>
-
-<p>ToServerIDList : 同步到哪些目标库</p>
-
-<p>StartTime : 开始时间</p>
-
-<p>OverTime : 结束时间,整个全量查询所用的时间,这个时间 并不代表是整个表的数据已经同步到了目标库,只是从表中查询出来,放已提交给了同步的队列中去</p>
-
-<h5 id="status-全量任务的状态">Status : 全量任务的状态</h5>
-
-<p>1). close : 关闭</p>
-
-<p>2). running : 正在查询</p>
-
-<p>3). halfway : 查询过程中,有连接中途出错了</p>
-
-<p>4). over : 查询结束</p>
-
-<p>5). killed : 查询的过程中被stop掉了</p>
+<p>文件队列,是按表的同步配置为单位启动的,也就是说,假如一个表配置了 10 个同步, 其中第一个配置同步是同步到 Redis, 在这个同步到 Redis 的同步中同步慢了,出现了内存队列阻塞的情况下,则启用一个文件队列,用于缓冲 同步到当前这个表同步到 Redis</p>
 <div class="edit-meta">
-Last updated on 23 Nov 2019
+Last updated on 11 Aug 2020
 
 
-<br><a href="https://github.com/brokercap/brokercap.github.io/edit/master/content/syncData/sync_history_config.md" class="edit-page"><i class="fas fa-pen-square"></i> Edit on GitHub</a></div><nav class="pagination"><a class="nav nav-prev" href="/syncdata/sync_list/" title="同步列表字段解析"><i class="fas fa-arrow-left" aria-hidden="true"></i> Prev - 同步列表字段解析</a>
-<a class="nav nav-next" href="/filequeue/" title="文件队列">Next - 文件队列 <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+<br>
+Published on 11 Aug 2020
+<br><a href="https://github.com/brokercap/brokercap.github.io/edit/master/content/filequeue/_index.md" class="edit-page"><i class="fas fa-pen-square"></i> Edit on GitHub</a></div><nav class="pagination"><a class="nav nav-prev" href="/syncdata/sync_history_config/" title="全量任务配置"><i class="fas fa-arrow-left" aria-hidden="true"></i> Prev - 全量任务配置</a>
+<a class="nav nav-next" href="/filequeue/stroage/" title="文件存储">Next - 文件存储 <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
 </nav><footer><p class="powered">Powered by <a href="https://gohugo.io">Hugo</a>. Theme by <a href="https://themes.gohugo.io/hugo-theme-techdoc/">TechDoc</a>. Designed by <a href="https://github.com/thingsym/hugo-theme-techdoc">Thingsym</a>.</p>
 </footer>
 </main><div class="sidebar">
@@ -178,18 +135,18 @@ Last updated on 23 Nov 2019
   
 </li>
 
-<li class="parent"><a href="/syncdata/">数据同步配置</a>
+<li class=""><a href="/syncdata/">数据同步配置</a>
   
 <ul class="sub-menu">
 <li class=""><a href="/syncdata/sync_config/">数据表同步配置</a></li>
 <li class=""><a href="/syncdata/sync_batch/">批量同步配置</a></li>
 <li class=""><a href="/syncdata/sync_list/">同步列表字段解析</a></li>
-<li class="active"><a href="/syncdata/sync_history_config/">全量任务配置</a></li>
+<li class=""><a href="/syncdata/sync_history_config/">全量任务配置</a></li>
 </ul>
   
 </li>
 
-<li class=""><a href="/filequeue/">文件队列</a>
+<li class="parent active"><a href="/filequeue/">文件队列</a>
   
 <ul class="sub-menu">
 <li class=""><a href="/filequeue/stroage/">文件存储</a></li>

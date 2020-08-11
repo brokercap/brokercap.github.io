@@ -50,7 +50,14 @@
 </nav>
 </div>
 <div class="content-container">
-<main><h1>数据同步配置</h1><div class="edit-meta">
+<main><h1>数据同步配置</h1><p>在添加了数据源及目标库之后 ,就是配置 哪些数据表要以什么方式同步到哪些目标库</p>
+
+<p>一个表的数据支持同时同步到多个目标库,并且 在 v1.4 版本之后支持模糊匹配规则 ,支持 同数据结构的表同步到同一个目标库配置</p>
+
+<p>从数据源列表里的 Setting 按钮 进入配置数据表同步的界面</p>
+
+<p><img src="/images/syncData/syncData_1.jpg" alt="image" /></p>
+<div class="edit-meta">
 Last updated on 8 Aug 2020
 
 
@@ -110,6 +117,17 @@ Published on 8 Aug 2020
 <li class=""><a href="/syncdata/sync_batch/">批量同步配置</a></li>
 <li class=""><a href="/syncdata/sync_list/">同步列表字段解析</a></li>
 <li class=""><a href="/syncdata/sync_history_config/">全量任务配置</a></li>
+</ul>
+  
+</li>
+
+<li class=""><a href="/filequeue/">文件队列</a>
+  
+<ul class="sub-menu">
+<li class=""><a href="/filequeue/stroage/">文件存储</a></li>
+<li class=""><a href="/filequeue/write/">数据写入</a></li>
+<li class=""><a href="/filequeue/consumer/">数据消费</a></li>
+<li class=""><a href="/filequeue/restart/">服务重启</a></li>
 </ul>
   
 </li>

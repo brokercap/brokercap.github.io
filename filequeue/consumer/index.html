@@ -3,11 +3,11 @@
 <head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<title>全量任务配置 - Bifrost Document</title>
+<title>数据消费 - Bifrost Document</title>
 <meta name="description" content="Bifrost ---- 面向生产环境的 MySQL 同步到 Redis,MongoDB,ClickHouse 等服务的异构中间件">
 <meta name="generator" content="Hugo 0.59.1" />
 <link href="http://wiki.xbifrost.com/index.xml" rel="alternate" type="application/rss+xml">
-<link rel="canonical" href="http://wiki.xbifrost.com/syncdata/sync_history_config/">
+<link rel="canonical" href="http://wiki.xbifrost.com/filequeue/consumer/">
 <link rel="stylesheet" href="http://wiki.xbifrost.com/css/theme.min.css">
 
 <link rel="stylesheet" href="http://wiki.xbifrost.com/css/chroma.min.css">
@@ -50,89 +50,45 @@
 </nav>
 </div>
 <div class="content-container">
-<main><h1>全量任务配置</h1>
+<main><h1>数据消费</h1>
 
-<p>全量任务同步 是建立在  表配置同步到目标库  之上</p>
+<p>在同步配置中标记为文件队列已启动,并且当前内存队列大小为 0 的时候,会自动从文件队列中加载数据</p>
 
-<p>假如没有 配置表同步到目标库 则不能配置全量同步</p>
+<h4 id="消费过程">消费过程</h4>
 
-<h3 id="配置过程">配置过程</h3>
+<ol>
+<li><p>每次从文件队列中读取一条数据,最多加载条数为 内存队列最大大小 - 1 ,加载出来后写入刷回到内存队列</p></li>
 
-<h4 id="1-点击-刷全量数据-按钮">1. 点击 刷全量数据 按钮</h4>
+<li><p>每次内存成功被同步一条数据后,往文件队列中 ack 一次数据</p></li>
 
-<p><img src="/images/syncData/tableSync_history_add_1.jpg" alt="image" /></p>
+<li><p>将所有文件队列数据处理完之后,标准文件队列功能关闭,后续的数据,直接进入内存队列</p></li>
+</ol>
 
-<h4 id="2-配置查询全量数据的条件">2. 配置查询全量数据的条件</h4>
+<h4 id="ack-过程">ACK 过程</h4>
 
-<p><img src="/images/syncData/tableSync_history_add_2.jpg" alt="image" /></p>
+<p>其实每次 ACK 并不是立马将这条数据从文件队列中删除,而是用于统计每个文件成功被处理了多少条数据</p>
 
-<p><em>字段解析</em></p>
+<ol>
+<li><p>每次从文件中读取一条数据的时候,都会统计每个文件被读取了多少条数据</p></li>
 
-<p>Where : 支持写 where 条件 ,比如  update_time &gt;= &lsquo;2019-11-23 00:00:00&rsquo; AND user_id = 100</p>
+<li><p>在整个文件都被加载完之后,标记当前文件已经没有数据可加载了</p></li>
 
-<p>ThreadNum : 开启多少个连接同步进行 SELECT 语句查询</p>
+<li><p>每次 ACK 按文件加载的的顺序,进行标记 - 1,直到减为 0 ,并且文件标记是已加载完数据,则将整个文件删除</p></li>
+</ol>
 
-<p>ThreadCountPer : 每次 SELECT 查询多少条数据</p>
+<h4 id="小结">小结</h4>
 
-<p>ToServer : 选择此次刷全量数据,需要刷到哪些目标库里去</p>
+<p>因为文件写入和读取,都是有序的,可以保证被删除文件的时候,所以数据都已经被成功处理</p>
 
-<h4 id="3-点击保存">3. 点击保存</h4>
-
-<p>假如写的 where 条件有问题,则会提示 错误 ,保存不了</p>
-
-<h4 id="4-保存成功之后-提示成功-并点击确认跳转到-全量任务列表">4. 保存成功之后 提示成功,并点击确认跳转到 全量任务列表</h4>
-
-<h4 id="5-点击-start-按钮">5. 点击 start 按钮</h4>
-
-<h4 id="6-全量任务-列表查询">6. 全量任务 列表查询</h4>
-
-<p>DbName : 数据源名称</p>
-
-<p>SchemaName : 数据库名</p>
-
-<p>TableName : 表名</p>
-
-<h5 id="property-连接配置同步">Property : 连接配置同步</h5>
-
-<p>1). ThreadNum : 几个连接</p>
-
-<p>2). ThreadCountPer : 每个连接每次最多查询几条数据</p>
-
-<p>3). Where : where 条件</p>
-
-<p>NowStartI : 下一次查询从第几条数据开始</p>
-
-<h5 id="threadpool-连接池的查询情况">ThreadPool : 连接池的查询情况</h5>
-
-<p>1). Num : 第几个连接</p>
-
-<p>2). NowStartI : 当前连接是从第几条数据开始查询 ,LIMIT N,100 中的 N</p>
-
-<p>3). Error : 查询过程中遇到的错误信息</p>
-
-<p>ToServerIDList : 同步到哪些目标库</p>
-
-<p>StartTime : 开始时间</p>
-
-<p>OverTime : 结束时间,整个全量查询所用的时间,这个时间 并不代表是整个表的数据已经同步到了目标库,只是从表中查询出来,放已提交给了同步的队列中去</p>
-
-<h5 id="status-全量任务的状态">Status : 全量任务的状态</h5>
-
-<p>1). close : 关闭</p>
-
-<p>2). running : 正在查询</p>
-
-<p>3). halfway : 查询过程中,有连接中途出错了</p>
-
-<p>4). over : 查询结束</p>
-
-<p>5). killed : 查询的过程中被stop掉了</p>
+<p>由于 ACK 的时候并不是将这条数据删除掉,所以如果当前这个文件数据只被成功处理了一半,Bifrost 被重启了,下一次启动的时候,会从当前这个文件第一条数据开始处理</p>
 <div class="edit-meta">
-Last updated on 23 Nov 2019
+Last updated on 11 Aug 2020
 
 
-<br><a href="https://github.com/brokercap/brokercap.github.io/edit/master/content/syncData/sync_history_config.md" class="edit-page"><i class="fas fa-pen-square"></i> Edit on GitHub</a></div><nav class="pagination"><a class="nav nav-prev" href="/syncdata/sync_list/" title="同步列表字段解析"><i class="fas fa-arrow-left" aria-hidden="true"></i> Prev - 同步列表字段解析</a>
-<a class="nav nav-next" href="/filequeue/" title="文件队列">Next - 文件队列 <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+<br>
+Published on 11 Aug 2020
+<br><a href="https://github.com/brokercap/brokercap.github.io/edit/master/content/filequeue/consumer.md" class="edit-page"><i class="fas fa-pen-square"></i> Edit on GitHub</a></div><nav class="pagination"><a class="nav nav-prev" href="/filequeue/write/" title="数据写入"><i class="fas fa-arrow-left" aria-hidden="true"></i> Prev - 数据写入</a>
+<a class="nav nav-next" href="/filequeue/restart/" title="服务重启">Next - 服务重启 <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
 </nav><footer><p class="powered">Powered by <a href="https://gohugo.io">Hugo</a>. Theme by <a href="https://themes.gohugo.io/hugo-theme-techdoc/">TechDoc</a>. Designed by <a href="https://github.com/thingsym/hugo-theme-techdoc">Thingsym</a>.</p>
 </footer>
 </main><div class="sidebar">
@@ -178,23 +134,23 @@ Last updated on 23 Nov 2019
   
 </li>
 
-<li class="parent"><a href="/syncdata/">数据同步配置</a>
+<li class=""><a href="/syncdata/">数据同步配置</a>
   
 <ul class="sub-menu">
 <li class=""><a href="/syncdata/sync_config/">数据表同步配置</a></li>
 <li class=""><a href="/syncdata/sync_batch/">批量同步配置</a></li>
 <li class=""><a href="/syncdata/sync_list/">同步列表字段解析</a></li>
-<li class="active"><a href="/syncdata/sync_history_config/">全量任务配置</a></li>
+<li class=""><a href="/syncdata/sync_history_config/">全量任务配置</a></li>
 </ul>
   
 </li>
 
-<li class=""><a href="/filequeue/">文件队列</a>
+<li class="parent"><a href="/filequeue/">文件队列</a>
   
 <ul class="sub-menu">
 <li class=""><a href="/filequeue/stroage/">文件存储</a></li>
 <li class=""><a href="/filequeue/write/">数据写入</a></li>
-<li class=""><a href="/filequeue/consumer/">数据消费</a></li>
+<li class="active"><a href="/filequeue/consumer/">数据消费</a></li>
 <li class=""><a href="/filequeue/restart/">服务重启</a></li>
 </ul>
   
