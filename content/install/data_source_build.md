@@ -1,6 +1,6 @@
 ---
 title: "编译安装"
-lastmod: 2019-11-23T15:30:15Z
+lastmod: 2020-08-17T15:30:15Z
 draft: false
 weight: 11
 ---
@@ -10,7 +10,7 @@ weight: 11
 
 下载源码包
 ```
-git clone -b v1.1.x git clone https://github.com/brokercap/Bifrost.git
+git clone git clone https://github.com/brokercap/Bifrost.git
 ```
 
 #### 编译方式1

@@ -19,7 +19,7 @@ weight: 53
 
 5. Others : Bifrost 内部参数
 
-1). MustBeSuccess : 每一条数据是否必须同步成功,不成功就一直在重试
+1). MustBeSuccess : 每一条数据是否必须同步成功,不成功就一直在重试 (v1.4.0 版本后请参考 plugin_commit_timeout,plugin_retry_sync_time 配置)
 
 2). FilterQuery : 是否过滤 sql 语句事件
 
