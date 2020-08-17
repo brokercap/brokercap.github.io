@@ -14,7 +14,7 @@
     <item>
       <title>数据源新增</title>
       <link>http://wiki.xbifrost.com/data_source/add/</link>
-      <pubDate>Sat, 23 Nov 2019 10:05:00 +0000</pubDate>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>http://wiki.xbifrost.com/data_source/add/</guid>
       <description>在线添加数据源,不需要重启服务 字段解析 Name : 数据源唯一名字,不能和其他数据源名字重复,30个数字或者字母以内 ConnectUri : 连接数据源的地址 BinlogFileName : 从哪一个位</description>
@@ -27,6 +27,24 @@
       
       <guid>http://wiki.xbifrost.com/data_source/edit/</guid>
       <description>可以在线修改数据源信息,唯独不能修改数据源的Name 数据源只有在 close 状态下才能进行修改 close 状态下, 数据源列表的 Position 列 会出现一个 修改 按钮, 点击 之后可</description>
+    </item>
+    
+    <item>
+      <title>Binlog解析</title>
+      <link>http://wiki.xbifrost.com/data_source/binlog/</link>
+      <pubDate>Mon, 17 Aug 2020 19:05:00 +0000</pubDate>
+      
+      <guid>http://wiki.xbifrost.com/data_source/binlog/</guid>
+      <description>存储类型数据转换 从Binlog解析出来的数据,在转成 map[string]interface{} 的数据格式的时候 MySQL里的存储类型对应Golang里的数据类型不一样 括号里的代表是</description>
+    </item>
+    
+    <item>
+      <title>常见问题</title>
+      <link>http://wiki.xbifrost.com/data_source/qa/</link>
+      <pubDate>Mon, 17 Aug 2020 19:05:00 +0000</pubDate>
+      
+      <guid>http://wiki.xbifrost.com/data_source/qa/</guid>
+      <description>1. 一直是 starting 状态,有以下可能 1). 刷新整个界面,看是否会有状态变化 2). 在尝试启动数据源之前,发现位点有问题,会自动的将当前位点文件最开始的位置进行遍</description>
     </item>
     
   </channel>

@@ -44,7 +44,7 @@
   
   <url>
     <loc>http://wiki.xbifrost.com/install/data_source_build/</loc>
-    <lastmod>2019-11-23T15:30:15+00:00</lastmod>
+    <lastmod>2020-08-17T15:30:15+00:00</lastmod>
   </url>
   
   <url>
@@ -78,12 +78,21 @@
   
   <url>
     <loc>http://wiki.xbifrost.com/data_source/add/</loc>
-    <lastmod>2019-11-23T10:05:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>http://wiki.xbifrost.com/data_source/edit/</loc>
     <lastmod>2019-11-23T10:05:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://wiki.xbifrost.com/data_source/binlog/</loc>
+    <lastmod>2020-08-17T19:05:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://wiki.xbifrost.com/data_source/qa/</loc>
+    <lastmod>2020-08-17T19:05:00+00:00</lastmod>
   </url>
   
   <url>
@@ -103,7 +112,7 @@
   
   <url>
     <loc>http://wiki.xbifrost.com/syncdata/sync_batch/</loc>
-    <lastmod>2020-08-08T18:31:15+00:00</lastmod>
+    <lastmod>2020-08-17T18:31:15+00:00</lastmod>
   </url>
   
   <url>

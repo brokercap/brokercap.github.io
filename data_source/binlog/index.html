@@ -3,11 +3,11 @@
 <head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<title>为什么选择 Bifrost - Bifrost Document</title>
+<title>Binlog解析 - Bifrost Document</title>
 <meta name="description" content="Bifrost ---- 面向生产环境的 MySQL 同步到 Redis,MongoDB,ClickHouse 等服务的异构中间件">
 <meta name="generator" content="Hugo 0.59.1" />
 <link href="http://wiki.xbifrost.com/index.xml" rel="alternate" type="application/rss+xml">
-<link rel="canonical" href="http://wiki.xbifrost.com/other/why/">
+<link rel="canonical" href="http://wiki.xbifrost.com/data_source/binlog/">
 <link rel="stylesheet" href="http://wiki.xbifrost.com/css/theme.min.css">
 
 <link rel="stylesheet" href="http://wiki.xbifrost.com/css/chroma.min.css">
@@ -50,89 +50,51 @@
 </nav>
 </div>
 <div class="content-container">
-<main><h1>为什么选择 Bifrost</h1>
+<main><h1>Binlog解析</h1>
 
-<h4 id="1-很多人对于-bifrost-binlog-解析及同步会有几个疑问">1. 很多人对于 Bifrost Binlog 解析及同步会有几个疑问</h4>
+<h4 id="存储类型数据转换">存储类型数据转换</h4>
 
-<p>1). 为什么我不用 canal ,自己将数据 同步到 kafka ,然后业务再从 kafka 消费出来处理 . 这样我想怎么同步就怎么同步</p>
+<p>从Binlog解析出来的数据,在转成 map[string]interface{} 的数据格式的时候</p>
 
-<p>2). Bifrost 有什么优势 ?</p>
+<p>MySQL里的存储类型对应Golang里的数据类型不一样</p>
 
-<h5 id="反问">反问</h5>
+<p>括号里的代表是Golang里的数据类型</p>
 
-<p>假如要自己去实现 canal 或者 其他 Binlog 解析工具(包括 Bristol) 同步到 kafka ,再从 kafka 消费出来,自己实现同步 ? 请问需要去实现哪些功能?</p>
+<p>TINYINT ( int8 | unit8 ) , SMALLINT ( int16 | unit16 ) , MEDIUMINT ( int32 | uint32 ), INT ( int32 | uint32 ) , BIGINT ( int64 | uint64 )</p>
 
-<p>1). 流量监控</p>
+<p>FLOAT ( float32 ) , DOUBLE ( float64 ) ,REAL ( float64 )</p>
 
-<p>请问你不想知道你的工具什么时候同步了多少数据吗?</p>
+<p>DECIMAL , NUMERIC( 返回string类型 )</p>
 
-<p>2). 监控报警</p>
+<p>DATE , TIME , YEAR , DATETIME , TIMESTAMP ( string类型 )</p>
 
-<p>整个应用过程中,MySQL 连接不上,或者 目标库 连接不上 咋发现呢 ?</p>
+<p>CHAR , VARCHAR ( string )</p>
 
-<p>同步目标库的过程中,要是某一数据同步同步失败了 咋发现呢 ?</p>
+<p>TEXT , TINYTEXT , MEDIUMINTTEXT , LONGTEXT ( string )</p>
 
-<p>假如因为某一条数据本身有问题了,要不要提供机制错过数据等功能 ?</p>
+<p>BLOB, TINYBLOB , MEDIUMINTBLOB , LONGBLOB ( string )</p>
 
-<p>3). 目标库丰富性</p>
+<p>ENUM ( string类型 )</p>
 
-<p>假如一个表的数据要同步多个地方去,是不是就要写多套程序 ?</p>
+<p>SET ( []string )</p>
 
-<h5 id="bifrost-优势">Bifrost 优势</h5>
+<p>BIT ( int64类型 )</p>
 
-<p>1). 自带流量监控,哪一个表同步了多少数据,一目了然</p>
+<p>JSON ( map | array )</p>
 
-<p>2). 自带报警功能,数据源,目标库连接不上,及 某一条数同步出错了,可以报警出来</p>
+<h4 id="binlog-对-ddl-支持说明">Binlog 对 DDL 支持说明</h4>
 
-<p>3). 丰富的插件支持</p>
+<p>正常Bifrost同步过程中 DDL 是没有问题的</p>
 
-<ul>
-<li>Redis</li>
-<li>Memcache</li>
-<li>RabbitMQ</li>
-<li>ActiveMQ</li>
-<li>Kafka</li>
-<li>Mongodb</li>
-<li>ClickHouse</li>
-<li>MySQL</li>
-<li><a href="https://github.com/brokercap/Bifrost/blob/v1.1.x/plugin/http/example/http_server/http_server.go">Http 自定义服务</a></li>
+<p>但是如果配置的 <em>位点</em> 是在DDL 之前的位点,会出现数据和字段对应不上,甚至数据解析出解析出错,造成不可解析的问题.</p>
 
-<li><p><a href="https://github.com/brokercap/Bifrost/blob/v1.1.x/hprose_server/tcp_server.go">Hprose RPC 自定义服务</a></p></li>
-
-<li><p>TableCount</p></li>
-</ul>
-
-<p>4). MySQL 多个版本支持</p>
-
-<ul>
-<li>5.1 - 8.0</li>
-</ul>
-
-<p>5). 支持 <em>增量</em> 和 <em>全量</em> 数据同步</p>
-
-<p>6). 界面动态配置,可视化管理</p>
-
-<p>在线管理数据源,要同步表等操作</p>
-
-<p>7). 部署简单,不烧硬件</p>
-
-<p>go 语言编写,一键安装</p>
-
-<p>1核 CPU,  256MB 内存 都能运行</p>
-
-<p>表的目标库同步是异步同步的,多个目标库多个协程同时同步</p>
-
-<h4 id="2-小结">2. 小结</h4>
-
-<p>Bifost 不能解决所有问题</p>
-
-<p>但如果现在的工具,为什么不用呢?</p>
+<p>这种情况,会有日志显示</p>
 <div class="edit-meta">
-Last updated on 27 Nov 2019
+Last updated on 17 Aug 2020
 
 
-<br><a href="https://github.com/brokercap/brokercap.github.io/edit/master/content/other/why.md" class="edit-page"><i class="fas fa-pen-square"></i> Edit on GitHub</a></div><nav class="pagination"><a class="nav nav-prev" href="/other/performancetest/testresult_1/" title="Mac 测试结果 1"><i class="fas fa-arrow-left" aria-hidden="true"></i> Prev - Mac 测试结果 1</a>
-<a class="nav nav-next" href="/other/performancetest/" title="性能测试">Next - 性能测试 <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+<br><a href="https://github.com/brokercap/brokercap.github.io/edit/master/content/data_source/binlog.md" class="edit-page"><i class="fas fa-pen-square"></i> Edit on GitHub</a></div><nav class="pagination"><a class="nav nav-prev" href="/data_source/edit/" title="数据源修改"><i class="fas fa-arrow-left" aria-hidden="true"></i> Prev - 数据源修改</a>
+<a class="nav nav-next" href="/data_source/qa/" title="常见问题">Next - 常见问题 <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
 </nav><footer><p class="powered">Powered by <a href="https://gohugo.io">Hugo</a>. Theme by <a href="https://themes.gohugo.io/hugo-theme-techdoc/">TechDoc</a>. Designed by <a href="https://github.com/thingsym/hugo-theme-techdoc">Thingsym</a>.</p>
 </footer>
 </main><div class="sidebar">
@@ -152,12 +114,12 @@ Last updated on 27 Nov 2019
   
 </li>
 
-<li class=""><a href="/data_source/">数据源管理</a>
+<li class="parent"><a href="/data_source/">数据源管理</a>
   
 <ul class="sub-menu">
 <li class=""><a href="/data_source/add/">数据源新增</a></li>
 <li class=""><a href="/data_source/edit/">数据源修改</a></li>
-<li class=""><a href="/data_source/binlog/">Binlog解析</a></li>
+<li class="active"><a href="/data_source/binlog/">Binlog解析</a></li>
 <li class=""><a href="/data_source/qa/">常见问题</a></li>
 </ul>
   
@@ -228,11 +190,11 @@ Last updated on 27 Nov 2019
   
 </li>
 
-<li class="parent"><a href="/other/">其他</a>
+<li class=""><a href="/other/">其他</a>
   
 <ul class="sub-menu">
 <li class=""><a href="/other/how_used/">使用手册</a></li>
-<li class="active"><a href="/other/why/">为什么选择 Bifrost</a></li>
+<li class=""><a href="/other/why/">为什么选择 Bifrost</a></li>
 <li class=""><a href="/other/cluster_why_not/">Bifrost 为什么还不支持集群?</a></li>
 <li class=""><a href="/other/cluster_may_design/">Bifrost 集群设想</a></li>
 

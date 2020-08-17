@@ -169,6 +169,14 @@ bristol_performance_test success
 
 <p>{$字段名} : 表的字段数据</p>
 
+<p>{$字段名[&lsquo;key1&rsquo;][0][&lsquo;key3&rsquo;]} :   这个对 JSON 字段存储类型的支持,在 Bifrost 1.3.x 版本后开始 支持</p>
+
+<p>假如 JSON 字段内容值为 ：{&ldquo;testK&rdquo;: [{&ldquo;Bool&rdquo;: false, &ldquo;Null&rdquo;: null, &ldquo;Time&rdquo;: &ldquo;2020-05-31 23:21:30&rdquo;, &ldquo;Int32&rdquo;: -2147483648, &ldquo;Int64&rdquo;: -9223372036854775808, &ldquo;String&rdquo;: &ldquo;ss&rdquo;, &ldquo;Uint32&rdquo;: 4294967295, &ldquo;Uint64&rdquo;: 18446744073709551615, &ldquo;Float64&rdquo;: 526637.46}]}</p>
+
+<p>{$字段名[&lsquo;testK&rsquo;][0][&lsquo;Time&rsquo;]} 的对应的值 为：2020-05-31 23:21:30</p>
+
+<p>备注： 标签支持程度，取决于各个插件的实现,请参考各插件的文档</p>
+
 <h4 id="5-备注">5. 备注</h4>
 
 <p>1). 源数据的库名不能是关键字 AllDataBases</p>
@@ -179,7 +187,7 @@ bristol_performance_test success
 
 <p>4). 假如配置的时候,使用了 {$id} 这样的字段名标签 , 假如源表里没有这样的字段,将会转换成&rdquo;&rdquo;</p>
 <div class="edit-meta">
-Last updated on 8 Aug 2020
+Last updated on 17 Aug 2020
 
 
 <br><a href="https://github.com/brokercap/brokercap.github.io/edit/master/content/syncData/sync_batch.md" class="edit-page"><i class="fas fa-pen-square"></i> Edit on GitHub</a></div><nav class="pagination"><a class="nav nav-prev" href="/syncdata/sync_config/" title="数据表同步配置"><i class="fas fa-arrow-left" aria-hidden="true"></i> Prev - 数据表同步配置</a>
@@ -208,6 +216,8 @@ Last updated on 8 Aug 2020
 <ul class="sub-menu">
 <li class=""><a href="/data_source/add/">数据源新增</a></li>
 <li class=""><a href="/data_source/edit/">数据源修改</a></li>
+<li class=""><a href="/data_source/binlog/">Binlog解析</a></li>
+<li class=""><a href="/data_source/qa/">常见问题</a></li>
 </ul>
   
 </li>

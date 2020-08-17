@@ -70,14 +70,44 @@
 
 <p>MaxBinlogFileName ,MaxBinlogPosition : 解析到哪一个位点的时候,就close掉,不再进行binlog解析</p>
 
+<h5 id="所需权限">所需权限</h5>
+
+<p>GRANT SELECT, SHOW DATABASES, SUPER, REPLICATION SLAVE, EVENT ON <em>.</em> TO &lsquo;xxtest&rsquo;@&lsquo;%&rsquo;</p>
+
+<p>RDS云产品数据库云产品权限,可能不是按 MySQL 开源权限来的,请自行确认是否有足够权限</p>
+
+<p><em>会执行的SQL：</em></p>
+
+<p>SELECT <code>COLUMN_NAME</code>,<code>COLUMN_DEFAULT</code>,<code>IS_NULLABLE</code>,<code>COLUMN_TYPE</code>,<code>COLUMN_KEY</code>,<code>EXTRA</code>,<code>COLUMN_COMMENT</code>,<code>DATA_TYPE</code>,<code>NUMERIC_PRECISION</code>,<code>NUMERIC_SCALE</code> FROM <code>information_schema</code>.<code>columns</code> WHERE TABLE_SCHEMA = ? AND TABLE_NAME = ?</p>
+
+<p>SELECT COLUMN_NAME,COLUMN_KEY,COLUMN_TYPE,CHARACTER_SET_NAME,COLLATION_NAME,NUMERIC_SCALE,EXTRA,COLUMN_DEFAULT,DATA_TYPE,CHARACTER_OCTET_LENGTH FROM information_schema.columns WHERE table_schema= ? AND table_name= ? ORDER BY <code>ORDINAL_POSITION</code> ASC</p>
+
+<p>SELECT <code>SCHEMA_NAME</code> FROM <code>information_schema</code>.<code>SCHEMATA</code></p>
+
+<p>SELECT TABLE_NAME,TABLE_TYPE FROM <code>information_schema</code>.<code>TABLES</code> WHERE TABLE_SCHEMA = ?</p>
+
+<p>SHOW GLOBAL VARIABLES LIKE &lsquo;BINLOG_CHECKSUM&rsquo;</p>
+
+<p>SHOW MASTER STATUS</p>
+
+<p>SHOW VARIABLES LIKE &lsquo;server_id&rsquo;</p>
+
+<p>SHOW VARIABLES LIKE &lsquo;binlog_format&rsquo;</p>
+
+<p>SELECT connection_id()</p>
+
+<p>SELECT TIME,STATE FROM <code>information_schema</code>.<code>PROCESSLIST</code> WHERE ID = ?&rsquo;</p>
+
+<p>KILL 当前帐号binlog监控的异常连接</p>
+
+<p><em>根据以上SQL,如果是RDS等云产品,请自行确认是否有 监听Binlog的权限，KILL 当前帐号连接的权限,SET 权限</em></p>
+
 <h5 id="其他">其他</h5>
 
 <p>新增了数据源之后 状态默认为 close 状态,在配置了数据表同步之后再去点击 start 按钮开始</p>
 
 <p>默认情况下会自动为这个数据源添加一个名为 default 的通道. default 通道默认为开始状态. 通道信息,请查阅 通道相关文档</p>
 <div class="edit-meta">
-Last updated on 23 Nov 2019
-
 
 <br><a href="https://github.com/brokercap/brokercap.github.io/edit/master/content/data_source/add.md" class="edit-page"><i class="fas fa-pen-square"></i> Edit on GitHub</a></div><nav class="pagination"><a class="nav nav-prev" href="/data_source/" title="数据源管理"><i class="fas fa-arrow-left" aria-hidden="true"></i> Prev - 数据源管理</a>
 <a class="nav nav-next" href="/data_source/edit/" title="数据源修改">Next - 数据源修改 <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
@@ -105,6 +135,8 @@ Last updated on 23 Nov 2019
 <ul class="sub-menu">
 <li class="active"><a href="/data_source/add/">数据源新增</a></li>
 <li class=""><a href="/data_source/edit/">数据源修改</a></li>
+<li class=""><a href="/data_source/binlog/">Binlog解析</a></li>
+<li class=""><a href="/data_source/qa/">常见问题</a></li>
 </ul>
   
 </li>

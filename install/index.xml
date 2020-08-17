@@ -14,10 +14,10 @@
     <item>
       <title>编译安装</title>
       <link>http://wiki.xbifrost.com/install/data_source_build/</link>
-      <pubDate>Sat, 23 Nov 2019 15:30:15 +0000</pubDate>
+      <pubDate>Mon, 17 Aug 2020 15:30:15 +0000</pubDate>
       
       <guid>http://wiki.xbifrost.com/install/data_source_build/</guid>
-      <description>安装好 go 语言环境，go 1.12+,如果这个搞不定的，请查看下面的 二进制包安装 下载源码包 git clone -b v1.1.x git clone https://github.com/brokercap/Bifrost.git 编译方式1 make install prefix=./target 编译方式2 ./build.sh linux ./build.sh windows ./build.sh freebsd ./build.sh</description>
+      <description>安装好 go 语言环境，go 1.12+,如果这个搞不定的，请查看下面的 二进制包安装 下载源码包 git clone git clone https://github.com/brokercap/Bifrost.git 编译方式1 make install prefix=./target 编译方式2 ./build.sh linux ./build.sh windows ./build.sh freebsd ./build.sh darwin 编</description>
     </item>
     
     <item>
