@@ -2,13 +2,13 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>二进制文件解析 on Bifrost Document</title>
-    <link>http://wiki.xbifrost.com/bristol/</link>
+    <link>https://wiki.xbifrost.com/bristol/</link>
     <description>Recent content in 二进制文件解析 on Bifrost Document</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 28 Nov 2018 21:49:15 +0000</lastBuildDate>
     
-	<atom:link href="http://wiki.xbifrost.com/bristol/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://wiki.xbifrost.com/bristol/index.xml" rel="self" type="application/rss+xml" />
     
     
   </channel>

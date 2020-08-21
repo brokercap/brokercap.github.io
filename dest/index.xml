@@ -2,30 +2,30 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>目标库管理 on Bifrost Document</title>
-    <link>http://wiki.xbifrost.com/dest/</link>
+    <link>https://wiki.xbifrost.com/dest/</link>
     <description>Recent content in 目标库管理 on Bifrost Document</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 23 Nov 2019 15:32:15 +0000</lastBuildDate>
     
-	<atom:link href="http://wiki.xbifrost.com/dest/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://wiki.xbifrost.com/dest/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>目标库修改</title>
-      <link>http://wiki.xbifrost.com/dest/edit/</link>
+      <link>https://wiki.xbifrost.com/dest/edit/</link>
       <pubDate>Sat, 23 Nov 2019 10:05:00 +0000</pubDate>
       
-      <guid>http://wiki.xbifrost.com/dest/edit/</guid>
+      <guid>https://wiki.xbifrost.com/dest/edit/</guid>
       <description>目标库配置是可以修改的 但只能修改目标库的连接地址,连接池大小及备注,不能修改绑定的插件及ToServerKey 修改了的信息,要待一个全新的插</description>
     </item>
     
     <item>
       <title>目标库新增</title>
-      <link>http://wiki.xbifrost.com/dest/add/</link>
+      <link>https://wiki.xbifrost.com/dest/add/</link>
       <pubDate>Sat, 23 Nov 2019 10:05:00 +0000</pubDate>
       
-      <guid>http://wiki.xbifrost.com/dest/add/</guid>
+      <guid>https://wiki.xbifrost.com/dest/add/</guid>
       <description>在线添加数据源,不需要重启服务 一个插件可以绑定多个目标库 字段解析: ToServerKey : 全局唯一值,在数据表设置同步的时候,需要用到这个. 30个数字或者字母以</description>
     </item>
     

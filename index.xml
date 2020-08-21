@@ -2,291 +2,291 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>前言 on Bifrost Document</title>
-    <link>http://wiki.xbifrost.com/</link>
+    <link>https://wiki.xbifrost.com/</link>
     <description>Recent content in 前言 on Bifrost Document</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 07 Aug 2020 21:49:15 +0000</lastBuildDate>
     
-	<atom:link href="http://wiki.xbifrost.com/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://wiki.xbifrost.com/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>编译安装</title>
-      <link>http://wiki.xbifrost.com/install/data_source_build/</link>
+      <link>https://wiki.xbifrost.com/install/data_source_build/</link>
       <pubDate>Mon, 17 Aug 2020 15:30:15 +0000</pubDate>
       
-      <guid>http://wiki.xbifrost.com/install/data_source_build/</guid>
+      <guid>https://wiki.xbifrost.com/install/data_source_build/</guid>
       <description>安装好 go 语言环境，go 1.12+,如果这个搞不定的，请查看下面的 二进制包安装 下载源码包 git clone git clone https://github.com/brokercap/Bifrost.git 编译方式1 make install prefix=./target 编译方式2 ./build.sh linux ./build.sh windows ./build.sh freebsd ./build.sh darwin 编</description>
     </item>
     
     <item>
       <title>二进制安装</title>
-      <link>http://wiki.xbifrost.com/install/install_binary/</link>
+      <link>https://wiki.xbifrost.com/install/install_binary/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://wiki.xbifrost.com/install/install_binary/</guid>
+      <guid>https://wiki.xbifrost.com/install/install_binary/</guid>
       <description>二进制包安装，不用安装 go 语言环境，下载二进制包可修改配置可直接运行 下载二进制包 以v1.3.2-release linux版本为例 wget https://github.com/jc3wish/Bifrost/releases/download/v1.3.2-release/linux.zip unzip linux.zip mv ./linux ./Bifrost_v1.3.2-release</description>
     </item>
     
     <item>
       <title>HTTPS证书</title>
-      <link>http://wiki.xbifrost.com/install/https_certificate/</link>
+      <link>https://wiki.xbifrost.com/install/https_certificate/</link>
       <pubDate>Tue, 03 Dec 2019 22:51:15 +0000</pubDate>
       
-      <guid>http://wiki.xbifrost.com/install/https_certificate/</guid>
+      <guid>https://wiki.xbifrost.com/install/https_certificate/</guid>
       <description>脚本生成 cd etc/ ./crt_create.sh 自行生成 openssl genrsa -out server.key 2048 openssl req -new -x509 -sha256 -key server.key -out server.crt -days 3650 证书生成参考 免费证书 Let’s Encrypt</description>
     </item>
     
     <item>
       <title>启动配置解析</title>
-      <link>http://wiki.xbifrost.com/install/config_doc/</link>
+      <link>https://wiki.xbifrost.com/install/config_doc/</link>
       <pubDate>Sat, 23 Nov 2019 15:30:15 +0000</pubDate>
       
-      <guid>http://wiki.xbifrost.com/install/config_doc/</guid>
+      <guid>https://wiki.xbifrost.com/install/config_doc/</guid>
       <description>Bifrost 默认配置路径在 Bifrost 运行目录下的 etc/Bifrost.ini [user] #管理界面的用户名及密码 Bifrost=Bifrost123 [groups] #administrator 管理人员可以添加删除等操作 #monitor 只能查看数据 Bifrost=administrator BifrostMonitor=monitor [Bifrostd] #默认会当前启动文件夹 #log_dir=/data/log/ #默认</description>
     </item>
     
     <item>
       <title>数据源新增</title>
-      <link>http://wiki.xbifrost.com/data_source/add/</link>
+      <link>https://wiki.xbifrost.com/data_source/add/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://wiki.xbifrost.com/data_source/add/</guid>
+      <guid>https://wiki.xbifrost.com/data_source/add/</guid>
       <description>在线添加数据源,不需要重启服务 字段解析 Name : 数据源唯一名字,不能和其他数据源名字重复,30个数字或者字母以内 ConnectUri : 连接数据源的地址 BinlogFileName : 从哪一个位</description>
     </item>
     
     <item>
       <title>数据源修改</title>
-      <link>http://wiki.xbifrost.com/data_source/edit/</link>
+      <link>https://wiki.xbifrost.com/data_source/edit/</link>
       <pubDate>Sat, 23 Nov 2019 10:05:00 +0000</pubDate>
       
-      <guid>http://wiki.xbifrost.com/data_source/edit/</guid>
+      <guid>https://wiki.xbifrost.com/data_source/edit/</guid>
       <description>可以在线修改数据源信息,唯独不能修改数据源的Name 数据源只有在 close 状态下才能进行修改 close 状态下, 数据源列表的 Position 列 会出现一个 修改 按钮, 点击 之后可</description>
     </item>
     
     <item>
       <title>Binlog解析</title>
-      <link>http://wiki.xbifrost.com/data_source/binlog/</link>
+      <link>https://wiki.xbifrost.com/data_source/binlog/</link>
       <pubDate>Mon, 17 Aug 2020 19:05:00 +0000</pubDate>
       
-      <guid>http://wiki.xbifrost.com/data_source/binlog/</guid>
+      <guid>https://wiki.xbifrost.com/data_source/binlog/</guid>
       <description>存储类型数据转换 从Binlog解析出来的数据,在转成 map[string]interface{} 的数据格式的时候 MySQL里的存储类型对应Golang里的数据类型不一样 括号里的代表是</description>
     </item>
     
     <item>
       <title>常见问题</title>
-      <link>http://wiki.xbifrost.com/data_source/qa/</link>
+      <link>https://wiki.xbifrost.com/data_source/qa/</link>
       <pubDate>Mon, 17 Aug 2020 19:05:00 +0000</pubDate>
       
-      <guid>http://wiki.xbifrost.com/data_source/qa/</guid>
+      <guid>https://wiki.xbifrost.com/data_source/qa/</guid>
       <description>1. 一直是 starting 状态,有以下可能 1). 刷新整个界面,看是否会有状态变化 2). 在尝试启动数据源之前,发现位点有问题,会自动的将当前位点文件最开始的位置进行遍</description>
     </item>
     
     <item>
       <title>目标库修改</title>
-      <link>http://wiki.xbifrost.com/dest/edit/</link>
+      <link>https://wiki.xbifrost.com/dest/edit/</link>
       <pubDate>Sat, 23 Nov 2019 10:05:00 +0000</pubDate>
       
-      <guid>http://wiki.xbifrost.com/dest/edit/</guid>
+      <guid>https://wiki.xbifrost.com/dest/edit/</guid>
       <description>目标库配置是可以修改的 但只能修改目标库的连接地址,连接池大小及备注,不能修改绑定的插件及ToServerKey 修改了的信息,要待一个全新的插</description>
     </item>
     
     <item>
       <title>目标库新增</title>
-      <link>http://wiki.xbifrost.com/dest/add/</link>
+      <link>https://wiki.xbifrost.com/dest/add/</link>
       <pubDate>Sat, 23 Nov 2019 10:05:00 +0000</pubDate>
       
-      <guid>http://wiki.xbifrost.com/dest/add/</guid>
+      <guid>https://wiki.xbifrost.com/dest/add/</guid>
       <description>在线添加数据源,不需要重启服务 一个插件可以绑定多个目标库 字段解析: ToServerKey : 全局唯一值,在数据表设置同步的时候,需要用到这个. 30个数字或者字母以</description>
     </item>
     
     <item>
       <title>数据表同步配置</title>
-      <link>http://wiki.xbifrost.com/syncdata/sync_config/</link>
+      <link>https://wiki.xbifrost.com/syncdata/sync_config/</link>
       <pubDate>Sat, 08 Aug 2020 18:32:15 +0000</pubDate>
       
-      <guid>http://wiki.xbifrost.com/syncdata/sync_config/</guid>
+      <guid>https://wiki.xbifrost.com/syncdata/sync_config/</guid>
       <description>一. 配置过程 选择要同步的数据库 绑定表和通道的关系 选择数据表(只有ADD按钮 绑定了表和通道的关系之后才能选择) 选择这个表的数据要同步到哪一个目</description>
     </item>
     
     <item>
       <title>批量同步配置</title>
-      <link>http://wiki.xbifrost.com/syncdata/sync_batch/</link>
+      <link>https://wiki.xbifrost.com/syncdata/sync_batch/</link>
       <pubDate>Mon, 17 Aug 2020 18:31:15 +0000</pubDate>
       
-      <guid>http://wiki.xbifrost.com/syncdata/sync_batch/</guid>
+      <guid>https://wiki.xbifrost.com/syncdata/sync_batch/</guid>
       <description>批量配置的使用场景: 有多个表要设置以同样的配置需要同步同一个 目标库里去 要设置整个所有库或者某一个库里的所有表,包括以后新增的表同步到kafk</description>
     </item>
     
     <item>
       <title>同步列表字段解析</title>
-      <link>http://wiki.xbifrost.com/syncdata/sync_list/</link>
+      <link>https://wiki.xbifrost.com/syncdata/sync_list/</link>
       <pubDate>Wed, 27 Nov 2019 21:05:15 +0000</pubDate>
       
-      <guid>http://wiki.xbifrost.com/syncdata/sync_list/</guid>
+      <guid>https://wiki.xbifrost.com/syncdata/sync_list/</guid>
       <description>字段解析 sliceId/ID : 第几个同步 / 自增ID PluginType : 插件名称 ToServerKey : 绑定的目标库唯一名字,添加目标库时候的 ToServerKey FieldList : 选择了哪些字段要同步 Others : Bifrost 内部参数 1). MustBeSuccess : 每一条数</description>
     </item>
     
     <item>
       <title>全量任务配置</title>
-      <link>http://wiki.xbifrost.com/syncdata/sync_history_config/</link>
+      <link>https://wiki.xbifrost.com/syncdata/sync_history_config/</link>
       <pubDate>Sat, 23 Nov 2019 15:30:15 +0000</pubDate>
       
-      <guid>http://wiki.xbifrost.com/syncdata/sync_history_config/</guid>
+      <guid>https://wiki.xbifrost.com/syncdata/sync_history_config/</guid>
       <description>全量任务同步 是建立在 表配置同步到目标库 之上 假如没有 配置表同步到目标库 则不能配置全量同步 配置过程 1. 点击 刷全量数据 按钮 2. 配置查询全量数据的条件 字</description>
     </item>
     
     <item>
       <title>文件存储</title>
-      <link>http://wiki.xbifrost.com/filequeue/stroage/</link>
+      <link>https://wiki.xbifrost.com/filequeue/stroage/</link>
       <pubDate>Tue, 11 Aug 2020 08:05:00 +0000</pubDate>
       
-      <guid>http://wiki.xbifrost.com/filequeue/stroage/</guid>
+      <guid>https://wiki.xbifrost.com/filequeue/stroage/</guid>
       <description>文件队列是按每个同步配置为单位管理的 每个同步配置对应一个文件夹进行文件存储 $DataDir/filequeue/$dbName/$SchemaName/$TableName/$ToServerID $DataDir : Bifrost.ini 配置中的 data_dir 路径 $dbName : 数据源名称 $SchemaName : 数据库名称 $TableName : 表名 $ToServerID : 同步</description>
     </item>
     
     <item>
       <title>数据写入</title>
-      <link>http://wiki.xbifrost.com/filequeue/write/</link>
+      <link>https://wiki.xbifrost.com/filequeue/write/</link>
       <pubDate>Tue, 11 Aug 2020 08:05:00 +0000</pubDate>
       
-      <guid>http://wiki.xbifrost.com/filequeue/write/</guid>
+      <guid>https://wiki.xbifrost.com/filequeue/write/</guid>
       <description>在每次数据写完之后,都会进行判断文件大小是否大于16MB,如果大于后,标记下一次是否需要创建新文件 const FileMaxSize int64 = 16 * 1024 * 1024 func (This *Queue) Append(content string) error{ return This.AppendBytes([]byte(content)) } func (This *Queue)</description>
     </item>
     
     <item>
       <title>数据消费</title>
-      <link>http://wiki.xbifrost.com/filequeue/consumer/</link>
+      <link>https://wiki.xbifrost.com/filequeue/consumer/</link>
       <pubDate>Tue, 11 Aug 2020 08:05:00 +0000</pubDate>
       
-      <guid>http://wiki.xbifrost.com/filequeue/consumer/</guid>
+      <guid>https://wiki.xbifrost.com/filequeue/consumer/</guid>
       <description>在同步配置中标记为文件队列已启动,并且当前内存队列大小为 0 的时候,会自动从文件队列中加载数据 消费过程 每次从文件队列中读取一条数据,最多加载条</description>
     </item>
     
     <item>
       <title>服务重启</title>
-      <link>http://wiki.xbifrost.com/filequeue/restart/</link>
+      <link>https://wiki.xbifrost.com/filequeue/restart/</link>
       <pubDate>Tue, 11 Aug 2020 08:05:00 +0000</pubDate>
       
-      <guid>http://wiki.xbifrost.com/filequeue/restart/</guid>
+      <guid>https://wiki.xbifrost.com/filequeue/restart/</guid>
       <description>文件队列在数据写入的时候 ,是写到内核就认为成功了,由内核决定什么时候磁盘到磁盘 由内核决定什么时候磁盘,这样应用层就保证不了数据绝对正确 所以 Bifrost</description>
     </item>
     
     <item>
       <title>使用手册</title>
-      <link>http://wiki.xbifrost.com/other/how_used/</link>
+      <link>https://wiki.xbifrost.com/other/how_used/</link>
       <pubDate>Thu, 05 Dec 2019 22:37:15 +0000</pubDate>
       
-      <guid>http://wiki.xbifrost.com/other/how_used/</guid>
+      <guid>https://wiki.xbifrost.com/other/how_used/</guid>
       <description>导航栏 导航栏里有 首页 ，数据源 , 目标库列表 , 表同步列表 ,全量任务, 流量 ,插件,报警, 文档 每个导航菜单采用不同的功能。 插件 插件 点击进去后，显示的</description>
     </item>
     
     <item>
       <title>为什么选择 Bifrost</title>
-      <link>http://wiki.xbifrost.com/other/why/</link>
+      <link>https://wiki.xbifrost.com/other/why/</link>
       <pubDate>Wed, 27 Nov 2019 23:04:15 +0000</pubDate>
       
-      <guid>http://wiki.xbifrost.com/other/why/</guid>
+      <guid>https://wiki.xbifrost.com/other/why/</guid>
       <description>1. 很多人对于 Bifrost Binlog 解析及同步会有几个疑问 1). 为什么我不用 canal ,自己将数据 同步到 kafka ,然后业务再从 kafka 消费出来处理 . 这样我想怎么同步就怎么同步 2). Bifrost 有什么</description>
     </item>
     
     <item>
       <title>Bifrost 为什么还不支持集群?</title>
-      <link>http://wiki.xbifrost.com/other/cluster_why_not/</link>
+      <link>https://wiki.xbifrost.com/other/cluster_why_not/</link>
       <pubDate>Tue, 03 Dec 2019 22:19:15 +0000</pubDate>
       
-      <guid>http://wiki.xbifrost.com/other/cluster_why_not/</guid>
+      <guid>https://wiki.xbifrost.com/other/cluster_why_not/</guid>
       <description>有不少用户，一直在问 Bifrost 什么时候支持集群功能 虽然有用户一直很想要集群功能，包括我本人在内，也很想立马就支持集群 有集群多好呀，高可用，还可以多台</description>
     </item>
     
     <item>
       <title>Bifrost 集群设想</title>
-      <link>http://wiki.xbifrost.com/other/cluster_may_design/</link>
+      <link>https://wiki.xbifrost.com/other/cluster_may_design/</link>
       <pubDate>Tue, 03 Dec 2019 22:20:15 +0000</pubDate>
       
-      <guid>http://wiki.xbifrost.com/other/cluster_may_design/</guid>
+      <guid>https://wiki.xbifrost.com/other/cluster_may_design/</guid>
       <description>Bifrost 当前并不支持高可用，但作者本人，一直在想，Bifrost 高可用要怎么实现。 Bifrost 集群要求 不强依懒第三方系统 只有一个 Bifrost 应用，不需要部署多个应用 一</description>
     </item>
     
     <item>
       <title>报警规则</title>
-      <link>http://wiki.xbifrost.com/warning/rule/</link>
+      <link>https://wiki.xbifrost.com/warning/rule/</link>
       <pubDate>Thu, 28 Nov 2019 22:59:15 +0000</pubDate>
       
-      <guid>http://wiki.xbifrost.com/warning/rule/</guid>
+      <guid>https://wiki.xbifrost.com/warning/rule/</guid>
       <description>报警 数据源连接失败 数据源关闭(包括手动close或者因binlog解析致命性原因解析失败造成的close等) 数据同步到目标库,同一条数据超过</description>
     </item>
     
     <item>
       <title>API接口</title>
-      <link>http://wiki.xbifrost.com/other/web_api/</link>
+      <link>https://wiki.xbifrost.com/other/web_api/</link>
       <pubDate>Thu, 05 Dec 2019 22:52:15 +0000</pubDate>
       
-      <guid>http://wiki.xbifrost.com/other/web_api/</guid>
+      <guid>https://wiki.xbifrost.com/other/web_api/</guid>
       <description>Bifrost 提供相应的监控接口,用于第三方监控服务器对Bifrost进行监控 数据源列表 URL: /db/list?format=json METHOD: GET 返回数据结构: map[string]DbListStruct type DbListStruct struct { Name string // DbName ConnectUri string // 连接地址 ConnStatus string // close,stop,starting,running ConnErr</description>
     </item>
     
     <item>
       <title>微信</title>
-      <link>http://wiki.xbifrost.com/warning/weixin/</link>
+      <link>https://wiki.xbifrost.com/warning/weixin/</link>
       <pubDate>Thu, 28 Nov 2019 22:59:15 +0000</pubDate>
       
-      <guid>http://wiki.xbifrost.com/warning/weixin/</guid>
+      <guid>https://wiki.xbifrost.com/warning/weixin/</guid>
       <description>CorpID : 微信企业号CorpID参数 Secret : 微信企业号Secret参数 agentid : 微信企业号 应用ID,数字类型 touser : 消息接收者，多个接收者用‘|’分隔，最多支持</description>
     </item>
     
     <item>
       <title>插件开发教程</title>
-      <link>http://wiki.xbifrost.com/plugin/plugin_dev/</link>
+      <link>https://wiki.xbifrost.com/plugin/plugin_dev/</link>
       <pubDate>Thu, 28 Nov 2019 22:59:15 +0000</pubDate>
       
-      <guid>http://wiki.xbifrost.com/plugin/plugin_dev/</guid>
+      <guid>https://wiki.xbifrost.com/plugin/plugin_dev/</guid>
       <description>Bifrost v1.1.x 版本开始提供接口，在 linux 下支持通过 go1.12+ 版本的 plugin 包生成的 so 进行动态的加载到正在运行的 Bifrost 进程中去 Bifrost 本身提供了相关的接口进行插件注入，也同样提供了</description>
     </item>
     
     <item>
       <title>邮箱</title>
-      <link>http://wiki.xbifrost.com/warning/email/</link>
+      <link>https://wiki.xbifrost.com/warning/email/</link>
       <pubDate>Thu, 28 Nov 2019 22:59:15 +0000</pubDate>
       
-      <guid>http://wiki.xbifrost.com/warning/email/</guid>
+      <guid>https://wiki.xbifrost.com/warning/email/</guid>
       <description>FROM : 采用哪一个邮箱发送邮件 NickName : 邮箱别名 Password : 邮箱密码 , 如果是 qq邮箱,不是你的QQ密码,也不是设置的你设置的QQ邮箱的独立密码,而是有一个用于</description>
     </item>
     
     <item>
       <title>Bifrost 运维</title>
-      <link>http://wiki.xbifrost.com/other/support/</link>
+      <link>https://wiki.xbifrost.com/other/support/</link>
       <pubDate>Tue, 03 Dec 2019 22:22:15 +0000</pubDate>
       
-      <guid>http://wiki.xbifrost.com/other/support/</guid>
+      <guid>https://wiki.xbifrost.com/other/support/</guid>
       <description>Bifrost 常见问题 1. 全量同步没有问题，但insert,update等增量没过去 1). 检查数据源是不是 running 状态,重新启动一下数据源 2). 检查数据表绑定的通道是不</description>
     </item>
     
     <item>
       <title>联系我们</title>
-      <link>http://wiki.xbifrost.com/other/contact_us/</link>
+      <link>https://wiki.xbifrost.com/other/contact_us/</link>
       <pubDate>Thu, 05 Dec 2019 22:52:15 +0000</pubDate>
       
-      <guid>http://wiki.xbifrost.com/other/contact_us/</guid>
+      <guid>https://wiki.xbifrost.com/other/contact_us/</guid>
       <description></description>
     </item>
     
     <item>
       <title>捐赠</title>
-      <link>http://wiki.xbifrost.com/other/donate/</link>
+      <link>https://wiki.xbifrost.com/other/donate/</link>
       <pubDate>Sat, 08 Aug 2020 18:38:18 +0000</pubDate>
       
-      <guid>http://wiki.xbifrost.com/other/donate/</guid>
+      <guid>https://wiki.xbifrost.com/other/donate/</guid>
       <description>感谢大家的支持 在捐赠的时候,请大家备注一下是Bifrost捐赠,及 您的名字(昵称也可).</description>
     </item>
     
     <item>
       <title>Mac 测试结果 1</title>
-      <link>http://wiki.xbifrost.com/other/performancetest/testresult_1/</link>
+      <link>https://wiki.xbifrost.com/other/performancetest/testresult_1/</link>
       <pubDate>Sun, 08 Dec 2019 12:36:15 +0000</pubDate>
       
-      <guid>http://wiki.xbifrost.com/other/performancetest/testresult_1/</guid>
+      <guid>https://wiki.xbifrost.com/other/performancetest/testresult_1/</guid>
       <description>查看当前 MySQL 位点 连接上 MySQL 后 执行 show master status\G; *************************** 1. row *************************** File: mysql-bin.000020 Position: 739 Binlog_Do_DB: Binlog_Ignore_DB: 1 row in set (0.00 sec) 造数据 往 bifrost_test.bristol_performance_test 表里写 100000 条数据 如果 bifrost_test 库 和 bristol_performance_test 表不存在的情况下会自动创建 ./BristolPerformanceTest -count 100000 -u root -P</description>
     </item>
     

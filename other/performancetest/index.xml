@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>性能测试 on Bifrost Document</title>
-    <link>http://wiki.xbifrost.com/other/performancetest/</link>
+    <link>https://wiki.xbifrost.com/other/performancetest/</link>
     <description>Recent content in 性能测试 on Bifrost Document</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 03 Dec 2019 23:00:15 +0000</lastBuildDate>
     
-	<atom:link href="http://wiki.xbifrost.com/other/performancetest/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://wiki.xbifrost.com/other/performancetest/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Mac 测试结果 1</title>
-      <link>http://wiki.xbifrost.com/other/performancetest/testresult_1/</link>
+      <link>https://wiki.xbifrost.com/other/performancetest/testresult_1/</link>
       <pubDate>Sun, 08 Dec 2019 12:36:15 +0000</pubDate>
       
-      <guid>http://wiki.xbifrost.com/other/performancetest/testresult_1/</guid>
+      <guid>https://wiki.xbifrost.com/other/performancetest/testresult_1/</guid>
       <description>查看当前 MySQL 位点 连接上 MySQL 后 执行 show master status\G; *************************** 1. row *************************** File: mysql-bin.000020 Position: 739 Binlog_Do_DB: Binlog_Ignore_DB: 1 row in set (0.00 sec) 造数据 往 bifrost_test.bristol_performance_test 表里写 100000 条数据 如果 bifrost_test 库 和 bristol_performance_test 表不存在的情况下会自动创建 ./BristolPerformanceTest -count 100000 -u root -P</description>
     </item>
     

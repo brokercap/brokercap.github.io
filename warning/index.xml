@@ -2,39 +2,39 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>报警 on Bifrost Document</title>
-    <link>http://wiki.xbifrost.com/warning/</link>
+    <link>https://wiki.xbifrost.com/warning/</link>
     <description>Recent content in 报警 on Bifrost Document</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 28 Nov 2018 21:49:15 +0000</lastBuildDate>
     
-	<atom:link href="http://wiki.xbifrost.com/warning/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://wiki.xbifrost.com/warning/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>报警规则</title>
-      <link>http://wiki.xbifrost.com/warning/rule/</link>
+      <link>https://wiki.xbifrost.com/warning/rule/</link>
       <pubDate>Thu, 28 Nov 2019 22:59:15 +0000</pubDate>
       
-      <guid>http://wiki.xbifrost.com/warning/rule/</guid>
+      <guid>https://wiki.xbifrost.com/warning/rule/</guid>
       <description>报警 数据源连接失败 数据源关闭(包括手动close或者因binlog解析致命性原因解析失败造成的close等) 数据同步到目标库,同一条数据超过</description>
     </item>
     
     <item>
       <title>微信</title>
-      <link>http://wiki.xbifrost.com/warning/weixin/</link>
+      <link>https://wiki.xbifrost.com/warning/weixin/</link>
       <pubDate>Thu, 28 Nov 2019 22:59:15 +0000</pubDate>
       
-      <guid>http://wiki.xbifrost.com/warning/weixin/</guid>
+      <guid>https://wiki.xbifrost.com/warning/weixin/</guid>
       <description>CorpID : 微信企业号CorpID参数 Secret : 微信企业号Secret参数 agentid : 微信企业号 应用ID,数字类型 touser : 消息接收者，多个接收者用‘|’分隔，最多支持</description>
     </item>
     
     <item>
       <title>邮箱</title>
-      <link>http://wiki.xbifrost.com/warning/email/</link>
+      <link>https://wiki.xbifrost.com/warning/email/</link>
       <pubDate>Thu, 28 Nov 2019 22:59:15 +0000</pubDate>
       
-      <guid>http://wiki.xbifrost.com/warning/email/</guid>
+      <guid>https://wiki.xbifrost.com/warning/email/</guid>
       <description>FROM : 采用哪一个邮箱发送邮件 NickName : 邮箱别名 Password : 邮箱密码 , 如果是 qq邮箱,不是你的QQ密码,也不是设置的你设置的QQ邮箱的独立密码,而是有一个用于</description>
     </item>
     

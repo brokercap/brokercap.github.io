@@ -2,84 +2,84 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>其他 on Bifrost Document</title>
-    <link>http://wiki.xbifrost.com/other/</link>
+    <link>https://wiki.xbifrost.com/other/</link>
     <description>Recent content in 其他 on Bifrost Document</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 23 Nov 2019 15:32:15 +0000</lastBuildDate>
     
-	<atom:link href="http://wiki.xbifrost.com/other/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://wiki.xbifrost.com/other/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>使用手册</title>
-      <link>http://wiki.xbifrost.com/other/how_used/</link>
+      <link>https://wiki.xbifrost.com/other/how_used/</link>
       <pubDate>Thu, 05 Dec 2019 22:37:15 +0000</pubDate>
       
-      <guid>http://wiki.xbifrost.com/other/how_used/</guid>
+      <guid>https://wiki.xbifrost.com/other/how_used/</guid>
       <description>导航栏 导航栏里有 首页 ，数据源 , 目标库列表 , 表同步列表 ,全量任务, 流量 ,插件,报警, 文档 每个导航菜单采用不同的功能。 插件 插件 点击进去后，显示的</description>
     </item>
     
     <item>
       <title>为什么选择 Bifrost</title>
-      <link>http://wiki.xbifrost.com/other/why/</link>
+      <link>https://wiki.xbifrost.com/other/why/</link>
       <pubDate>Wed, 27 Nov 2019 23:04:15 +0000</pubDate>
       
-      <guid>http://wiki.xbifrost.com/other/why/</guid>
+      <guid>https://wiki.xbifrost.com/other/why/</guid>
       <description>1. 很多人对于 Bifrost Binlog 解析及同步会有几个疑问 1). 为什么我不用 canal ,自己将数据 同步到 kafka ,然后业务再从 kafka 消费出来处理 . 这样我想怎么同步就怎么同步 2). Bifrost 有什么</description>
     </item>
     
     <item>
       <title>Bifrost 为什么还不支持集群?</title>
-      <link>http://wiki.xbifrost.com/other/cluster_why_not/</link>
+      <link>https://wiki.xbifrost.com/other/cluster_why_not/</link>
       <pubDate>Tue, 03 Dec 2019 22:19:15 +0000</pubDate>
       
-      <guid>http://wiki.xbifrost.com/other/cluster_why_not/</guid>
+      <guid>https://wiki.xbifrost.com/other/cluster_why_not/</guid>
       <description>有不少用户，一直在问 Bifrost 什么时候支持集群功能 虽然有用户一直很想要集群功能，包括我本人在内，也很想立马就支持集群 有集群多好呀，高可用，还可以多台</description>
     </item>
     
     <item>
       <title>Bifrost 集群设想</title>
-      <link>http://wiki.xbifrost.com/other/cluster_may_design/</link>
+      <link>https://wiki.xbifrost.com/other/cluster_may_design/</link>
       <pubDate>Tue, 03 Dec 2019 22:20:15 +0000</pubDate>
       
-      <guid>http://wiki.xbifrost.com/other/cluster_may_design/</guid>
+      <guid>https://wiki.xbifrost.com/other/cluster_may_design/</guid>
       <description>Bifrost 当前并不支持高可用，但作者本人，一直在想，Bifrost 高可用要怎么实现。 Bifrost 集群要求 不强依懒第三方系统 只有一个 Bifrost 应用，不需要部署多个应用 一</description>
     </item>
     
     <item>
       <title>API接口</title>
-      <link>http://wiki.xbifrost.com/other/web_api/</link>
+      <link>https://wiki.xbifrost.com/other/web_api/</link>
       <pubDate>Thu, 05 Dec 2019 22:52:15 +0000</pubDate>
       
-      <guid>http://wiki.xbifrost.com/other/web_api/</guid>
+      <guid>https://wiki.xbifrost.com/other/web_api/</guid>
       <description>Bifrost 提供相应的监控接口,用于第三方监控服务器对Bifrost进行监控 数据源列表 URL: /db/list?format=json METHOD: GET 返回数据结构: map[string]DbListStruct type DbListStruct struct { Name string // DbName ConnectUri string // 连接地址 ConnStatus string // close,stop,starting,running ConnErr</description>
     </item>
     
     <item>
       <title>Bifrost 运维</title>
-      <link>http://wiki.xbifrost.com/other/support/</link>
+      <link>https://wiki.xbifrost.com/other/support/</link>
       <pubDate>Tue, 03 Dec 2019 22:22:15 +0000</pubDate>
       
-      <guid>http://wiki.xbifrost.com/other/support/</guid>
+      <guid>https://wiki.xbifrost.com/other/support/</guid>
       <description>Bifrost 常见问题 1. 全量同步没有问题，但insert,update等增量没过去 1). 检查数据源是不是 running 状态,重新启动一下数据源 2). 检查数据表绑定的通道是不</description>
     </item>
     
     <item>
       <title>联系我们</title>
-      <link>http://wiki.xbifrost.com/other/contact_us/</link>
+      <link>https://wiki.xbifrost.com/other/contact_us/</link>
       <pubDate>Thu, 05 Dec 2019 22:52:15 +0000</pubDate>
       
-      <guid>http://wiki.xbifrost.com/other/contact_us/</guid>
+      <guid>https://wiki.xbifrost.com/other/contact_us/</guid>
       <description></description>
     </item>
     
     <item>
       <title>捐赠</title>
-      <link>http://wiki.xbifrost.com/other/donate/</link>
+      <link>https://wiki.xbifrost.com/other/donate/</link>
       <pubDate>Sat, 08 Aug 2020 18:38:18 +0000</pubDate>
       
-      <guid>http://wiki.xbifrost.com/other/donate/</guid>
+      <guid>https://wiki.xbifrost.com/other/donate/</guid>
       <description>感谢大家的支持 在捐赠的时候,请大家备注一下是Bifrost捐赠,及 您的名字(昵称也可).</description>
     </item>
     

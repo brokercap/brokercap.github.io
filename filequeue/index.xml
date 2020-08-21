@@ -2,48 +2,48 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>文件队列 on Bifrost Document</title>
-    <link>http://wiki.xbifrost.com/filequeue/</link>
+    <link>https://wiki.xbifrost.com/filequeue/</link>
     <description>Recent content in 文件队列 on Bifrost Document</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 11 Aug 2020 08:05:00 +0000</lastBuildDate>
     
-	<atom:link href="http://wiki.xbifrost.com/filequeue/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://wiki.xbifrost.com/filequeue/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>文件存储</title>
-      <link>http://wiki.xbifrost.com/filequeue/stroage/</link>
+      <link>https://wiki.xbifrost.com/filequeue/stroage/</link>
       <pubDate>Tue, 11 Aug 2020 08:05:00 +0000</pubDate>
       
-      <guid>http://wiki.xbifrost.com/filequeue/stroage/</guid>
+      <guid>https://wiki.xbifrost.com/filequeue/stroage/</guid>
       <description>文件队列是按每个同步配置为单位管理的 每个同步配置对应一个文件夹进行文件存储 $DataDir/filequeue/$dbName/$SchemaName/$TableName/$ToServerID $DataDir : Bifrost.ini 配置中的 data_dir 路径 $dbName : 数据源名称 $SchemaName : 数据库名称 $TableName : 表名 $ToServerID : 同步</description>
     </item>
     
     <item>
       <title>数据写入</title>
-      <link>http://wiki.xbifrost.com/filequeue/write/</link>
+      <link>https://wiki.xbifrost.com/filequeue/write/</link>
       <pubDate>Tue, 11 Aug 2020 08:05:00 +0000</pubDate>
       
-      <guid>http://wiki.xbifrost.com/filequeue/write/</guid>
+      <guid>https://wiki.xbifrost.com/filequeue/write/</guid>
       <description>在每次数据写完之后,都会进行判断文件大小是否大于16MB,如果大于后,标记下一次是否需要创建新文件 const FileMaxSize int64 = 16 * 1024 * 1024 func (This *Queue) Append(content string) error{ return This.AppendBytes([]byte(content)) } func (This *Queue)</description>
     </item>
     
     <item>
       <title>数据消费</title>
-      <link>http://wiki.xbifrost.com/filequeue/consumer/</link>
+      <link>https://wiki.xbifrost.com/filequeue/consumer/</link>
       <pubDate>Tue, 11 Aug 2020 08:05:00 +0000</pubDate>
       
-      <guid>http://wiki.xbifrost.com/filequeue/consumer/</guid>
+      <guid>https://wiki.xbifrost.com/filequeue/consumer/</guid>
       <description>在同步配置中标记为文件队列已启动,并且当前内存队列大小为 0 的时候,会自动从文件队列中加载数据 消费过程 每次从文件队列中读取一条数据,最多加载条</description>
     </item>
     
     <item>
       <title>服务重启</title>
-      <link>http://wiki.xbifrost.com/filequeue/restart/</link>
+      <link>https://wiki.xbifrost.com/filequeue/restart/</link>
       <pubDate>Tue, 11 Aug 2020 08:05:00 +0000</pubDate>
       
-      <guid>http://wiki.xbifrost.com/filequeue/restart/</guid>
+      <guid>https://wiki.xbifrost.com/filequeue/restart/</guid>
       <description>文件队列在数据写入的时候 ,是写到内核就认为成功了,由内核决定什么时候磁盘到磁盘 由内核决定什么时候磁盘,这样应用层就保证不了数据绝对正确 所以 Bifrost</description>
     </item>
     
