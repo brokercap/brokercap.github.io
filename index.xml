@@ -23,10 +23,10 @@
     <item>
       <title>二进制安装</title>
       <link>https://wiki.xbifrost.com/install/install_binary/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 24 Aug 2020 21:12:15 +0000</pubDate>
       
       <guid>https://wiki.xbifrost.com/install/install_binary/</guid>
-      <description>二进制包安装，不用安装 go 语言环境，下载二进制包可修改配置可直接运行 下载二进制包 以v1.3.2-release linux版本为例 wget https://github.com/jc3wish/Bifrost/releases/download/v1.3.2-release/linux.zip unzip linux.zip mv ./linux ./Bifrost_v1.3.2-release</description>
+      <description>二进制包安装，不用安装 go 语言环境，下载二进制包可修改配置可直接运行 下载二进制包 自1.4及以后版本,以 Linux 为例 wget https://github.com/brokercap/Bifrost/releases/download/v1.4.0-release/bifrost_v1.4.0-release_Linux-64bit-bin.tar.gz tar -zxvf bifrost_v1.4.0-release_Linux-64bit-bin.tar.gz cd bifrost_v1.4.0-beta.03_Linux-64bit-bin/bin &amp;amp;&amp;amp; chmod a+x ./Bifrost* ./Bifrost-server start 以v1.</description>
     </item>
     
     <item>
@@ -36,15 +36,6 @@
       
       <guid>https://wiki.xbifrost.com/install/https_certificate/</guid>
       <description>脚本生成 cd etc/ ./crt_create.sh 自行生成 openssl genrsa -out server.key 2048 openssl req -new -x509 -sha256 -key server.key -out server.crt -days 3650 证书生成参考 免费证书 Let’s Encrypt</description>
-    </item>
-    
-    <item>
-      <title>启动配置解析</title>
-      <link>https://wiki.xbifrost.com/install/config_doc/</link>
-      <pubDate>Sat, 23 Nov 2019 15:30:15 +0000</pubDate>
-      
-      <guid>https://wiki.xbifrost.com/install/config_doc/</guid>
-      <description>Bifrost 默认配置路径在 Bifrost 运行目录下的 etc/Bifrost.ini [user] #管理界面的用户名及密码 Bifrost=Bifrost123 [groups] #administrator 管理人员可以添加删除等操作 #monitor 只能查看数据 Bifrost=administrator BifrostMonitor=monitor [Bifrostd] #默认会当前启动文件夹 #log_dir=/data/log/ #默认</description>
     </item>
     
     <item>
