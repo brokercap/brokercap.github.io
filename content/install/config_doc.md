@@ -1,6 +1,6 @@
 ---
 title: "启动配置解析"
-date: 2019-11-23T15:30:15Z
+date: 2020-08-24T21:00:15Z
 draft: false
 weight: 13
 ---
@@ -48,6 +48,21 @@ tls=true
 #server.key 及 server.crt 相对于 Bifrost 的路径，也可以填绝对路径
 tls_key_file=./etc/server.key
 tls_crt_file=./etc/server.crt
+
+#是否开启文件队列功能 true|false
+file_queue_usable=true
+
+#统计是否启文件队列的时间，单位毫秒
+file_queue_usable_count_time_diff=5000
+
+#file_queue_usable_count_time_diff 时间内内存队列被挤满的次数
+file_queue_usable_count=10
+
+#在没有数据的情况下,间隔多久提交一次插件,单位 秒(v1.4版本开始)
+plugin_commit_timeout=5
+
+#在同步出错的情况下,间隔多久重试 ,单位 秒
+plugin_retry_sync_time=1
 
 #用于性能测试
 #key是界面添加的DBName

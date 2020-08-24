@@ -1,6 +1,6 @@
 ---
 title: "二进制安装"
-lastmod: 2020-08-008T19:12:15Z
+lastmod: 2020-08-24T21:12:15Z
 draft: false
 weight: 12
 ---
@@ -11,7 +11,23 @@ weight: 12
 
 下载二进制包
 
-以v1.3.2-release linux版本为例
+
+自1.4及以后版本,以 Linux 为例
+
+
+```
+wget https://github.com/brokercap/Bifrost/releases/download/v1.4.0-release/bifrost_v1.4.0-release_Linux-64bit-bin.tar.gz
+
+tar -zxvf bifrost_v1.4.0-release_Linux-64bit-bin.tar.gz
+
+cd bifrost_v1.4.0-beta.03_Linux-64bit-bin/bin && chmod a+x ./Bifrost*
+
+./Bifrost-server start
+```
+
+
+
+以v1.3及更早版本,以 Linux 为例
 
 ```
 wget https://github.com/jc3wish/Bifrost/releases/download/v1.3.2-release/linux.zip
@@ -26,6 +42,7 @@ chmod a+x ./Bifrost ./Bifrost-server
 
 ./Bifrost-server start
 ```
+
 
 
 windows 下启动
