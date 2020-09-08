@@ -2,7 +2,7 @@
 title: "全量任务配置"
 lastmod: 2019-11-23T15:30:15Z
 draft: false
-weight: 54
+weight: 55
 ---
 
 全量任务同步 是建立在  表配置同步到目标库  之上

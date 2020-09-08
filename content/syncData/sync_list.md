@@ -2,7 +2,7 @@
 title: "同步列表字段解析"
 lastmod: 2019-11-27T21:05:15Z
 draft: false
-weight: 53
+weight: 54
 ---
 
 ![image](/images/syncData/tableSync_list_1.jpg)
