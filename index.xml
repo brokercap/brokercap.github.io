@@ -23,10 +23,10 @@
     <item>
       <title>二进制安装</title>
       <link>https://wiki.xbifrost.com/install/install_binary/</link>
-      <pubDate>Mon, 24 Aug 2020 21:12:15 +0000</pubDate>
+      <pubDate>Tue, 08 Sep 2020 20:53:15 +0000</pubDate>
       
       <guid>https://wiki.xbifrost.com/install/install_binary/</guid>
-      <description>二进制包安装，不用安装 go 语言环境，下载二进制包可修改配置可直接运行 下载二进制包 自1.4及以后版本,以 Linux 为例 wget https://github.com/brokercap/Bifrost/releases/download/v1.4.0-release/bifrost_v1.4.0-release_Linux-64bit-bin.tar.gz tar -zxvf bifrost_v1.4.0-release_Linux-64bit-bin.tar.gz cd bifrost_v1.4.0-beta.03_Linux-64bit-bin/bin &amp;amp;&amp;amp; chmod a+x ./Bifrost* ./Bifrost-server start 以v1.</description>
+      <description>二进制包安装，不用安装 go 语言环境，下载二进制包可修改配置可直接运行 下载二进制包 自1.4及以后版本,以 Linux 为例 wget https://github.com/brokercap/Bifrost/releases/download/v1.4.2-release/bifrost_v1.4.2-release_Linux-64bit-bin.tar.gz tar -zxvf bifrost_v1.4.2-release_Linux-64bit-bin.tar.gz cd bifrost_v1.4.2-release_Linux-64bit-bin/bin &amp;amp;&amp;amp; chmod a+x ./Bifrost* ./Bifrost-server start 以v1.</description>
     </item>
     
     <item>
