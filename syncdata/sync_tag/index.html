@@ -3,11 +3,11 @@
 <head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<title>报警规则 - Bifrost Document</title>
+<title>标签使用 - Bifrost Document</title>
 <meta name="description" content="Bifrost ---- 面向生产环境的 MySQL 同步到 Redis,MongoDB,ClickHouse 等服务的异构中间件">
 <meta name="generator" content="Hugo 0.59.1" />
 <link href="https://wiki.xbifrost.com/index.xml" rel="alternate" type="application/rss+xml">
-<link rel="canonical" href="https://wiki.xbifrost.com/warning/rule/">
+<link rel="canonical" href="https://wiki.xbifrost.com/syncdata/sync_tag/">
 <link rel="stylesheet" href="https://wiki.xbifrost.com/css/theme.min.css">
 
 <link rel="stylesheet" href="https://wiki.xbifrost.com/css/chroma.min.css">
@@ -50,33 +50,41 @@
 </nav>
 </div>
 <div class="content-container">
-<main><h1>报警规则</h1>
+<main><h1>标签使用</h1>
 
-<h4 id="报警">报警</h4>
+<h3 id="一-标签使用">一. 标签使用</h3>
 
-<ol>
-<li><p>数据源连接失败</p></li>
+<p>表配置同步过程中,支持使用标签,代替相对应的数据</p>
 
-<li><p>数据源关闭(包括手动close或者因binlog解析致命性原因解析失败造成的close等)</p></li>
+<p>{$SchemaName} : 数据库名字</p>
 
-<li><p>数据同步到目标库,同一条数据超过30秒没有同步成功(包括连接不上目标库等原因)</p></li>
-</ol>
+<p>{$TableName} : 表的名字</p>
 
-<h4 id="数据恢复">数据恢复</h4>
+<p>{$EventType} : 当前记录的增删改事件,新增(insert); 修改(update) ; 删除(delete); SQL(sql)</p>
 
-<ol>
-<li><p>数据源启动</p></li>
+<p>{$Timestamp} : 当前Bifrost同机器的时间戳</p>
 
-<li><p>数据源因网络原因连接断开重试连接恢复后</p></li>
+<p>{$BinlogTimestamp} : Binlog 发生的时间戳</p>
 
-<li><p>当一条数据同步到目标库超过30秒没有同步成功并且已报警出来之后,继续重试恢复成功之后</p></li>
-</ol>
+<p>{$BinlogFileNum} : Binlog文件编号,并不是 整个Binlog文件名,比如 binlog 文件是 mysql-bin.000001 那这个 BinlogFileNum 的值 是1</p>
+
+<p>{$BinlogPosition} : Binlog position 位点</p>
+
+<p>{$字段名} : 表的字段数据</p>
+
+<p>{$字段名[&lsquo;key1&rsquo;][0][&lsquo;key3&rsquo;]} :</p>
+
+<p>假如 JSON 字段内容值为 ：{&ldquo;testK&rdquo;: [{&ldquo;Bool&rdquo;: false, &ldquo;Null&rdquo;: null, &ldquo;Time&rdquo;: &ldquo;2020-05-31 23:21:30&rdquo;, &ldquo;Int32&rdquo;: -2147483648, &ldquo;Int64&rdquo;: -9223372036854775808, &ldquo;String&rdquo;: &ldquo;ss&rdquo;, &ldquo;Uint32&rdquo;: 4294967295, &ldquo;Uint64&rdquo;: 18446744073709551615, &ldquo;Float64&rdquo;: 526637.46}]}</p>
+
+<p>{$字段名[&lsquo;testK&rsquo;][0][&lsquo;Time&rsquo;]} 的对应的值 为：2020-05-31 23:21:30</p>
+
+<p>备注： 标签支持程度，取决于各个插件的实现,请参考各插件的文档</p>
 <div class="edit-meta">
-Last updated on 28 Nov 2019
+Last updated on 8 Sep 2020
 
 
-<br><a href="https://github.com/brokercap/brokercap.github.io/edit/master/content/warning/rule.md" class="edit-page"><i class="fas fa-pen-square"></i> Edit on GitHub</a></div><nav class="pagination"><a class="nav nav-prev" href="/warning/" title="报警"><i class="fas fa-arrow-left" aria-hidden="true"></i> Prev - 报警</a>
-<a class="nav nav-next" href="/warning/weixin/" title="微信">Next - 微信 <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+<br><a href="https://github.com/brokercap/brokercap.github.io/edit/master/content/syncData/sync_tag.md" class="edit-page"><i class="fas fa-pen-square"></i> Edit on GitHub</a></div><nav class="pagination"><a class="nav nav-prev" href="/syncdata/sync_config/" title="数据表同步配置"><i class="fas fa-arrow-left" aria-hidden="true"></i> Prev - 数据表同步配置</a>
+<a class="nav nav-next" href="/syncdata/sync_batch/" title="批量同步配置">Next - 批量同步配置 <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
 </nav><footer><p class="powered">Powered by <a href="https://gohugo.io">Hugo</a>. Theme by <a href="https://themes.gohugo.io/hugo-theme-techdoc/">TechDoc</a>. Designed by <a href="https://github.com/thingsym/hugo-theme-techdoc">Thingsym</a>.</p>
 </footer>
 </main><div class="sidebar">
@@ -124,11 +132,11 @@ Last updated on 28 Nov 2019
   
 </li>
 
-<li class=""><a href="/syncdata/">数据同步配置</a>
+<li class="parent"><a href="/syncdata/">数据同步配置</a>
   
 <ul class="sub-menu">
 <li class=""><a href="/syncdata/sync_config/">数据表同步配置</a></li>
-<li class=""><a href="/syncdata/sync_tag/">标签使用</a></li>
+<li class="active"><a href="/syncdata/sync_tag/">标签使用</a></li>
 <li class=""><a href="/syncdata/sync_batch/">批量同步配置</a></li>
 <li class=""><a href="/syncdata/sync_list/">同步列表字段解析</a></li>
 <li class=""><a href="/syncdata/sync_history_config/">全量任务配置</a></li>
@@ -155,10 +163,10 @@ Last updated on 28 Nov 2019
   
 </li>
 
-<li class="parent"><a href="/warning/">报警</a>
+<li class=""><a href="/warning/">报警</a>
   
 <ul class="sub-menu">
-<li class="active"><a href="/warning/rule/">报警规则</a></li>
+<li class=""><a href="/warning/rule/">报警规则</a></li>
 <li class=""><a href="/warning/weixin/">微信</a></li>
 <li class=""><a href="/warning/email/">邮箱</a></li>
 </ul>

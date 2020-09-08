@@ -94,6 +94,21 @@ tls=true
 tls_key_file=./etc/server.key
 tls_crt_file=./etc/server.crt
 
+#是否开启文件队列功能 true|false
+file_queue_usable=true
+
+#统计是否启文件队列的时间，单位毫秒
+file_queue_usable_count_time_diff=5000
+
+#file_queue_usable_count_time_diff 时间内内存队列被挤满的次数
+file_queue_usable_count=10
+
+#在没有数据的情况下,间隔多久提交一次插件,单位 秒(v1.4版本开始)
+plugin_commit_timeout=5
+
+#在同步出错的情况下,间隔多久重试 ,单位 秒
+plugin_retry_sync_time=1
+
 #用于性能测试
 #key是界面添加的DBName
 #mysql-bin.000015,107175  位点信息
@@ -106,13 +121,13 @@ myTest=mysql-bin.000015,107175
 
 <p>user,groups 只有在第一次启动初始化的有效,在线新增用户名和修改后,配置文件用户名和密码并不会进行修改</p>
 <div class="edit-meta">
-Last updated on 23 Nov 2019
+Last updated on 24 Aug 2020
 
 
 <br>
-Published on 23 Nov 2019
-<br><a href="https://github.com/brokercap/brokercap.github.io/edit/master/content/install/config_doc.md" class="edit-page"><i class="fas fa-pen-square"></i> Edit on GitHub</a></div><nav class="pagination"><a class="nav nav-prev" href="/install/https_certificate/" title="HTTPS证书"><i class="fas fa-arrow-left" aria-hidden="true"></i> Prev - HTTPS证书</a>
-<a class="nav nav-next" href="/data_source/" title="数据源管理">Next - 数据源管理 <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+Published on 24 Aug 2020
+<br><a href="https://github.com/brokercap/brokercap.github.io/edit/master/content/install/config_doc.md" class="edit-page"><i class="fas fa-pen-square"></i> Edit on GitHub</a></div><nav class="pagination"><a class="nav nav-prev" href="/install/install_binary/" title="二进制安装"><i class="fas fa-arrow-left" aria-hidden="true"></i> Prev - 二进制安装</a>
+<a class="nav nav-next" href="/install/https_certificate/" title="HTTPS证书">Next - HTTPS证书 <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
 </nav><footer><p class="powered">Powered by <a href="https://gohugo.io">Hugo</a>. Theme by <a href="https://themes.gohugo.io/hugo-theme-techdoc/">TechDoc</a>. Designed by <a href="https://github.com/thingsym/hugo-theme-techdoc">Thingsym</a>.</p>
 </footer>
 </main><div class="sidebar">
@@ -126,8 +141,8 @@ Published on 23 Nov 2019
 <ul class="sub-menu">
 <li class=""><a href="/install/data_source_build/">编译安装</a></li>
 <li class=""><a href="/install/install_binary/">二进制安装</a></li>
-<li class=""><a href="/install/https_certificate/">HTTPS证书</a></li>
 <li class="active"><a href="/install/config_doc/">启动配置解析</a></li>
+<li class=""><a href="/install/https_certificate/">HTTPS证书</a></li>
 </ul>
   
 </li>
@@ -164,6 +179,7 @@ Published on 23 Nov 2019
   
 <ul class="sub-menu">
 <li class=""><a href="/syncdata/sync_config/">数据表同步配置</a></li>
+<li class=""><a href="/syncdata/sync_tag/">标签使用</a></li>
 <li class=""><a href="/syncdata/sync_batch/">批量同步配置</a></li>
 <li class=""><a href="/syncdata/sync_list/">同步列表字段解析</a></li>
 <li class=""><a href="/syncdata/sync_history_config/">全量任务配置</a></li>

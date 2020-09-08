@@ -30,6 +30,15 @@
     </item>
     
     <item>
+      <title>启动配置解析</title>
+      <link>https://wiki.xbifrost.com/install/config_doc/</link>
+      <pubDate>Mon, 24 Aug 2020 21:00:15 +0000</pubDate>
+      
+      <guid>https://wiki.xbifrost.com/install/config_doc/</guid>
+      <description>Bifrost 默认配置路径在 Bifrost 运行目录下的 etc/Bifrost.ini [user] #管理界面的用户名及密码 Bifrost=Bifrost123 [groups] #administrator 管理人员可以添加删除等操作 #monitor 只能查看数据 Bifrost=administrator BifrostMonitor=monitor [Bifrostd] #默认会当前启动文件夹 #log_dir=/data/log/ #默认</description>
+    </item>
+    
+    <item>
       <title>HTTPS证书</title>
       <link>https://wiki.xbifrost.com/install/https_certificate/</link>
       <pubDate>Tue, 03 Dec 2019 22:51:15 +0000</pubDate>
@@ -102,9 +111,18 @@
     </item>
     
     <item>
+      <title>标签使用</title>
+      <link>https://wiki.xbifrost.com/syncdata/sync_tag/</link>
+      <pubDate>Tue, 08 Sep 2020 20:45:15 +0000</pubDate>
+      
+      <guid>https://wiki.xbifrost.com/syncdata/sync_tag/</guid>
+      <description>一. 标签使用 表配置同步过程中,支持使用标签,代替相对应的数据 {$SchemaName} : 数据库名字 {$TableName} : 表的名字 {$EventType} : 当前记录的增删改事件,新增(insert); 修改(</description>
+    </item>
+    
+    <item>
       <title>批量同步配置</title>
       <link>https://wiki.xbifrost.com/syncdata/sync_batch/</link>
-      <pubDate>Mon, 17 Aug 2020 18:31:15 +0000</pubDate>
+      <pubDate>Tue, 08 Sep 2020 20:49:15 +0000</pubDate>
       
       <guid>https://wiki.xbifrost.com/syncdata/sync_batch/</guid>
       <description>批量配置的使用场景: 有多个表要设置以同样的配置需要同步同一个 目标库里去 要设置整个所有库或者某一个库里的所有表,包括以后新增的表同步到kafk</description>

@@ -21,9 +21,18 @@
     </item>
     
     <item>
+      <title>标签使用</title>
+      <link>https://wiki.xbifrost.com/syncdata/sync_tag/</link>
+      <pubDate>Tue, 08 Sep 2020 20:45:15 +0000</pubDate>
+      
+      <guid>https://wiki.xbifrost.com/syncdata/sync_tag/</guid>
+      <description>一. 标签使用 表配置同步过程中,支持使用标签,代替相对应的数据 {$SchemaName} : 数据库名字 {$TableName} : 表的名字 {$EventType} : 当前记录的增删改事件,新增(insert); 修改(</description>
+    </item>
+    
+    <item>
       <title>批量同步配置</title>
       <link>https://wiki.xbifrost.com/syncdata/sync_batch/</link>
-      <pubDate>Mon, 17 Aug 2020 18:31:15 +0000</pubDate>
+      <pubDate>Tue, 08 Sep 2020 20:49:15 +0000</pubDate>
       
       <guid>https://wiki.xbifrost.com/syncdata/sync_batch/</guid>
       <description>批量配置的使用场景: 有多个表要设置以同样的配置需要同步同一个 目标库里去 要设置整个所有库或者某一个库里的所有表,包括以后新增的表同步到kafk</description>
