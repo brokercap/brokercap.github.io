@@ -1,6 +1,6 @@
 ---
 title: "二进制安装"
-lastmod: 2020-08-24T21:12:15Z
+lastmod: 2020-09-08T20:53:15Z
 draft: false
 weight: 12
 ---
@@ -16,11 +16,11 @@ weight: 12
 
 
 ```
-wget https://github.com/brokercap/Bifrost/releases/download/v1.4.0-release/bifrost_v1.4.0-release_Linux-64bit-bin.tar.gz
+wget https://github.com/brokercap/Bifrost/releases/download/v1.4.2-release/bifrost_v1.4.2-release_Linux-64bit-bin.tar.gz
 
-tar -zxvf bifrost_v1.4.0-release_Linux-64bit-bin.tar.gz
+tar -zxvf bifrost_v1.4.2-release_Linux-64bit-bin.tar.gz
 
-cd bifrost_v1.4.0-beta.03_Linux-64bit-bin/bin && chmod a+x ./Bifrost*
+cd bifrost_v1.4.2-release_Linux-64bit-bin/bin && chmod a+x ./Bifrost*
 
 ./Bifrost-server start
 ```
